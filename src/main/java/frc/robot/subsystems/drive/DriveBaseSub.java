@@ -1,4 +1,4 @@
-package frc.robot.drive;
+package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -9,7 +9,7 @@ import com.team7419.TalonFuncs;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
-public class DriveBase extends SubsystemBase {
+public class DriveBaseSub extends SubsystemBase {
   
   private VictorSPX leftFol;
 	private VictorSPX rightFol;
@@ -18,7 +18,7 @@ public class DriveBase extends SubsystemBase {
   public MotorGroup leftSide; 
   public MotorGroup rightSide;
   
-  public DriveBase() {
+  public DriveBaseSub() {
     
     leftFol = new VictorSPX(RobotMap.leftVictor.value);
 		rightFol = new VictorSPX(RobotMap.rightVictor.value);
@@ -55,4 +55,7 @@ public class DriveBase extends SubsystemBase {
   public void periodic() {
     // unclear on what actually goes here?
   }
+
+  public TalonSRX getLeftMast(){return leftMast;}
+  public TalonSRX getRightMast(){return rightMast;}
 }

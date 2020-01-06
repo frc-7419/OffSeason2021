@@ -7,13 +7,19 @@
 
 package frc.robot;
 
-import com.team7419.templates.*;
+import com.team7419.PaddedXbox;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.drive.*;
 
 public class RobotContainer {
 
-  private final ExampleSubsystem subsystem = new ExampleSubsystem();
-  private final ExampleCommand command = new ExampleCommand(subsystem);
+  private final DriveBaseSub driveBase = new DriveBaseSub();
+  private final Dashboard dashboard = new Dashboard();
+  private final PaddedXbox joystick = new PaddedXbox();
+
+  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
 
   public RobotContainer() {
     configureButtonBindings();
@@ -22,7 +28,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
   }
 
-  public Command getAutonomousCommand() {
-    return command;
-  }
+  // public Command getAutonomousCommand() {
+  //   return print;
+  // }
 }
