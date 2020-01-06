@@ -16,7 +16,6 @@ public class RobotContainer {
   private final ExampleCommand command = new ExampleCommand(subsystem);
 
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
   }
 
