@@ -22,6 +22,7 @@ public class RobotContainer {
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
 
   public RobotContainer() {
+    arcade.schedule();
     configureButtonBindings();
   }
 

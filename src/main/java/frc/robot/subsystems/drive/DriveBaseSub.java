@@ -7,7 +7,7 @@ import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
+import frc.robot.Constants;
 
 public class DriveBaseSub extends SubsystemBase {
   
@@ -20,10 +20,10 @@ public class DriveBaseSub extends SubsystemBase {
   
   public DriveBaseSub() {
     
-    leftFol = new VictorSPX(RobotMap.leftVictor.value);
-		rightFol = new VictorSPX(RobotMap.rightVictor.value);
-		leftMast = new TalonSRX(RobotMap.leftTalon.value);
-		rightMast = new TalonSRX(RobotMap.rightTalon.value);
+    leftFol = new VictorSPX(Constants.CanIds.leftVictor.value);
+		rightFol = new VictorSPX(Constants.CanIds.rightVictor.value);
+		leftMast = new TalonSRX(Constants.CanIds.leftTalon.value);
+		rightMast = new TalonSRX(Constants.CanIds.rightTalon.value);
 
     leftSide = new MotorGroup(leftMast, leftFol);
     rightSide = new MotorGroup(rightMast, rightFol);
@@ -53,7 +53,7 @@ public class DriveBaseSub extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // unclear on what actually goes here?
+    //SmartDashboard.putString("drive base", this.getCurrentCommand().toString());
   }
 
   public TalonSRX getLeftMast(){return leftMast;}
