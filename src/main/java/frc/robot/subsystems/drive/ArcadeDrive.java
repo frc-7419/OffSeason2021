@@ -1,6 +1,8 @@
 package frc.robot.subsystems.drive;
 
 import com.team7419.PaddedXbox;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -32,11 +34,15 @@ public class ArcadeDrive extends CommandBase {
   public void initialize() {
     /* factory default just so nothing acts up */
 		driveBase.rightMast.configFactoryDefault();
-		driveBase.leftMast.configFactoryDefault();
+        driveBase.leftMast.configFactoryDefault();
+        
+        SmartDashboard.putString("command status", "init arcade");
   }
 
   @Override
   public void execute() {
+
+    SmartDashboard.putString("command status", "exec arcade");
     
     double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY();
     double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY();
