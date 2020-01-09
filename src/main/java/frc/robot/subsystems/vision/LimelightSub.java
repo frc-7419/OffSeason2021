@@ -19,4 +19,7 @@ public class LimelightSub extends SubsystemBase{
         SmartDashboard.putNumber("tx", tx.getDouble(0));
         SmartDashboard.putNumber("ty", ty.getDouble(0));
     }
+
+    public double getTx(){return tx.getDouble(0);}
+    public double getTy(){return ty.getDouble(0);}
 }

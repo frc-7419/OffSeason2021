@@ -1,5 +1,6 @@
 package frc.robot.subsystems.drive;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.Initers;
@@ -58,4 +59,13 @@ public class DriveBaseSub extends SubsystemBase {
 
   public TalonSRX getLeftMast(){return leftMast;}
   public TalonSRX getRightMast(){return rightMast;}
+
+  public void setAll(double power){
+    leftMast.set(ControlMode.PercentOutput, power);
+    rightMast.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setLeft(double power){leftSide.setPower(power);}
+  public void setRight(double power){rightSide.setPower(power);}
+
 }
