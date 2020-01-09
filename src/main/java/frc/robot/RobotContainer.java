@@ -17,7 +17,7 @@ public class RobotContainer {
 
   private final DriveBaseSub driveBase = new DriveBaseSub();
   private final Dashboard dashboard = new Dashboard();
-  private final PaddedXbox joystick = new PaddedXbox();
+  public static final PaddedXbox joystick = new PaddedXbox();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
 
