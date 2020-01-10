@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.pneumatics.ActuatePneumatics;
+import frc.robot.subsystems.pneumatics.PneumaticSub;
 import frc.robot.subsystems.vision.LimelightSub;
 import frc.robot.subsystems.vision.TurnToTx;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -24,6 +25,7 @@ public class RobotContainer {
   private final Dashboard dashboard = new Dashboard();
   private final PaddedXbox joystick = new PaddedXbox();
   private final LimelightSub limelight = new LimelightSub();
+  private final PneumaticSub pneumatic = new PneumaticSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard.getkP(), 0, dashboard.getkD());
@@ -34,17 +36,17 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-        .whenPressed(new RunOneSide(driveBase, "left", 1));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-      .whenPressed(new RunOneSide(driveBase, "left", -1));
+        .whileHeld(new RunOneSide(driveBase, "left", .5));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    //   .whileHeld(new RunOneSide(driveBase, "left", -.25));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whenPressed(new RunOneSide(driveBase, "right", 1));
+      .whileHeld(new RunOneSide(driveBase, "right", .25));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whenPressed(new RunOneSide(driveBase, "right", -1));
+      .whileHeld(new RunOneSide(driveBase, "right", -.25));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-      .whenPressed(new ActuatePneumatics(true));
+      .whileHeld(new ActuatePneumatics(pneumatic, true));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-      .whenPressed(new ActuatePneumatics(false));
+      .whileHeld(new ActuatePneumatics(pneumatic, false)); 
   }
 
   public Command getArcade(){return arcade;}

@@ -31,6 +31,7 @@ public class RunOneSide extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    driveBase.setAll(0);
   }
 
   @Override
