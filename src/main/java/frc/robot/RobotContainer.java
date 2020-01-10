@@ -12,6 +12,7 @@ import com.team7419.PaddedXbox;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
+import frc.robot.subsystems.pneumatics.ActuatePneumatics;
 import frc.robot.subsystems.vision.LimelightSub;
 import frc.robot.subsystems.vision.TurnToTx;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -32,7 +33,6 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    System.out.println("configuring buttons");
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
         .whenPressed(new RunOneSide(driveBase, "left", 1));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
@@ -41,6 +41,10 @@ public class RobotContainer {
       .whenPressed(new RunOneSide(driveBase, "right", 1));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
       .whenPressed(new RunOneSide(driveBase, "right", -1));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
+      .whenPressed(new ActuatePneumatics(true));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
+      .whenPressed(new ActuatePneumatics(false));
   }
 
   public Command getArcade(){return arcade;}
