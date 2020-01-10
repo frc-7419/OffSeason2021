@@ -10,6 +10,5 @@ public class ExampleSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // unclear on what actually goes here?
   }
 }
