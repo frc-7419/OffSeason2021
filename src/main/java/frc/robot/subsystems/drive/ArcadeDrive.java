@@ -2,6 +2,9 @@ package frc.robot.subsystems.drive;
 
 import com.team7419.PaddedXbox;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -34,9 +37,9 @@ public class ArcadeDrive extends CommandBase {
   public void initialize() {
     /* factory default just so nothing acts up */
 		driveBase.rightMast.configFactoryDefault();
-        driveBase.leftMast.configFactoryDefault();
+    driveBase.leftMast.configFactoryDefault();
         
-        SmartDashboard.putString("command status", "init arcade");
+    SmartDashboard.putString("command status", "init arcade");
   }
 
   @Override

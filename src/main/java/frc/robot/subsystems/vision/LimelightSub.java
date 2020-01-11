@@ -8,18 +8,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSub extends SubsystemBase{
 
+
+    public LimelightSub(){}
+
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
 
-    public LimelightSub(){}
-
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("tx", tx.getDouble(0));
-        SmartDashboard.putNumber("ty", ty.getDouble(0));
+        double x = tx.getDouble(0.0);
+        double y = ty.getDouble(0.0);
+        SmartDashboard.putNumber("tx", x);
+        SmartDashboard.putNumber("ty", y);
     }
 
-    public double getTx(){return tx.getDouble(0);}
-    public double getTy(){return ty.getDouble(0);}
+    public double getTx(){return tx.getDouble(0.0);}
+    public double getTy(){return ty.getDouble(0.0);}
 }
