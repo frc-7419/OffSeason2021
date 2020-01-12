@@ -37,16 +37,19 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
         .whileHeld(new RunOneSide(driveBase, "left", .5));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    //   .whileHeld(new RunOneSide(driveBase, "left", -.25));
+    
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
       .whileHeld(new RunOneSide(driveBase, "right", .25));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
       .whileHeld(new RunOneSide(driveBase, "right", -.25));
+    
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
       .whileHeld(new ActuatePneumatics(pneumatic, true));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
       .whileHeld(new ActuatePneumatics(pneumatic, false)); 
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+      .whileHeld(turnToTx); // limelight test command
   }
 
   public Command getArcade(){return arcade;}

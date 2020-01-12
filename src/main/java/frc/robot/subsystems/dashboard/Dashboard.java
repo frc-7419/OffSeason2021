@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Dashboard extends SubsystemBase{
 
-    ShuffleboardTab pidTab = Shuffleboard.getTab("motion magic tuning");
-    double defaultP = .1;
-    double defaultD = 0;
+    ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
+    double defaultP = .08;
+    double defaultD = .02;
 
     public NetworkTableEntry kP = pidTab.add("P", defaultP).getEntry();
     public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry();    
