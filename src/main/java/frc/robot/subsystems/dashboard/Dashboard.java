@@ -6,19 +6,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Dashboard extends SubsystemBase{
 
-    ShuffleboardTab pidTab = Shuffleboard.getTab("motion magic tuning");
+    ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
+    double defaultP = .08;
+    double defaultD = .02;
 
-    public NetworkTableEntry kP = pidTab.add("P", 0.3).getEntry();
-    public NetworkTableEntry kD = pidTab.add("D", 0.1).getEntry();    
+    public NetworkTableEntry kP = pidTab.add("P", defaultP).getEntry();
+    public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry();    
     
     public Dashboard(){}
 
     public double getkP(){
-        return kP.getDouble(0.3);
+        return kP.getDouble(defaultP);
     }
     
     public double getkD(){
-        return kD.getDouble(0.1);
+        return kD.getDouble(defaultD);
     }
 
     @Override

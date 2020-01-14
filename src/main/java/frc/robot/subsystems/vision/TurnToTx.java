@@ -1,6 +1,7 @@
 package frc.robot.subsystems.vision;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.drive.DriveBaseSub;
 
@@ -29,13 +30,18 @@ public class TurnToTx extends CommandBase {
   @Override
   public void initialize() {
     pidController = new PIDController(kP, kI, kD);
+    pidController.setSetpoint(0);
+    pidController.setTolerance(1);
   }
 
   @Override
   public void execute() {
+
+    SmartDashboard.putString("pid", "running");
     pidOutput = pidController.calculate(limelight.getTx());
-    driveBase.setLeft(pidOutput);
-    driveBase.setRight(-pidOutput);
+    SmartDashboard.putNumber("pidoutput", pidOutput);
+    driveBase.setLeft(-pidOutput);
+    driveBase.setRight(pidOutput);
   }
 
   @Override
