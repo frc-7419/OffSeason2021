@@ -17,6 +17,7 @@ public class TurnToTx extends CommandBase {
   private double kD;
 
   private double pidOutput;
+  private double tx;
 
   public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight, double kP, double kI, double kD) {
     this.driveBase = driveBase;
@@ -38,10 +39,12 @@ public class TurnToTx extends CommandBase {
   public void execute() {
 
     SmartDashboard.putString("pid", "running");
-    pidOutput = pidController.calculate(limelight.getTx());
+    tx = limelight.getTx();
+    pidOutput = pidController.calculate(tx);
     SmartDashboard.putNumber("pidoutput", pidOutput);
     driveBase.setLeft(-pidOutput);
     driveBase.setRight(pidOutput);
+
   }
 
   @Override
@@ -51,6 +54,6 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return pidController.atSetpoint();
+    return Math.abs(tx) < 1;
   }
 }

@@ -30,4 +30,8 @@ public final class Constants {
         this.value = value;
         }
     }
+
+    public class RobotConstants{
+        
+    }
 }
