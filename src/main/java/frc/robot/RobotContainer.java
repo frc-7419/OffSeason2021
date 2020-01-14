@@ -28,7 +28,7 @@ public class RobotContainer {
   private final PneumaticSub pneumatic = new PneumaticSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
-  private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard.getkP(), 0, dashboard.getkD());
+  private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
 
   public RobotContainer() {
     configureButtonBindings();
