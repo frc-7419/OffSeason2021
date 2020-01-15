@@ -37,9 +37,9 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public void initialize() {
-    kP = dashboard.getkP();
+    kP = dashboard.getkP(); // gets P coefficient from dashboard
     kI = 0;
-    kD = dashboard.getkD();
+    kD = dashboard.getkD(); 
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(0);
     pidController.setTolerance(1);
@@ -47,14 +47,16 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public void execute() {
-
     SmartDashboard.putString("command status", "pid");
+
     tx = limelight.getTx();
     ty = limelight.getTy();
+
     pidOutput = pidController.calculate(tx);
     SmartDashboard.putNumber("pidoutput", pidOutput);
     driveBase.setLeft(-pidOutput);
     driveBase.setRight(pidOutput);
+
     distanceToTarget =  (Constants.kTargetHeight - RobotConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
     SmartDashboard.putNumber("distance", distanceToTarget);
   }
@@ -69,3 +71,4 @@ public class TurnToTx extends CommandBase {
     return Math.abs(tx) < 1;
   }
 }
+ 

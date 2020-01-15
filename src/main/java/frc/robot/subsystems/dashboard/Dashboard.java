@@ -11,7 +11,7 @@ public class Dashboard extends SubsystemBase{
     double defaultD = .02;
 
     public NetworkTableEntry kP = pidTab.add("P", defaultP).getEntry();
-    public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry();    
+    public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry(); 
     
     public Dashboard(){}
 
