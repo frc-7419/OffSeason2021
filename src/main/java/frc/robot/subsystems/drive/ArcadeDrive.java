@@ -51,8 +51,8 @@ public class ArcadeDrive extends CommandBase {
     driveBase.rightSide.setPower(rightPower);
 
     if(joystick.getRightShoulder()){
-      driveBase.getLeftMast().getSensorCollection().setQuadraturePosition(0, 10);
-      driveBase.getRightMast().getSensorCollection().setQuadraturePosition(0, 10);
+      driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
+      driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
     }
   }
 

@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,10 +17,10 @@ import frc.robot.subsystems.drive.*;
 
 public class RobotContainer {
 
-  private final DriveBaseSub driveBase = new DriveBaseSub();
-  private final Dashboard dashboard = new Dashboard();
+  public static final DriveBaseSub driveBase = new DriveBaseSub();
+  public static final Dashboard dashboard = new Dashboard();
   public static final PaddedXbox joystick = new PaddedXbox();
-
+  
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
 
   public RobotContainer() {
@@ -30,6 +32,14 @@ public class RobotContainer {
   }
 
   public Command getDefaultTeleOpCommand(){return arcade;}
+  
+  public static TalonFX getRightMast(){
+    return driveBase.rightMast;
+  }
+  public static TalonFX getLeftMast(){
+    return driveBase.leftMast;
+  }
+
 
   // public Command getAutonomousCommand() {
   //   return print;
