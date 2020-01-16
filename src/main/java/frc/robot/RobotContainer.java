@@ -36,7 +36,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-        .whileHeld(new RunOneSide(driveBase, "left", .5));
+        .whenPressed(arcade);
     
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
       .whileHeld(new RunOneSide(driveBase, "right", .25));
@@ -49,7 +49,7 @@ public class RobotContainer {
       .whileHeld(new ActuatePneumatics(pneumatic, false)); 
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-      .whileHeld(turnToTx); // limelight test command
+      .whenPressed(turnToTx); // limelight test command
   }
 
   public Command getArcade(){return arcade;}
