@@ -7,11 +7,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Dashboard extends SubsystemBase{
 
     ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
-    double defaultP = .0185;
-    double defaultD = .001;
+    double defaultP = .004;
+    double defaultD = 20;
 
     public NetworkTableEntry kP = pidTab.add("P", defaultP).getEntry();
     public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry(); 
+
+    ShuffleboardTab shooterTab = Shuffleboard.getTab("shooter power");
+    double defaultPower = .5;
+
+    public NetworkTableEntry power = shooterTab.add("power", defaultPower).getEntry();
+
     
     public Dashboard(){}
 
@@ -21,6 +27,10 @@ public class Dashboard extends SubsystemBase{
     
     public double getkD(){
         return kD.getDouble(defaultD);
+    }
+
+    public double getPower(){
+        return power.getDouble(defaultPower);
     }
 
     @Override

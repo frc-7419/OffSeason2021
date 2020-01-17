@@ -24,22 +24,22 @@ public class TurnToTx extends CommandBase {
   private double tx;
   private double ty;
   private double distanceToTarget;
+  private double boost;
 
   public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight, Dashboard dashboard) {
     this.driveBase = driveBase;
     this.limelight = limelight;
     this.dashboard = dashboard;
-    // this.kP = kP;
-    // this.kI = kI;
-    // this.kD = kD;
     addRequirements(driveBase, limelight);
   }
 
   @Override
   public void initialize() {
-    kP = dashboard.getkP(); // gets P coefficient from dashboard
+    driveBase.rightMast.configFactoryDefault();
+    driveBase.leftMast.configFactoryDefault();
+    kP = .016; // gets P coefficient from dashboard
     kI = 0;
-    kD = dashboard.getkD(); 
+    kD = 1; 
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(0);
     pidController.setTolerance(1);
@@ -53,6 +53,8 @@ public class TurnToTx extends CommandBase {
     ty = limelight.getTy();
 
     pidOutput = pidController.calculate(tx);
+    boost = Math.abs(pidOutput) / pidOutput * .05;
+    pidOutput += boost;
     SmartDashboard.putNumber("pidoutput", pidOutput);
     driveBase.setLeft(-pidOutput);
     driveBase.setRight(pidOutput);
@@ -68,7 +70,7 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(tx) < 1;
+    return false;
   }
 }
  

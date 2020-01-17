@@ -31,25 +31,30 @@ public class RobotContainer {
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
 
   public RobotContainer() {
-    configureButtonBindings();
+    codeTestButtonBindings();
   }
 
-  private void configureButtonBindings() {
+  private void mechTesterButtonBindings() { // for dj
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-        .whenPressed(arcade);
-    
+        .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+        .whileHeld(new RunOneSide(driveBase, "left", dashboard, false)); 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whileHeld(new RunOneSide(driveBase, "right", .25));
+      .whileHeld(new RunOneSide(driveBase, "right", dashboard, false));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whileHeld(new RunOneSide(driveBase, "right", -.25));
-    
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-      .whileHeld(new ActuatePneumatics(pneumatic, true));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-      .whileHeld(new ActuatePneumatics(pneumatic, false)); 
+      .whileHeld(new RunOneSide(driveBase, "right", dashboard, true)); 
+  }
+
+  private void codeTestButtonBindings(){ // for programmer
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
+    //   .whileHeld(new ActuatePneumatics(pneumatic, true));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
+    //   .whileHeld(new ActuatePneumatics(pneumatic, false)); 
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
       .whenPressed(turnToTx); // limelight test command
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+      .whenPressed(arcade);
   }
 
   public Command getArcade(){return arcade;}
