@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Dashboard extends SubsystemBase{
 
     ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
-    double defaultP = .004;
-    double defaultD = 20;
+    double defaultP = .016;
+    double defaultD = 1;
 
     public NetworkTableEntry kP = pidTab.add("P", defaultP).getEntry();
     public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry(); 
