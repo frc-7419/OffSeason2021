@@ -2,16 +2,20 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.dashboard.Dashboard;
 
 public class RunOneSide extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private DriveBaseSub driveBase;
+  private Dashboard dashboard;
   private boolean isLeft;
-  private double power;
+  private boolean reversed;
+  private double coeff = 1;
 
-  public RunOneSide(DriveBaseSub driveBase, String direction, double power) {
+  public RunOneSide(DriveBaseSub driveBase, String direction, Dashboard dashboard, boolean reversed) {
     this.driveBase = driveBase;
-    this.power = power;
+    this.dashboard = dashboard;
+    this.reversed = reversed;
     if(direction == "left"){isLeft = true;}
     else{isLeft = false;}
     // uses addRequirements() instead of requires()
@@ -25,8 +29,14 @@ public class RunOneSide extends CommandBase {
 
   @Override
   public void execute() {
-      if(isLeft){driveBase.setLeft(power);}
-      else{driveBase.setRight(power);}
+    if(reversed){
+      coeff = -1;
+    }
+    if(isLeft){
+      driveBase.setLeft(coeff * dashboard.getPower());
+    } else {
+      driveBase.setRight(coeff * dashboard.getPower());
+    }
   }
 
   @Override

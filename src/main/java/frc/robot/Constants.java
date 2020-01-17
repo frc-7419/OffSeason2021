@@ -30,4 +30,10 @@ public final class Constants {
         this.value = value;
         }
     }
+
+    public static double kTargetHeight = 98;
+
+    public static class RobotConstants{
+        public static double kCameraHeight = 12;
+    }
 }
