@@ -34,10 +34,10 @@ public class RunOneSide extends CommandBase {
     }
     if(isLeft){
       driveBase.setLeft(coeff * dashboard.getPower());
-      SmartDashboard.putNumber("leftVelocity", driveBase.getLeftMast().getSelectedSensorVelocity());
+      // SmartDashboard.putNumber("leftVelocity", driveBase.getLeftMast().getSelectedSensorVelocity());
     } else {
       driveBase.setRight(coeff * dashboard.getPower());
-      SmartDashboard.putNumber("rightVelocity", driveBase.getRightMast().getSelectedSensorVelocity());
+      // SmartDashboard.putNumber("rightVelocity", driveBase.getRightMast().getSelectedSensorVelocity());
 
     }
   }

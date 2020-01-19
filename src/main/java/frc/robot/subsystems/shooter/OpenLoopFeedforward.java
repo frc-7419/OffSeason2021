@@ -7,19 +7,16 @@ import com.team7419.TalonFuncs;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class GetToTargetVelocity extends CommandBase {
+public class OpenLoopFeedforward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private TalonSRX talon;
-  private double targetRpm;
+  private double kF = .06397; // from vex data sheet for 775pro
+  private double holdRpm;
 
-  private double kP;
-  private double kI;
-  private double kD;
-  private double kF;
-
-  public GetToTargetVelocity(TalonSRX talon, double targetRpm) {
+  public OpenLoopFeedforward(TalonSRX talon, double kF, double holdRpm) {
     this.talon = talon;
-    this.targetRpm = targetRpm;
+    this.kF = kF;
+    this.holdRpm = holdRpm;
   }
 
   @Override
@@ -36,13 +33,12 @@ public class GetToTargetVelocity extends CommandBase {
 		  talon.configPeakOutputForward(1, 0);
       talon.configPeakOutputReverse(-1, 0);
       
-      TalonFuncs.setPIDFConstants(0, talon, kP, kI, kD, kF);
+      TalonFuncs.setPIDFConstants(0, talon, 0, 0, 0, kF);
   }
 
   @Override
   public void execute() {
-      double targetVelocity = targetRpm * 4096 / 600;
-      talon.set(ControlMode.Velocity, targetVelocity);
+      talon.set(ControlMode.Velocity, holdRpm);
   }
 
   @Override
