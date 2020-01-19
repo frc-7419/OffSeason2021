@@ -47,6 +47,8 @@ public class GetToTargetVelocity extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    double velocity = talon.getSelectedSensorVelocity();
+    double kF = 1023 / velocity; // no idea where the 1023 comes from but shh
   }
 
   @Override
