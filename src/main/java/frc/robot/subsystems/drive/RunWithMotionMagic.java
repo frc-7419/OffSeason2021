@@ -43,7 +43,7 @@ public class RunWithMotionMagic extends CommandBase{
 
         // velocity: 5375, acc. converting .7
         RobotContainer.getLeftMast().configMotionCruiseVelocity(5375, 0);
-		    RobotContainer.getLeftMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);
+		RobotContainer.getLeftMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);
 
         RobotContainer.getRightMast().configMotionCruiseVelocity(5375, 0);
         RobotContainer.getRightMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);  
