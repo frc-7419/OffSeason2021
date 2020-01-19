@@ -21,42 +21,25 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainerShooter {
 
-  private final DriveBaseSub driveBase = new DriveBaseSub();
+  private final ShooterSub shooter = new ShooterSub();
   private final Dashboard dashboard = new Dashboard();
   private final PaddedXbox joystick = new PaddedXbox();
   private final LimelightSub limelight = new LimelightSub();
   // private final PneumaticSub pneumatic = new PneumaticSub();
 
-  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
-  private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
-
   public RobotContainerShooter() {
-    mechTesterButtonBindings();
   }
 
-  private void mechTesterButtonBindings() { // for dj
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-        .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-        .whileHeld(new RunOneSide(driveBase, "left", dashboard, false)); 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whileHeld(new RunOneSide(driveBase, "right", dashboard, false));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whileHeld(new RunOneSide(driveBase, "right", dashboard, true)); 
-  }
-
-  private void codeTestButtonBindings(){ // for programmer
+  private void buttonBindings(){ // for programmer
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     //   .whileHeld(new ActuatePneumatics(pneumatic, true));
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
     //   .whileHeld(new ActuatePneumatics(pneumatic, false)); 
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-      .whenPressed(turnToTx); // limelight test command
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-      .whenPressed(arcade);
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    //   .whenPressed(turnToTx); // limelight test command
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    //   .whenPressed(arcade);
   }
 
-  public Command getArcade(){return arcade;}
-  public Command getLimelightTest(){return turnToTx;}
 }
