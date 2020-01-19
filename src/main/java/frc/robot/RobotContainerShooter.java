@@ -12,10 +12,9 @@ import com.team7419.PaddedXbox;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
-import frc.robot.subsystems.pneumatics.ActuatePneumatics;
-import frc.robot.subsystems.pneumatics.PneumaticSub;
+import frc.robot.subsystems.shooter.OpenLoopFeedforward;
+import frc.robot.subsystems.shooter.ShooterSub;
 import frc.robot.subsystems.vision.LimelightSub;
-import frc.robot.subsystems.vision.TurnToTx;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
@@ -28,18 +27,14 @@ public class RobotContainerShooter {
   // private final PneumaticSub pneumatic = new PneumaticSub();
 
   public RobotContainerShooter() {
+    configButtonBindings();
   }
 
-  private void buttonBindings(){ // for programmer
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    //   .whileHeld(new ActuatePneumatics(pneumatic, true));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    //   .whileHeld(new ActuatePneumatics(pneumatic, false)); 
+  private void configButtonBindings(){ 
 
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    //   .whenPressed(turnToTx); // limelight test command
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-    //   .whenPressed(arcade);
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+      .whenPressed(new OpenLoopFeedforward(shooter, .06397, 5000));
+      
   }
 
 }
