@@ -9,7 +9,7 @@ import com.team7419.math.UnitConversions;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard.*;
-// import edu.wpi.first.wpilibj2.*;
+// import edu.wpi.first.wpilibj2.*; //does not work :(
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -33,7 +33,7 @@ public class RunWithMotionMagic extends CommandBase{
 
         Dashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */
-		    RobotContainer.getRightMast().configFactoryDefault();
+		RobotContainer.getRightMast().configFactoryDefault();
         RobotContainer.getLeftMast().configFactoryDefault();
         // Robot.getRightMast().configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
         // Robot.getLeftMast().configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);

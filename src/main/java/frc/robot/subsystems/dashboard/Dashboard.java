@@ -26,4 +26,7 @@ public class Dashboard extends SubsystemBase{
     @Override
     public void periodic(){}
 
+	public static void putString(String string, String string2) {
+	}
+
 }

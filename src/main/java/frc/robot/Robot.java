@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    teleOpCommand = robotContainer.getArcade();
+    teleOpCommand = robotContainer.getDefaultTeleOpCommand();
     teleOpCommand.schedule();
   }
 

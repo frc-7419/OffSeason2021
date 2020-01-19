@@ -1,7 +1,8 @@
 package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.Initers;
 import com.team7419.MotorGroup;
@@ -15,8 +16,8 @@ public class DriveBaseSub extends SubsystemBase {
   
   private VictorSPX leftFol;
 	private VictorSPX rightFol;
-	public TalonSRX leftMast;
-  public TalonSRX rightMast;
+	public TalonFX leftMast;
+  public TalonFX rightMast;
   public MotorGroup leftSide; 
   public MotorGroup rightSide;
   
@@ -24,8 +25,8 @@ public class DriveBaseSub extends SubsystemBase {
     
     leftFol = new VictorSPX(Constants.CanIds.leftVictor.value);
 		rightFol = new VictorSPX(Constants.CanIds.rightVictor.value);
-		leftMast = new TalonSRX(Constants.CanIds.leftTalon.value);
-		rightMast = new TalonSRX(Constants.CanIds.rightTalon.value);
+		leftMast = new TalonFX(Constants.CanIds.leftTalon.value);
+		rightMast = new TalonFX(Constants.CanIds.rightTalon.value);
 
     leftSide = new MotorGroup(leftMast, leftFol);
     rightSide = new MotorGroup(rightMast, rightFol);
@@ -59,8 +60,8 @@ public class DriveBaseSub extends SubsystemBase {
     // SmartDashboard.putString("drivebase", current);
   }
 
-  public TalonSRX getLeftMast(){return leftMast;}
-  public TalonSRX getRightMast(){return rightMast;}
+  public TalonFX getLeftMast(){return leftMast;}
+  public TalonFX getRightMast(){return rightMast;}
 
   public void setAll(double power){
     leftMast.set(ControlMode.PercentOutput, power);
