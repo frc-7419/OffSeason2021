@@ -6,7 +6,7 @@ public class UnitConversions{
         return rpm * 2 * Math.PI / 60;
     }
 
-    public static int mPSToTicksP100Ms(double input){
+    public static int mPSToTicksP100Ms(double input){ // m is meters thanks for commenting this neha cough cough
 		double output = (((input*39.3701)/6)*4096)/10;
 		return (int) Math.round(output);
 	}
