@@ -7,7 +7,7 @@ public class UnitConversions{
     }
 
     public static int mPSToTicksP100Ms(double input){ // m is meters thanks for commenting this neha cough cough
-		double output = (((input*39.3701)/6)*4096)/10;
+		double output = (((input*39.3701)/6)*2048)/10;
 		return (int) Math.round(output);
 	}
 }
