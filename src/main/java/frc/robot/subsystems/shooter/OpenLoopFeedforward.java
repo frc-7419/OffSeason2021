@@ -29,14 +29,21 @@ public class OpenLoopFeedforward extends CommandBase {
 
       SmartDashboard.putString("command status", "ramping up");
       
-      shooter.reset();
-      shooter.configureOutputs();
+      // shooter.reset();
+      // shooter.configureOutputs();
       shooter.setkF(kF);
+      shooter.setTargetRawSpeed(1150);
+      //shooter.setOutputPower(.8);
   }
 
   @Override
   public void execute() {
-      shooter.setControlMethod(ControlMethod.HOLDING);
+      // shooter.setControlMethod(ControlMethod.HOLDING);
+      // shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
+      // shooter.percentOutput();
+      shooter.feedforwardOnly();
+
+
   }
 
   @Override

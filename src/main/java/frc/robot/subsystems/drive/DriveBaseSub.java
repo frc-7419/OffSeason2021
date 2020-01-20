@@ -7,6 +7,7 @@ import com.team7419.Initers;
 import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -53,7 +54,9 @@ public class DriveBaseSub extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    SmartDashboard.putNumber("right velocity", rightMast.getSelectedSensorVelocity());
+  }
 
   public TalonSRX getLeftMast(){return leftMast;}
   public TalonSRX getRightMast(){return rightMast;}

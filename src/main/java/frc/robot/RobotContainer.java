@@ -27,11 +27,11 @@ public class RobotContainer {
   private final LimelightSub limelight = new LimelightSub();
   // private final PneumaticSub pneumatic = new PneumaticSub();
 
-  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
+  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
 
   public RobotContainer() {
-    mechTesterButtonBindings();
+    codeTestButtonBindings();
   }
 
   private void mechTesterButtonBindings() { // for dj

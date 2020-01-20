@@ -17,14 +17,15 @@ public class ShooterSub extends SubsystemBase{
 	public TalonSRX talon;
     public MotorGroup motors;
     private double kRampingF;
-    public double powerOutput = 0;
+    public double powerOutput = 0.2;
     public double kF = 0;
     public double targetVelocity = 0;
+    public double rawSpeed = 500;
 
     public ShooterSub(){
 
-        victor = new VictorSPX(Constants.CanIds.leftVictor.value);
-	    talon = new TalonSRX(Constants.CanIds.leftTalon.value);
+        victor = new VictorSPX(Constants.CanIds.rightVictor.value);
+	    talon = new TalonSRX(Constants.CanIds.rightTalon.value);
 
         motors = new MotorGroup(talon, victor);
 
@@ -45,8 +46,21 @@ public class ShooterSub extends SubsystemBase{
         HOLDING,
     }
 
+    public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
+
     @Override
     public void periodic() {
+        // switch(controlMethod){
+        //     case PERCENT_OUTPUT:
+        //         talon.set(ControlMode.PercentOutput, powerOutput);
+        //         System.out.println("spamming but working");
+        //     case SPIN_UP:
+        //         talon.set(ControlMode.Velocity, targetVelocity);
+        //     case HOLDING:
+        //         setPIDF(0, 0, 0, kF);
+        //         talon.set(ControlMode.Velocity, targetVelocity);
+        // }
+        // talon.set(ControlMode.PercentOutput, powerOutput);
     }
 
     public void reset(){
@@ -70,18 +84,20 @@ public class ShooterSub extends SubsystemBase{
 
     public void setkF(double kF){this.kF = kF;}
 
-    public void setTargetRpm(double rpm){this.targetVelocity = rpm * 4096 / 600;}
+    public void setTargetRpm(double rpm){this.rawSpeed = rpm * 1.7067;}
 
-    public void setControlMethod(ControlMethod method){
-        switch(method){
-            case PERCENT_OUTPUT:
-                motors.setPower(powerOutput);
-            case SPIN_UP:
-                talon.set(ControlMode.Velocity, targetVelocity);
-            case HOLDING:
-                setPIDF(0, 0, 0, kF);
-                talon.set(ControlMode.Velocity, targetVelocity);
-        }
+    // public void setControlMethod(ControlMethod method){
+    //     this.controlMethod = method;
+    // }
+
+    public void setTargetRawSpeed(double speed){this.rawSpeed = speed;}
+
+    public void percentOutput(){
+        motors.setPower(powerOutput);
+    }
+
+    public void feedforwardOnly(){
+        talon.set(ControlMode.Velocity, rawSpeed);
     }
 
 }

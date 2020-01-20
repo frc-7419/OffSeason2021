@@ -26,15 +26,19 @@ public class RobotContainerShooter {
   private final LimelightSub limelight = new LimelightSub();
   // private final PneumaticSub pneumatic = new PneumaticSub();
 
+  private final OpenLoopFeedforward percentOut = new OpenLoopFeedforward(shooter, .3558, 5000);
+
   public RobotContainerShooter() {
     configButtonBindings();
   }
 
   private void configButtonBindings(){ 
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-      .whenPressed(new OpenLoopFeedforward(shooter, .06397, 5000));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    //   .whileHeld(percentOut);
       
   }
+
+  public Command getShooterCommand(){return percentOut;}
 
 }
