@@ -97,6 +97,7 @@ public class ShooterSub extends SubsystemBase{
     }
 
     public void feedforwardOnly(){
+        this.setPIDF(0.0, 0.0, 0.0, kF);
         talon.set(ControlMode.Velocity, rawSpeed);
     }
 
