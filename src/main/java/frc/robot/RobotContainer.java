@@ -57,6 +57,6 @@ public class RobotContainer {
       .whenPressed(arcade);
   }
 
-  public Command getArcade(){return arcade;}
+  public Command getDefaultCommand(){return arcade;}
   public Command getLimelightTest(){return turnToTx;}
 }
