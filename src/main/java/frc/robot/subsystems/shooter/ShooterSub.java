@@ -18,6 +18,9 @@ public class ShooterSub extends SubsystemBase{
     public MotorGroup motors;
     private double kRampingF;
     public double powerOutput = 0.2;
+    public double kP = 0;
+    public double kI = 0;
+    public double kD = 0;
     public double kF = 0;
     public double targetVelocity = 0;
     public double rawSpeed = 500;
@@ -63,6 +66,20 @@ public class ShooterSub extends SubsystemBase{
         // talon.set(ControlMode.PercentOutput, powerOutput);
     }
 
+    public void executeControlMethod(ControlMethod method){
+        if(method == ControlMethod.PERCENT_OUTPUT){
+            talon.set(ControlMode.PercentOutput, powerOutput);
+            System.out.println("spamming but working");
+        }
+        else if(method == ControlMethod.HOLDING){
+            feedforwardOnly();
+        }
+        else if(method == ControlMethod.SPIN_UP){
+            this.setPIDF(kP, kI, kD, kF);
+            talon.set(ControlMode.Velocity, rawSpeed);
+        }
+    }
+
     public void reset(){
         talon.configFactoryDefault(); // so nothing acts up
         talon.getSensorCollection().setQuadraturePosition(0, 10); // reset encoder values
@@ -77,6 +94,10 @@ public class ShooterSub extends SubsystemBase{
     }
 
     public void setPIDF(double kP, double kI, double kD, double kF){
+        this.kP = kP;
+        this.kI = kI;
+        this.kD = kD;
+        this.kF = kF;
         TalonFuncs.setPIDFConstants(0, talon, kP, kI, kD, kF);
     }
 
@@ -86,9 +107,9 @@ public class ShooterSub extends SubsystemBase{
 
     public void setTargetRpm(double rpm){this.rawSpeed = rpm * 1.7067;}
 
-    // public void setControlMethod(ControlMethod method){
-    //     this.controlMethod = method;
-    // }
+    public void setControlMethod(ControlMethod method){
+        this.controlMethod = method;
+    }
 
     public void setTargetRawSpeed(double speed){this.rawSpeed = speed;}
 
@@ -100,5 +121,10 @@ public class ShooterSub extends SubsystemBase{
         this.setPIDF(0.0, 0.0, 0.0, kF);
         talon.set(ControlMode.Velocity, rawSpeed);
     }
+
+    public double getkP(){return kP;}
+    public double getkI(){return kI;}
+    public double getkD(){return kD;}
+    public double getkF(){return kF;}
 
 }

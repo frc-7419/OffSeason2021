@@ -39,9 +39,9 @@ public class OpenLoopFeedforward extends CommandBase {
   @Override
   public void execute() {
       // shooter.setControlMethod(ControlMethod.HOLDING);
-      // shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
+      shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
       // shooter.percentOutput();
-      shooter.feedforwardOnly();
+      // shooter.feedforwardOnly();
 
 
   }
