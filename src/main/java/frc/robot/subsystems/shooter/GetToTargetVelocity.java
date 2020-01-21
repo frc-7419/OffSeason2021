@@ -6,49 +6,40 @@ import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
 public class GetToTargetVelocity extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private TalonSRX talon;
-  private double targetRpm;
 
-  private double kP;
-  private double kI;
-  private double kD;
-  private double kF;
+  private ShooterSub shooter;
+  private double kP = 0;
+  private double kI = 0;
+  private double kD = 0;
+  private double kF = .3558;
 
-  public GetToTargetVelocity(TalonSRX talon, double targetRpm) {
-    this.talon = talon;
-    this.targetRpm = targetRpm;
+  public GetToTargetVelocity(ShooterSub shooter, double targetRpm) {
+    this.shooter = shooter;
   }
 
   @Override
   public void initialize() {
 
       SmartDashboard.putString("command status", "ramping up");
-      talon.configFactoryDefault(); // so nothing acts up
-      talon.getSensorCollection().setQuadraturePosition(0, 10); // reset encoder values
-
-      TalonFuncs.configEncoder(talon);
-
-      talon.configNominalOutputForward(0, 0);
-		  talon.configNominalOutputReverse(0, 0);
-		  talon.configPeakOutputForward(1, 0);
-      talon.configPeakOutputReverse(-1, 0);
       
-      TalonFuncs.setPIDFConstants(0, talon, kP, kI, kD, kF);
+      shooter.configureOutputs();
+      shooter.setPIDF(kP, kI, kD, kF);
+      shooter.setControlMethod(ControlMethod.SPIN_UP);
   }
 
   @Override
   public void execute() {
-      double targetVelocity = targetRpm * 4096 / 600;
-      talon.set(ControlMode.Velocity, targetVelocity);
+      shooter.run();
   }
 
   @Override
   public void end(boolean interrupted) {
-    double velocity = talon.getSelectedSensorVelocity();
-    double kF = 1023 / velocity; // 1023 represents max output
+    double velocity = shooter.getCurrentRawSpeed();
+    shooter.setkF(1023 / velocity); // where 1023 represents max output
   }
 
   @Override

@@ -24,6 +24,7 @@ public class ShooterSub extends SubsystemBase{
     public double kF = 0;
     public double targetVelocity = 0;
     public double rawSpeed = 500;
+    public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     public ShooterSub(){
 
@@ -49,8 +50,6 @@ public class ShooterSub extends SubsystemBase{
         HOLDING,
     }
 
-    public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
-
     @Override
     public void periodic() {
         // switch(controlMethod){
@@ -66,7 +65,8 @@ public class ShooterSub extends SubsystemBase{
         // talon.set(ControlMode.PercentOutput, powerOutput);
     }
 
-    public void executeControlMethod(ControlMethod method){
+    public void run(){
+        ControlMethod method = this.controlMethod;
         if(method == ControlMethod.PERCENT_OUTPUT){
             talon.set(ControlMode.PercentOutput, powerOutput);
             System.out.println("spamming but working");
@@ -110,6 +110,8 @@ public class ShooterSub extends SubsystemBase{
     public void setControlMethod(ControlMethod method){
         this.controlMethod = method;
     }
+
+    public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity();}
 
     public void setTargetRawSpeed(double speed){this.rawSpeed = speed;}
 
