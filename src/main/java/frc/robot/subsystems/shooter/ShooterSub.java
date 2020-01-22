@@ -9,7 +9,7 @@ import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.CanIds;;
 
 public class ShooterSub extends SubsystemBase{
 
@@ -28,8 +28,8 @@ public class ShooterSub extends SubsystemBase{
 
     public ShooterSub(){
 
-        victor = new VictorSPX(Constants.CanIds.rightVictor.value);
-	    talon = new TalonSRX(Constants.CanIds.rightTalon.value);
+        victor = new VictorSPX(CanIds.rightVictor.value);
+	    talon = new TalonSRX(CanIds.rightTalon.value);
 
         motors = new MotorGroup(talon, victor);
 

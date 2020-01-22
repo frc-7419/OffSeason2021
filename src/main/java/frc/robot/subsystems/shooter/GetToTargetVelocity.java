@@ -35,7 +35,7 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     double velocity = shooter.getCurrentRawSpeed();
-    shooter.setkF(1023 / velocity); // where 1023 represents max output
+    shooter.setkF(1023 / velocity); // where 1023 represents max output, might end up using 1150 (empirical value)
   }
 
   @Override

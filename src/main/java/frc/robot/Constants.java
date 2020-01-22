@@ -17,7 +17,7 @@ package frc.robot;
  */
 public final class Constants {
 
-    public enum CanIds{
+    public static enum CanIds{
 
         leftTalon(1),
         rightTalon(2),

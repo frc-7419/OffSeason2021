@@ -9,7 +9,7 @@ import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.CanIds;
 
 public class DriveBaseSub extends SubsystemBase {
   
@@ -22,10 +22,10 @@ public class DriveBaseSub extends SubsystemBase {
   
   public DriveBaseSub() {
     
-    leftFol = new VictorSPX(Constants.CanIds.leftVictor.value);
-		rightFol = new VictorSPX(Constants.CanIds.rightVictor.value);
-		leftMast = new TalonSRX(Constants.CanIds.leftTalon.value);
-		rightMast = new TalonSRX(Constants.CanIds.rightTalon.value);
+    leftFol = new VictorSPX(CanIds.leftVictor.value);
+		rightFol = new VictorSPX(CanIds.rightVictor.value);
+		leftMast = new TalonSRX(CanIds.leftTalon.value);
+		rightMast = new TalonSRX(CanIds.rightTalon.value);
 
     leftSide = new MotorGroup(leftMast, leftFol);
     rightSide = new MotorGroup(rightMast, rightFol);
