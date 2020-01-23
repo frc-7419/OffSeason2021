@@ -1,6 +1,8 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -14,7 +16,7 @@ import frc.robot.Constants.CanIds;;
 public class ShooterSub extends SubsystemBase{
 
     private VictorSPX victor;
-	public TalonSRX talon;
+	public TalonFX talon;
     public MotorGroup motors;
     private double kRampingF;
     public double powerOutput = 0;
@@ -29,9 +31,9 @@ public class ShooterSub extends SubsystemBase{
     public ShooterSub(){
 
         victor = new VictorSPX(CanIds.rightVictor.id);
-	    talon = new TalonSRX(CanIds.rightTalon.id);
+	    talon = new TalonFX(CanIds.rightTalon.id);
 
-        motors = new MotorGroup(talon, victor);
+        // motors = new MotorGroup(talon, victor);
 
         Initers.initVictors(victor);
         motors.followMaster();
@@ -40,7 +42,7 @@ public class ShooterSub extends SubsystemBase{
         talon.configNominalOutputForward(0, 0);
 	    talon.configNominalOutputReverse(0, 0);
         talon.configClosedloopRamp(.2, 0);
-    
+
         TalonFuncs.configEncoder(talon);
     }
 
@@ -67,12 +69,6 @@ public class ShooterSub extends SubsystemBase{
             this.setPIDF(kP, kI, kD, kF);
             talon.set(ControlMode.Velocity, rawSpeed);
         }
-    }
-
-    public void reset(){
-        talon.configFactoryDefault(); // so nothing acts up
-        talon.getSensorCollection().setQuadraturePosition(0, 10); // reset encoder values
-        TalonFuncs.configEncoder(talon);
     }
 
     public void configureOutputs(){

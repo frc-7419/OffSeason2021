@@ -38,6 +38,7 @@ public class RobotContainer {
   }
 
   private void mechTesterButtonBindings() { // for dj
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
         .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
@@ -49,10 +50,6 @@ public class RobotContainer {
   }
 
   private void codeTestButtonBindings(){ // for programmer
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    //   .whileHeld(new ActuatePneumatics(pneumatic, true));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    //   .whileHeld(new ActuatePneumatics(pneumatic, false)); 
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
       .whenPressed(turnToTx); // limelight test command
@@ -61,12 +58,13 @@ public class RobotContainer {
   }
 
   private void manualButtonBindings(){
+    
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, .75));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new PercentOutput(shooter, -.75));
 
-    
+
   }
 
   public Command getDefaultCommand(){return arcade;}
