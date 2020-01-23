@@ -13,6 +13,8 @@ public class GetToTargetVelocity extends CommandBase {
   private double kD = 0;
   private double kF = .3558;
 
+  private double threshold = 100;
+
   public GetToTargetVelocity(ShooterSub shooter, double targetRpm) {
     this.shooter = shooter;
   }

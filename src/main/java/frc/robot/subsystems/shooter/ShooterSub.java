@@ -52,17 +52,6 @@ public class ShooterSub extends SubsystemBase{
 
     @Override
     public void periodic() {
-        // switch(controlMethod){
-        //     case PERCENT_OUTPUT:
-        //         talon.set(ControlMode.PercentOutput, powerOutput);
-        //         System.out.println("spamming but working");
-        //     case SPIN_UP:
-        //         talon.set(ControlMode.Velocity, targetVelocity);
-        //     case HOLDING:
-        //         setPIDF(0, 0, 0, kF);
-        //         talon.set(ControlMode.Velocity, targetVelocity);
-        // }
-        // talon.set(ControlMode.PercentOutput, powerOutput);
     }
 
     public void run(){
