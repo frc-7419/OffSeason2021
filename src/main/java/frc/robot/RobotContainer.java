@@ -14,6 +14,8 @@ import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.pneumatics.ActuatePneumatics;
 import frc.robot.subsystems.pneumatics.PneumaticSub;
+import frc.robot.subsystems.shooter.PercentOutput;
+import frc.robot.subsystems.shooter.ShooterSub;
 import frc.robot.subsystems.vision.LimelightSub;
 import frc.robot.subsystems.vision.TurnToTx;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -22,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
 
   private final DriveBaseSub driveBase = new DriveBaseSub();
+  private final ShooterSub shooter = new ShooterSub();
   private final Dashboard dashboard = new Dashboard();
   private final PaddedXbox joystick = new PaddedXbox();
   private final LimelightSub limelight = new LimelightSub();
@@ -55,6 +58,15 @@ public class RobotContainer {
       .whenPressed(turnToTx); // limelight test command
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
       .whenPressed(arcade);
+  }
+
+  private void manualButtonBindings(){
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    .whileHeld(new PercentOutput(shooter, .75));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whileHeld(new PercentOutput(shooter, -.75));
+
+    
   }
 
   public Command getDefaultCommand(){return arcade;}

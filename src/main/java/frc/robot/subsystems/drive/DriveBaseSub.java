@@ -22,10 +22,10 @@ public class DriveBaseSub extends SubsystemBase {
   
   public DriveBaseSub() {
     
-    leftFol = new VictorSPX(CanIds.leftVictor.value);
-		rightFol = new VictorSPX(CanIds.rightVictor.value);
-		leftMast = new TalonSRX(CanIds.leftTalon.value);
-		rightMast = new TalonSRX(CanIds.rightTalon.value);
+    leftFol = new VictorSPX(CanIds.leftVictor.id);
+		rightFol = new VictorSPX(CanIds.rightVictor.id);
+		leftMast = new TalonSRX(CanIds.leftTalon.id);
+		rightMast = new TalonSRX(CanIds.rightTalon.id);
 
     leftSide = new MotorGroup(leftMast, leftFol);
     rightSide = new MotorGroup(rightMast, rightFol);

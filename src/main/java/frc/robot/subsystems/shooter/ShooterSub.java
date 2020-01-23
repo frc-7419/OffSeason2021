@@ -17,7 +17,7 @@ public class ShooterSub extends SubsystemBase{
 	public TalonSRX talon;
     public MotorGroup motors;
     private double kRampingF;
-    public double powerOutput = 0.2;
+    public double powerOutput = 0;
     public double kP = 0;
     public double kI = 0;
     public double kD = 0;
@@ -28,8 +28,8 @@ public class ShooterSub extends SubsystemBase{
 
     public ShooterSub(){
 
-        victor = new VictorSPX(CanIds.rightVictor.value);
-	    talon = new TalonSRX(CanIds.rightTalon.value);
+        victor = new VictorSPX(CanIds.rightVictor.id);
+	    talon = new TalonSRX(CanIds.rightTalon.id);
 
         motors = new MotorGroup(talon, victor);
 

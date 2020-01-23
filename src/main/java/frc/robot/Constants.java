@@ -23,11 +23,13 @@ public final class Constants {
         rightTalon(2),
         leftVictor(0),
         rightVictor(3),
-        armTalon(12);
+        loaderVictor(10),
+        intakeVictor(11),
+        revolverVictor(12);
 
-        public final int value; 
-        CanIds(int value){
-        this.value = value;
+        public final int id; 
+        CanIds(int id){
+        this.id = id;
         }
     }
 
