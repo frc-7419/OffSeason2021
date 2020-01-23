@@ -17,6 +17,7 @@ import frc.robot.subsystems.pneumatics.*;
 import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 
 public class RobotContainer {
@@ -70,6 +71,8 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
     .whileHeld(new RunRevolver(revolver, -.25));
 
+    new POVButton(joystick, 0).whenActive(new RunLoader(loader, .75)); // i have no idea if this works or not but like
+    new POVButton(joystick, 180).whenActive(new RunLoader(loader, -.75));
   }
 
   public Command getDefaultCommand(){return arcade;}
