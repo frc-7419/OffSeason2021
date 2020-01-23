@@ -1,16 +1,18 @@
 package frc.robot.subsystems.intake;
 
+import com.team7419.PaddedXbox;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunIntake extends CommandBase{
+public class IntakeDefault extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeSub intake;
-  private double power;
-
-
-  public RunIntake(IntakeSub intake, double power) {
+  private PaddedXbox joystick;
+  private boolean reversed;
+  
+  public IntakeDefault(IntakeSub intake, PaddedXbox joystick) {
     this.intake = intake;
-    this.power = power;
+    this.joystick = joystick;
   }
 
   @Override
@@ -19,7 +21,8 @@ public class RunIntake extends CommandBase{
 
   @Override
   public void execute() {
-    intake.setPower(power);
+
+    intake.setPower(joystick.getLeftTrig() + joystick.getRightTrig());
 }
 
   @Override
@@ -29,7 +32,7 @@ public class RunIntake extends CommandBase{
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 
 

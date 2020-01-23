@@ -12,12 +12,10 @@ import com.team7419.PaddedXbox;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
-import frc.robot.subsystems.pneumatics.ActuatePneumatics;
-import frc.robot.subsystems.pneumatics.PneumaticSub;
-import frc.robot.subsystems.shooter.PercentOutput;
-import frc.robot.subsystems.shooter.ShooterSub;
-import frc.robot.subsystems.vision.LimelightSub;
-import frc.robot.subsystems.vision.TurnToTx;
+import frc.robot.subsystems.intake.*;
+import frc.robot.subsystems.pneumatics.*;
+import frc.robot.subsystems.shooter.*;
+import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
@@ -28,10 +26,14 @@ public class RobotContainer {
   private final Dashboard dashboard = new Dashboard();
   private final PaddedXbox joystick = new PaddedXbox();
   private final LimelightSub limelight = new LimelightSub();
+  private final LoaderSub loader = new LoaderSub();
+  private final IntakeSub intake = new IntakeSub();
+  private final RevolverSub revolver = new RevolverSub();
   // private final PneumaticSub pneumatic = new PneumaticSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
+  private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
 
   public RobotContainer() {
     codeTestButtonBindings();
@@ -58,15 +60,23 @@ public class RobotContainer {
   }
 
   private void manualButtonBindings(){
-    
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, .75));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new PercentOutput(shooter, -.75));
-
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
+    .whileHeld(new RunRevolver(revolver, .25));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
+    .whileHeld(new RunRevolver(revolver, -.25));
 
   }
 
   public Command getDefaultCommand(){return arcade;}
   public Command getLimelightTest(){return turnToTx;}
+  
+  public void scheduleDefaultCommands(){
+    arcade.schedule();
+    intakeDefault.schedule();
+  }
 }

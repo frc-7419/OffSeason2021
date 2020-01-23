@@ -14,13 +14,13 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
 
   private Command teleOpCommand;
-  // private RobotContainer robotContainer;
-  private RobotContainerShooter robotContainer;
+  private RobotContainer robotContainer;
+  // private RobotContainerShooter robotContainer;
 
   @Override
   public void robotInit() {
-    // robotContainer = new RobotContainer();
-    robotContainer = new RobotContainerShooter();
+    robotContainer = new RobotContainer();
+    // robotContainer = new RobotContainerShooter();
   }
 
   
@@ -49,7 +49,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    robotContainer.getDefaultCommand().schedule();
+    robotContainer.scheduleDefaultCommands();
+
   }
 
   @Override

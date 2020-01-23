@@ -6,8 +6,12 @@ public class RunLoader extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private LoaderSub loader;
   private double power;
-
-
+  
+  /**
+   * 
+   * @param loader
+   * @param power
+   */
   public RunLoader(LoaderSub loader, double power) {
     this.loader = loader;
     this.power = power;
