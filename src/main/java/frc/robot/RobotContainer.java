@@ -74,6 +74,12 @@ public class RobotContainer {
 
     new POVButton(joystick, 90).whileHeld(new RunIntake(intake, .5)); 
     new POVButton(joystick, 270).whileHeld(new RunIntake(intake, -.5)); 
+
+    /* untested button bindings for intake and triggers, unclear on how to get trigger vals still*/
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisLeftTrigger.value)
+    .whileHeld(new RunIntake(intake, .5));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisRightTrigger.value)
+    .whileHeld(new RunIntake(intake, -.5));
   }
 
   public Command getDefaultCommand(){return arcade;}
