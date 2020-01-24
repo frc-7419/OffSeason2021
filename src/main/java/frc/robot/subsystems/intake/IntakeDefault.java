@@ -2,13 +2,13 @@ package frc.robot.subsystems.intake;
 
 import com.team7419.PaddedXbox;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class IntakeDefault extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeSub intake;
   private PaddedXbox joystick;
-  private boolean reversed;
   
   public IntakeDefault(IntakeSub intake, PaddedXbox joystick) {
     this.intake = intake;
@@ -21,9 +21,16 @@ public class IntakeDefault extends CommandBase{
 
   @Override
   public void execute() {
+    SmartDashboard.putString("intake", "running command");
+    // double power = joystick.getLeftTrig() + joystick.getRightTrig();
+    // SmartDashboard.putNumber("intake pow", power);
+    // assumption being that left trigger vals are negative
+    // if(Math.abs(joystick.getLeftTrig()) > 0){intake.setPower(joystick.getLeftTrig());}
+    // else if(Math.abs(joystick.getRightTrig()) > 0){intake.setPower(joystick.getRightTrig());}
+    // else{intake.setPower(0);}
+    intake.setPower(-.5);
 
-    intake.setPower(joystick.getLeftTrig() + joystick.getRightTrig());
-}
+  }
 
   @Override
   public void end(boolean interrupted) {
@@ -32,7 +39,7 @@ public class IntakeDefault extends CommandBase{
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 
 

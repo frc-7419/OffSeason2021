@@ -35,6 +35,7 @@ public class PercentOutput extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    shooter.off();
   }
 
   @Override

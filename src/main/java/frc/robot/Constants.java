@@ -25,7 +25,8 @@ public final class Constants {
         rightVictor(3),
         loaderVictor(10),
         intakeVictor(11),
-        revolverVictor(12);
+        revolverVictor(12),
+        shooterFalcon(13);
 
         public final int id; 
         CanIds(int id){

@@ -1,5 +1,6 @@
 package frc.robot.subsystems.intake;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunRevolver extends CommandBase{
@@ -19,6 +20,7 @@ public class RunRevolver extends CommandBase{
 
   @Override
   public void execute() {
+    SmartDashboard.putString("revolver", "running");
     revolver.setPower(power);
 }
 

@@ -15,7 +15,7 @@ import frc.robot.Constants.CanIds;;
 
 public class ShooterSub extends SubsystemBase{
 
-    private VictorSPX victor;
+    // private VictorSPX victor;
 	public TalonFX talon;
     public MotorGroup motors;
     private double kRampingF;
@@ -30,13 +30,13 @@ public class ShooterSub extends SubsystemBase{
 
     public ShooterSub(){
 
-        victor = new VictorSPX(CanIds.rightVictor.id);
-	    talon = new TalonFX(CanIds.rightTalon.id);
-
+        // victor = new VictorSPX(CanIds.shooterFalcon.id);
+	    talon = new TalonFX(CanIds.shooterFalcon.id);
+        // victor.follow(talon);
         // motors = new MotorGroup(talon, victor);
 
-        Initers.initVictors(victor);
-        motors.followMaster();
+        // Initers.initVictors(victor);
+        
         talon.neutralOutput();
 	    talon.setSensorPhase(true);
         talon.configNominalOutputForward(0, 0);
@@ -101,7 +101,11 @@ public class ShooterSub extends SubsystemBase{
     public void setTargetRawSpeed(double speed){this.rawSpeed = speed;}
 
     public void percentOutput(){
-        motors.setPower(powerOutput);
+        talon.set(ControlMode.PercentOutput,powerOutput);
+    }
+
+    public void off(){
+        talon.set(ControlMode.PercentOutput, 0);
     }
 
     public void feedforwardOnly(){

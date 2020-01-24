@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
-import frc.robot.subsystems.pneumatics.*;
 import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
 public class RobotContainer {
@@ -37,7 +37,7 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
 
   public RobotContainer() {
-    codeTestButtonBindings();
+    manualButtonBindings();
   }
 
   private void mechTesterButtonBindings() { // for dj
@@ -67,12 +67,15 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new PercentOutput(shooter, -.75));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    .whileHeld(new RunRevolver(revolver, .25));
+    .whileHeld(new RunRevolver(revolver, .35));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    .whileHeld(new RunRevolver(revolver, -.25));
+    .whileHeld(new RunRevolver(revolver, -.35));
 
-    new POVButton(joystick, 0).whenActive(new RunLoader(loader, .75)); // i have no idea if this works or not but like
-    new POVButton(joystick, 180).whenActive(new RunLoader(loader, -.75));
+    new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
+    new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));
+
+    new POVButton(joystick, 90).whileHeld(new IntakeDefault(intake, joystick)); 
+    new POVButton(joystick, 270).whileHeld(new IntakeDefault(intake, joystick)); 
   }
 
   public Command getDefaultCommand(){return arcade;}
@@ -80,6 +83,6 @@ public class RobotContainer {
   
   public void scheduleDefaultCommands(){
     arcade.schedule();
-    intakeDefault.schedule();
+    // intakeDefault.schedule();
   }
 }

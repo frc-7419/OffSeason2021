@@ -11,10 +11,9 @@ public class OpenLoopFeedforward extends CommandBase {
   private double holdRpm;
 
   /**
-   *
-   * @param shooter
-   * @param kF
-   * @param holdRpm
+   * @param shooter instance of ShooterSub 
+   * @param kF feedforward gain, for 40% power .3558 is okay
+   * @param holdRpm this doesnt do anything yet
    */
   public OpenLoopFeedforward(ShooterSub shooter, double kF, double holdRpm) {
     this.shooter = shooter;
@@ -25,7 +24,7 @@ public class OpenLoopFeedforward extends CommandBase {
   @Override
   public void initialize() {
 
-      SmartDashboard.putString("command status", "hold ff");
+      SmartDashboard.putString("shooter", "hold ff");
 
       shooter.setkF(kF);
       shooter.setTargetRawSpeed(1150);
