@@ -30,11 +30,9 @@ public class RobotContainer {
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
-  // private final PneumaticSub pneumatic = new PneumaticSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
-  private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -74,8 +72,8 @@ public class RobotContainer {
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));
 
-    new POVButton(joystick, 90).whileHeld(new IntakeDefault(intake, joystick)); 
-    new POVButton(joystick, 270).whileHeld(new IntakeDefault(intake, joystick)); 
+    new POVButton(joystick, 90).whileHeld(new RunIntake(intake, .5)); 
+    new POVButton(joystick, 270).whileHeld(new RunIntake(intake, -.5)); 
   }
 
   public Command getDefaultCommand(){return arcade;}
@@ -83,6 +81,5 @@ public class RobotContainer {
   
   public void scheduleDefaultCommands(){
     arcade.schedule();
-    // intakeDefault.schedule();
   }
 }
