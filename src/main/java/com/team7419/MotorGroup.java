@@ -9,6 +9,11 @@ public class MotorGroup {
     private TalonSRX master;
     private VictorSPX[] victors;
 
+    /**
+     * 
+     * @param master
+     * @param victors
+     */
     public MotorGroup(TalonSRX master, VictorSPX...victors){
         this.master = master;
         this.victors = victors;

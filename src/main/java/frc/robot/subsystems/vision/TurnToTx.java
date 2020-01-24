@@ -26,6 +26,9 @@ public class TurnToTx extends CommandBase {
   private double distanceToTarget;
   private double boost;
 
+  private double velocityThreshold = 115;
+  private boolean velocityBelow = false;
+
   public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight, Dashboard dashboard) {
     this.driveBase = driveBase;
     this.limelight = limelight;
@@ -60,7 +63,14 @@ public class TurnToTx extends CommandBase {
     driveBase.setRight(pidOutput);
 
     distanceToTarget =  (Constants.kTargetHeight - RobotConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
+    distanceToTarget = 1.426*distanceToTarget - 52.372; // based on linear regression, hopefully accurate
     SmartDashboard.putNumber("distance", distanceToTarget);
+
+    if(Math.abs(driveBase.getLeftVelocity()) < velocityThreshold){
+      if(Math.abs(driveBase.getRightVelocity()) < velocityThreshold){
+        velocityBelow = true;
+      }
+    }
   }
 
   @Override
@@ -70,7 +80,7 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return velocityBelow && pidController.atSetpoint();
   }
 }
  

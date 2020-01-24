@@ -7,8 +7,9 @@ import com.team7419.Initers;
 import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.CanIds;
 
 public class DriveBaseSub extends SubsystemBase {
   
@@ -21,10 +22,10 @@ public class DriveBaseSub extends SubsystemBase {
   
   public DriveBaseSub() {
     
-    leftFol = new VictorSPX(Constants.CanIds.leftVictor.value);
-		rightFol = new VictorSPX(Constants.CanIds.rightVictor.value);
-		leftMast = new TalonSRX(Constants.CanIds.leftTalon.value);
-		rightMast = new TalonSRX(Constants.CanIds.rightTalon.value);
+    leftFol = new VictorSPX(CanIds.leftVictor.id);
+		rightFol = new VictorSPX(CanIds.rightVictor.id);
+		leftMast = new TalonSRX(CanIds.leftTalon.id);
+		rightMast = new TalonSRX(CanIds.rightTalon.id);
 
     leftSide = new MotorGroup(leftMast, leftFol);
     rightSide = new MotorGroup(rightMast, rightFol);
@@ -53,7 +54,9 @@ public class DriveBaseSub extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    SmartDashboard.putNumber("right velocity", rightMast.getSelectedSensorVelocity());
+  }
 
   public TalonSRX getLeftMast(){return leftMast;}
   public TalonSRX getRightMast(){return rightMast;}
@@ -65,5 +68,9 @@ public class DriveBaseSub extends SubsystemBase {
 
   public void setLeft(double power){leftSide.setPower(power);}
   public void setRight(double power){rightSide.setPower(power);}
+
+  public double getLeftVelocity(){return leftMast.getSelectedSensorVelocity();}
+  public double getRightVelocity(){return rightMast.getSelectedSensorVelocity();}
+
 
 }

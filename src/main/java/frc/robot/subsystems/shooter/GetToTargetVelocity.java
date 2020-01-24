@@ -1,38 +1,43 @@
 package frc.robot.subsystems.shooter;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
 public class GetToTargetVelocity extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private TalonSRX talon;
-  private boolean isLeft;
-  private double targetRpm;
 
-  public GetToTargetVelocity(TalonSRX talon, double targetRpm) {
-    this.talon = talon;
-    this.targetRpm = targetRpm;
+  private ShooterSub shooter;
+  private double kP = 0;
+  private double kI = 0;
+  private double kD = 0;
+  private double kF = .3558;
+
+  private double threshold = 100;
+
+  public GetToTargetVelocity(ShooterSub shooter, double targetRpm) {
+    this.shooter = shooter;
   }
 
   @Override
   public void initialize() {
-      SmartDashboard.putString("command status", "motion magic");
-      talon.configFactoryDefault(); // so nothing acts up
-      talon.getSensorCollection().setQuadraturePosition(0, 10); // reset encoder values
 
+      SmartDashboard.putString("command status", "ramping up");
+      
+      shooter.configureOutputs();
+      shooter.setPIDF(kP, kI, kD, kF);
+      shooter.setControlMethod(ControlMethod.SPIN_UP);
   }
 
   @Override
   public void execute() {
-      
+      shooter.run();
   }
 
   @Override
   public void end(boolean interrupted) {
-    //driveBase.setAll(0);
+    double velocity = shooter.getCurrentRawSpeed();
+    shooter.setkF(1023 / velocity); // where 1023 represents max output, might end up using 1150 (empirical value)
   }
 
   @Override
