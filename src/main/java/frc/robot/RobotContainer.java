@@ -61,9 +61,9 @@ public class RobotContainer {
   private void manualButtonBindings(){
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whileHeld(new PercentOutput(shooter, .75));
+    .whileHeld(new PercentOutput(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new PercentOutput(shooter, -.75));
+    .whileHeld(new PercentOutput(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     .whileHeld(new RunRevolver(revolver, .35));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)

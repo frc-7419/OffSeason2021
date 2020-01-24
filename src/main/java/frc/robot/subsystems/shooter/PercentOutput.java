@@ -2,12 +2,13 @@ package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
 public class PercentOutput extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSub shooter;
-  private double power;
+  private Dashboard dashboard;
 
   /**
    *
@@ -15,16 +16,16 @@ public class PercentOutput extends CommandBase {
    * @param kF
    * @param holdRpm
    */
-  public PercentOutput(ShooterSub shooter, double power) {
+  public PercentOutput(ShooterSub shooter, Dashboard dashboard) {
     this.shooter = shooter;
-    this.power = power;
+    this.dashboard = dashboard;
   }
 
   @Override
   public void initialize() {
 
       SmartDashboard.putString("shooter", "percent power");
-      shooter.setOutputPower(power);
+      shooter.setOutputPower(dashboard.getPower());
       shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
   }
 
