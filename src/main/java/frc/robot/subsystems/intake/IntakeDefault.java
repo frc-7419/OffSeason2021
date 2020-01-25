@@ -22,13 +22,13 @@ public class IntakeDefault extends CommandBase{
   @Override
   public void execute() {
     SmartDashboard.putString("intake", "running command");
-    // double power = joystick.getLeftTrig() + joystick.getRightTrig();
+    double power = joystick.getLeftTrig() + joystick.getRightTrig();
     // SmartDashboard.putNumber("intake pow", power);
     // assumption being that left trigger vals are negative
-    // if(Math.abs(joystick.getLeftTrig()) > 0){intake.setPower(joystick.getLeftTrig());}
-    // else if(Math.abs(joystick.getRightTrig()) > 0){intake.setPower(joystick.getRightTrig());}
-    // else{intake.setPower(0);}
-    intake.setPower(-.5);
+    if(Math.abs(joystick.getLeftTrig()) > 0){intake.setPower(-.6*joystick.getLeftTrig());}
+    else if(Math.abs(joystick.getRightTrig()) > 0){intake.setPower(-.6*joystick.getRightTrig());}
+    else{intake.setPower(0);}
+    // intake.setPower(-.5);
 
   }
 
