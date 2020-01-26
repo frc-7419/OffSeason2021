@@ -64,11 +64,11 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new PercentOutput(shooter, dashboard));
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    .whileHeld(new RunRevolver(revolver, .35));
+    .whileHeld(new RunRevolver(revolver, .5)); // previously .35
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    .whileHeld(new RunRevolver(revolver, -.35));
+    .whileHeld(new RunRevolver(revolver, -.5)); // previously .35
 
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));

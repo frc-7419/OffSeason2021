@@ -31,7 +31,8 @@ public class PercentOutput extends CommandBase {
 
   @Override
   public void execute() {
-      shooter.run();
+    SmartDashboard.putNumber("speed", shooter.talon.getSelectedSensorVelocity(0));
+    shooter.run();
   }
 
   @Override

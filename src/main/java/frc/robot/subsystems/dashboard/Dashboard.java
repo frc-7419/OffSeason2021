@@ -17,6 +17,8 @@ public class Dashboard extends SubsystemBase{
     double defaultPower = .5;
 
     public NetworkTableEntry power = shooterTab.add("power", defaultPower).getEntry();
+    public NetworkTableEntry targetSpeed = shooterTab.add("raw speed", 5000).getEntry();
+
 
     
     public Dashboard(){}
@@ -31,6 +33,10 @@ public class Dashboard extends SubsystemBase{
 
     public double getPower(){
         return power.getDouble(defaultPower);
+    }
+
+    public double getRawSpeed(){
+        return power.getDouble(5000);
     }
 
     @Override
