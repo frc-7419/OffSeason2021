@@ -30,12 +30,8 @@ public class ShooterSub extends SubsystemBase{
 
     public ShooterSub(){
 
-        // victor = new VictorSPX(CanIds.shooterFalcon.id);
-	    talon = new TalonFX(CanIds.shooterFalcon.id);
-        // victor.follow(talon);
-        // motors = new MotorGroup(talon, victor);
-
-        // Initers.initVictors(victor);
+        talon = new TalonFX(CanIds.shooterFalcon.id);
+        talon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         
         talon.neutralOutput();
 	    talon.setSensorPhase(true);
@@ -43,7 +39,6 @@ public class ShooterSub extends SubsystemBase{
 	    talon.configNominalOutputReverse(0, 0);
         talon.configClosedloopRamp(.2, 0);
 
-        TalonFuncs.configEncoder(talon);
     }
 
     public enum ControlMethod{
@@ -60,7 +55,6 @@ public class ShooterSub extends SubsystemBase{
         ControlMethod method = this.controlMethod;
         if(method == ControlMethod.PERCENT_OUTPUT){
             talon.set(ControlMode.PercentOutput, powerOutput);
-            System.out.println("spamming but working");
         }
         else if(method == ControlMethod.HOLDING){
             feedforwardOnly();
@@ -96,7 +90,7 @@ public class ShooterSub extends SubsystemBase{
         this.controlMethod = method;
     }
 
-    public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity();}
+    public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity(0);}
 
     public void setTargetRawSpeed(double speed){this.rawSpeed = speed;}
 
