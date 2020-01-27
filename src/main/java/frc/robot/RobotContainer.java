@@ -87,8 +87,8 @@ public class RobotContainer {
   public Command getLimelightTest(){return turnToTx;}
   
   public void scheduleDefaultCommands(){
-    // arcade.schedule();
-    calibrate.schedule();
+    arcade.schedule();
+    // calibrate.schedule();
     intakeDefault.schedule();
   }
 }
