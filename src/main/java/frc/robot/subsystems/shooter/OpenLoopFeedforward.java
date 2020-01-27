@@ -35,7 +35,7 @@ public class OpenLoopFeedforward extends CommandBase {
 
   @Override
   public void execute() {
-    SmartDashboard.putNumber("shooter speed", shooter.talon.getSelectedSensorVelocity(0));
+    // SmartDashboard.putNumber("shooter speed", shooter.talon.getSelectedSensorVelocity(0));
     shooter.run();
   }
 

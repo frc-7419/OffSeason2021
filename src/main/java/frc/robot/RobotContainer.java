@@ -34,6 +34,7 @@ public class RobotContainer {
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
+  private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -86,7 +87,8 @@ public class RobotContainer {
   public Command getLimelightTest(){return turnToTx;}
   
   public void scheduleDefaultCommands(){
-    arcade.schedule();
+    // arcade.schedule();
+    calibrate.schedule();
     intakeDefault.schedule();
   }
 }
