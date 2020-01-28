@@ -45,7 +45,7 @@ public class OpenLoopFeedforward extends CommandBase {
     shooter.talon.set(ControlMode.Velocity, 10000);
     SmartDashboard.putNumber("f constant", shooter.getkF());
     SmartDashboard.putNumber("current speed", shooter.getCurrentRawSpeed());
-    System.out.println("spamming but working");
+    // System.out.println("spamming but working");
     // shooter.feedforwardOnly();
   }
 
