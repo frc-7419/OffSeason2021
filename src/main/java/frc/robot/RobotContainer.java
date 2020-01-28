@@ -33,6 +33,8 @@ public class RobotContainer {
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
+  private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
+  private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -63,23 +65,22 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new PercentOutput(shooter, dashboard));
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    .whileHeld(new RunRevolver(revolver, .35));
+    .whileHeld(new RunRevolver(revolver, .5)); // previously .35
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    .whileHeld(new RunRevolver(revolver, -.35));
+    .whileHeld(new RunRevolver(revolver, -.5)); // previously .35
 
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));
 
-    new POVButton(joystick, 90).whileHeld(new RunIntake(intake, .5)); 
-    new POVButton(joystick, 270).whileHeld(new RunIntake(intake, -.5)); 
+    // new POVButton(joystick, 90).whileHeld(new RunIntake(intake, joystick, .5)); 
+    // new POVButton(joystick, 270).whileHeld(new RunIntake(intake, joystick, -.5)); 
 
-    /* untested button bindings for intake and triggers, unclear on how to get trigger vals still*/
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisLeftTrigger.value)
-    .whileHeld(new RunIntake(intake, .5));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisRightTrigger.value)
-    .whileHeld(new RunIntake(intake, -.5));
+    /* untested button bindings for intake and triggers */
+    // new Trigger().toggleWhenActive(new RunIntake(intake, joystick, -.5));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisRightTrigger.value)
+    // .whileHeld(new RunIntake(intake, joystick, -.5));
   }
 
   public Command getDefaultCommand(){return arcade;}
@@ -87,5 +88,7 @@ public class RobotContainer {
   
   public void scheduleDefaultCommands(){
     arcade.schedule();
+    // calibrate.schedule();
+    intakeDefault.schedule();
   }
 }

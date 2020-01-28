@@ -1,14 +1,16 @@
 package frc.robot.subsystems.shooter;
 
+import com.team7419.PaddedXbox;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
-public class PercentOutput extends CommandBase {
+public class CalibrateFalcon extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSub shooter;
-  private Dashboard dashboard;
+  private PaddedXbox joystick;
 
   /**
    *
@@ -16,22 +18,22 @@ public class PercentOutput extends CommandBase {
    * @param kF
    * @param holdRpm
    */
-  public PercentOutput(ShooterSub shooter, Dashboard dashboard) {
+  public CalibrateFalcon(ShooterSub shooter, PaddedXbox joystick) {
     this.shooter = shooter;
-    this.dashboard = dashboard;
+    this.joystick = joystick;
   }
 
   @Override
   public void initialize() {
 
       SmartDashboard.putString("shooter", "percent power");
-      shooter.setOutputPower(dashboard.getPower());
       shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
   }
 
   @Override
   public void execute() {
-    // SmartDashboard.putNumber("speed", shooter.talon.getSelectedSensorVelocity(0));
+    SmartDashboard.putNumber("speed", shooter.talon.getSelectedSensorVelocity(0));
+    shooter.setOutputPower(joystick.getLeftY());
     shooter.run();
   }
 
