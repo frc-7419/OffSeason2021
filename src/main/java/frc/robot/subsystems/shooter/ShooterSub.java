@@ -10,6 +10,7 @@ import com.team7419.Initers;
 import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;;
 
@@ -49,6 +50,7 @@ public class ShooterSub extends SubsystemBase{
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
     }
 
     public void run(){

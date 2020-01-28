@@ -1,5 +1,7 @@
 package frc.robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
@@ -9,7 +11,6 @@ public class OpenLoopFeedforward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSub shooter;
   private double kF;
-  private double maxRawSpeed;
   private Dashboard dashboard;
   /**
    * @param shooter instance of ShooterSub 
@@ -27,20 +28,30 @@ public class OpenLoopFeedforward extends CommandBase {
       SmartDashboard.putString("shooter", "hold ff");
 
       double rawSpeed = dashboard.getRawSpeed();
-      kF = .4 * maxRawSpeed / rawSpeed;
+      double power = dashboard.getPower();
+      kF = power * 1023 / rawSpeed;
       shooter.setkF(kF);
-      shooter.setTargetRawSpeed(rawSpeed);
-      shooter.setControlMethod(ControlMethod.HOLDING);
+      // shooter.setTargetRawSpeed(rawSpeed);
+      // shooter.setControlMethod(ControlMethod.HOLDING);
+
+      shooter.setPIDF(0,0,0,kF);
+
   }
 
   @Override
   public void execute() {
-    // SmartDashboard.putNumber("shooter speed", shooter.talon.getSelectedSensorVelocity(0));
-    shooter.run();
+    SmartDashboard.putNumber("shooter speed", shooter.talon.getSelectedSensorVelocity(0));
+    // shooter.run();
+    shooter.talon.set(ControlMode.Velocity, 10000);
+    SmartDashboard.putNumber("f constant", shooter.getkF());
+    SmartDashboard.putNumber("current speed", shooter.getCurrentRawSpeed());
+    System.out.println("spamming but working");
+    // shooter.feedforwardOnly();
   }
 
   @Override
   public void end(boolean interrupted) {
+    shooter.off();
   }
 
   @Override
