@@ -59,7 +59,7 @@ public class ShooterSub extends SubsystemBase{
             talon.set(ControlMode.PercentOutput, powerOutput);
         }
         else if(method == ControlMethod.HOLDING){
-            feedforwardOnly();
+            talon.set(ControlMode.Velocity, rawSpeed);
         }
         else if(method == ControlMethod.SPIN_UP){
             this.setPIDF(kP, kI, kD, kF);
@@ -104,10 +104,10 @@ public class ShooterSub extends SubsystemBase{
         talon.set(ControlMode.PercentOutput, 0);
     }
 
-    public void feedforwardOnly(){
-        this.setPIDF(0.0, 0.0, 0.0, kF);
-        talon.set(ControlMode.Velocity, rawSpeed);
-    }
+    // public void feedforwardOnly(){
+    //     // this.setPIDF(0.0, 0.0, 0.0, kF);
+    //     talon.set(ControlMode.Velocity, rawSpeed);
+    // }
 
     public double getkP(){return kP;}
     public double getkI(){return kI;}
