@@ -58,7 +58,7 @@ public class RobotContainer {
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     // .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new GetToTargetVelocity(shooter, dashboard), true);
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
   }
 
   private void manualButtonBindings(){

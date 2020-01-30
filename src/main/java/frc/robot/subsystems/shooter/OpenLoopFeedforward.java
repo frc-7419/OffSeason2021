@@ -23,13 +23,10 @@ public class OpenLoopFeedforward extends CommandBase {
       SmartDashboard.putString("shooter", "hold ff");
 
       double rawSpeed = dashboard.getRawSpeed();
-      shooterkF = dashboard.getShooterkF();
-      shooter.setkF(shooterkF);
+      shooter.setkF(44.3172/rawSpeed + .0442152);
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);
-
-      shooter.setPIDF(0,0,0,shooterkF);
-
+      shooter.setPIDF(0,0,0,shooter.getkF());
   }
 
   @Override
