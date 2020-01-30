@@ -24,7 +24,7 @@ public class RobotContainer {
   
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
   private final RunWithMotionMagic motion = new RunWithMotionMagic(10);
-
+  private final MagicButton magic = new MagicButton();
 
   public RobotContainer() {
     //arcade.schedule();
@@ -36,8 +36,10 @@ public class RobotContainer {
     .whenPressed(arcade);
     
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(motion);
+    // .whenPressed(motion);
+    .whenPressed(magic);
   }
+
 
   public Command getDefaultTeleOpCommand(){
     return arcade;

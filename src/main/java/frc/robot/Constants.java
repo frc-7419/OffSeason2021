@@ -19,7 +19,7 @@ public final class Constants {
 
     public enum CanIds{
 
-        leftTalon(1),
+        leftTalon(14),
         rightTalon(2),
         leftVictor(0),
         rightVictor(3),

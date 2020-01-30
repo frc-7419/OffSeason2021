@@ -75,7 +75,7 @@ public class RunWithMotionMagic extends CommandBase{
 
         SmartDashboard.putString("command status", "excuting motion magic");
 
-        SmartDashboard.putNumber("leftMast", RobotContainer.driveBase.leftMast.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("leftMast", RobotContainer.driveBase.leftMast.getSelectedSensorPosition(0)); //should print?
         SmartDashboard.putNumber("rightMast", RobotContainer.driveBase.rightMast.getSelectedSensorPosition(0));
     
         double leftMastOutput = RobotContainer.driveBase.leftMast.getMotorOutputPercent();
