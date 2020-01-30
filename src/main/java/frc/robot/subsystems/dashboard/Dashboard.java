@@ -7,11 +7,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Dashboard extends SubsystemBase{
 
     ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
-    double defaultP = .08;
-    double defaultD = .02;
+    double defaultP = .016;
+    double defaultD = 1;
 
     public NetworkTableEntry kP = pidTab.add("P", defaultP).getEntry();
-    public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry();    
+    public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry(); 
+
+    ShuffleboardTab shooterTab = Shuffleboard.getTab("shooter power");
+    double defaultPower = .5;
+
+    public NetworkTableEntry power = shooterTab.add("power", defaultPower).getEntry();
+    public NetworkTableEntry targetSpeed = shooterTab.add("raw speed", 5000).getEntry();
+
+
     
 
     ShuffleboardTab motionTab = Shuffleboard.getTab("Falcon Motion");
@@ -30,8 +38,12 @@ public class Dashboard extends SubsystemBase{
         return kD.getDouble(defaultD);
     }
 
-    public double getSetpoint(){
-        return setpoint.getDouble(defaultSetpoint);
+    public double getPower(){
+        return power.getDouble(defaultPower);
+    }
+
+    public double getRawSpeed(){
+        return power.getDouble(5000);
     }
 
     @Override

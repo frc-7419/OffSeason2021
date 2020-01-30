@@ -3,32 +3,46 @@ package frc.robot.subsystems.vision;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Constants.RobotConstants;
+import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSub;
 
 public class TurnToTx extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private DriveBaseSub driveBase;
   private LimelightSub limelight;
   private PIDController pidController;
-
+  private Dashboard dashboard;
+  
   private double kP;
   private double kI;
   private double kD;
 
   private double pidOutput;
+  private double tx;
+  private double ty;
+  private double distanceToTarget;
+  private double boost;
 
-  public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight, double kP, double kI, double kD) {
+  private double velocityThreshold = 115;
+  private boolean velocityBelow = false;
+
+  public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight, Dashboard dashboard) {
     this.driveBase = driveBase;
     this.limelight = limelight;
-    this.kP = kP;
-    this.kI = kI;
-    this.kD = kD;
+    this.dashboard = dashboard;
     addRequirements(driveBase, limelight);
   }
 
   @Override
   public void initialize() {
+    driveBase.rightMast.configFactoryDefault();
+    driveBase.leftMast.configFactoryDefault();
+    kP = .016; // gets P coefficient from dashboard
+    kI = 0;
+    kD = 1; 
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(0);
     pidController.setTolerance(1);
@@ -36,12 +50,27 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("command status", "pid");
 
-    SmartDashboard.putString("pid", "running");
-    pidOutput = pidController.calculate(limelight.getTx());
+    tx = limelight.getTx();
+    ty = limelight.getTy();
+
+    pidOutput = pidController.calculate(tx);
+    boost = Math.abs(pidOutput) / pidOutput * .05;
+    pidOutput += boost;
     SmartDashboard.putNumber("pidoutput", pidOutput);
     driveBase.setLeft(-pidOutput);
     driveBase.setRight(pidOutput);
+
+    distanceToTarget =  (Constants.kTargetHeight - RobotConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
+    distanceToTarget = 1.426*distanceToTarget - 52.372; // based on linear regression, hopefully accurate
+    SmartDashboard.putNumber("distance", distanceToTarget);
+
+    if(Math.abs(driveBase.getLeftVelocity()) < velocityThreshold){
+      if(Math.abs(driveBase.getRightVelocity()) < velocityThreshold){
+        velocityBelow = true;
+      }
+    }
   }
 
   @Override
@@ -51,6 +80,7 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return pidController.atSetpoint();
+    return velocityBelow && pidController.atSetpoint();
   }
 }
+ 

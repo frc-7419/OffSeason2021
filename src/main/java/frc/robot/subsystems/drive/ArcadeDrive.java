@@ -1,10 +1,6 @@
 package frc.robot.subsystems.drive;
 
 import com.team7419.PaddedXbox;
-
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -53,10 +49,10 @@ public class ArcadeDrive extends CommandBase {
     driveBase.leftSide.setPower(leftPower);
     driveBase.rightSide.setPower(rightPower);
 
-    if(joystick.getRightShoulder()){
-      driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
-      driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
-    }
+    // if(joystick.getRightShoulder()){
+    //   driveBase.getLeftMast().getSensorCollection().setQuadraturePosition(0, 10);
+    //   driveBase.getRightMast().getSensorCollection().setQuadraturePosition(0, 10);
+    // }
   }
 
   @Override

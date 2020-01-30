@@ -17,17 +17,26 @@ package frc.robot;
  */
 public final class Constants {
 
-    public enum CanIds{
+    public static enum CanIds{
 
-        leftTalon(14),
+        leftTalon(13),
         rightTalon(2),
         leftVictor(0),
         rightVictor(3),
-        armTalon(12);
+        loaderVictor(10),
+        intakeVictor(11),
+        revolverVictor(12),
+        shooterFalcon(13);
 
-        public final int value; 
-        CanIds(int value){
-        this.value = value;
+        public final int id; 
+        CanIds(int id){
+        this.id = id;
         }
+    }
+
+    public static double kTargetHeight = 80; // 98 ish in real game
+
+    public static class RobotConstants{
+        public static double kCameraHeight = 10;
     }
 }

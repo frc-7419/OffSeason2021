@@ -15,45 +15,89 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
+import frc.robot.subsystems.intake.*;
+import frc.robot.subsystems.shooter.*;
+import frc.robot.subsystems.vision.*;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 
 public class RobotContainer {
 
-  public static final DriveBaseSub driveBase = new DriveBaseSub();
-  public static final Dashboard dashboard = new Dashboard();
-  public static final PaddedXbox joystick = new PaddedXbox();
-  
-  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .4, .4);
-  private final RunWithMotionMagic motion = new RunWithMotionMagic(10);
-  private final MagicButton magic = new MagicButton();
+  public final static DriveBaseSub driveBase = new DriveBaseSub();
+  private final ShooterSub shooter = new ShooterSub();
+  public final static Dashboard dashboard = new Dashboard();
+  private final PaddedXbox joystick = new PaddedXbox();
+  private final LimelightSub limelight = new LimelightSub();
+  private final LoaderSub loader = new LoaderSub();
+  private final IntakeSub intake = new IntakeSub();
+  private final RevolverSub revolver = new RevolverSub();
+
+  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
+  private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
+  private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
+  private final MagicButton magic = new MagicButton(intake, revolver, joystick, 0, 0);
+
 
   public RobotContainer() {
-    //arcade.schedule();
-    configureButtonBindings();
+    // manualButtonBindings();
+    magicButtonBindings();
   }
 
-  private void configureButtonBindings() {
+  private void mechTesterButtonBindings() { // for dj
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-    .whenPressed(arcade);
-    
+        .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whenPressed(motion);
-    .whenPressed(magic);
+        .whileHeld(new RunOneSide(driveBase, "left", dashboard, false)); 
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+      .whileHeld(new RunOneSide(driveBase, "right", dashboard, false));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+      .whileHeld(new RunOneSide(driveBase, "right", dashboard, true)); 
   }
 
+  private void codeTestButtonBindings(){ // for programmer
 
-  public Command getDefaultTeleOpCommand(){
-    return arcade;
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+      .whenPressed(turnToTx); // limelight test command
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+      .whenPressed(arcade);
   }
+
+  private void manualButtonBindings(){
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    .whileHeld(new PercentOutput(shooter, dashboard));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
+    .whileHeld(new RunRevolver(revolver, .5)); // previously .35
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
+    .whileHeld(new RunRevolver(revolver, -.5)); // previously .35
+
+    new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
+    new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));
+
+    // new POVButton(joystick, 90).whileHeld(new RunIntake(intake, joystick, .5)); 
+    // new POVButton(joystick, 270).whileHeld(new RunIntake(intake, joystick, -.5)); 
+
+    /* untested button bindings for intake and triggers */
+    // new Trigger().toggleWhenActive(new RunIntake(intake, joystick, -.5));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisRightTrigger.value)
+    // .whileHeld(new RunIntake(intake, joystick, -.5));
+  }
+
+  private void magicButtonBindings(){
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whenPressed(new MagicButton(intake, revolver, joystick, .5, 1));
+  }
+
+  public Command getDefaultCommand(){return arcade;}
+  public Command getLimelightTest(){return turnToTx;}
   
-  public static TalonFX getRightMast(){
-    return driveBase.rightMast;
+  public void scheduleDefaultCommands(){
+    arcade.schedule();
+    intakeDefault.schedule();
   }
-  public static TalonFX getLeftMast(){
-    return driveBase.leftMast;
-  }
-
-
-  // public Command getAutonomousCommand() {
-  //   return print;
-  // }
 }
