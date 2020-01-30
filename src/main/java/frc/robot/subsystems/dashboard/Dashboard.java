@@ -18,7 +18,7 @@ public class Dashboard extends SubsystemBase{
 
     public NetworkTableEntry power = shooterTab.add("power", defaultPower).getEntry();
     public NetworkTableEntry targetSpeed = shooterTab.add("raw speed", 5000).getEntry();
-    public NetworkTableEntry shooterkP = shooterTab.add("shooter speed P", 0).getEntry();
+    public NetworkTableEntry shooterkF = shooterTab.add("shooter kF", 0).getEntry();
 
 
     
@@ -40,8 +40,8 @@ public class Dashboard extends SubsystemBase{
         return targetSpeed.getDouble(5000);
     }
 
-    public double getShooterkP(){
-        return shooterkP.getDouble(0);
+    public double getShooterkF(){
+        return shooterkF.getDouble(0);
     }
 
     @Override

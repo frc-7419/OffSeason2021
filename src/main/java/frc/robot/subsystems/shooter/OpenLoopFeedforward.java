@@ -10,7 +10,7 @@ import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 public class OpenLoopFeedforward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSub shooter;
-  private double kF;
+  private double shooterkF;
   private Dashboard dashboard;
   /**
    * @param shooter instance of ShooterSub 
@@ -28,26 +28,18 @@ public class OpenLoopFeedforward extends CommandBase {
       SmartDashboard.putString("shooter", "hold ff");
 
       double rawSpeed = dashboard.getRawSpeed();
-      double power = dashboard.getPower();
-      double shooterkP = dashboard.getShooterkP();
-      kF = power * 1023 / rawSpeed;
-      shooter.setkF(kF);
+      shooterkF = dashboard.getShooterkF();
+      shooter.setkF(shooterkF);
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);
 
-      shooter.setPIDF(shooterkP,0,0,kF);
+      shooter.setPIDF(0,0,0,shooterkF);
 
   }
 
   @Override
   public void execute() {
-    SmartDashboard.putNumber("shooter speed", shooter.talon.getSelectedSensorVelocity(0));
     shooter.run();
-    // shooter.talon.set(ControlMode.Velocity, 10000); 
-    SmartDashboard.putNumber("f constant", shooter.getkF());
-    SmartDashboard.putNumber("current speed", shooter.getCurrentRawSpeed());
-    // System.out.println("spamming but working");
-    // shooter.feedforwardOnly();
   }
 
   @Override
