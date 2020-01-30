@@ -62,7 +62,6 @@ public class ShooterSub extends SubsystemBase{
             talon.set(ControlMode.Velocity, rawSpeed);
         }
         else if(method == ControlMethod.SPIN_UP){
-            this.setPIDF(kP, kI, kD, kF);
             talon.set(ControlMode.Velocity, rawSpeed);
         }
     }
