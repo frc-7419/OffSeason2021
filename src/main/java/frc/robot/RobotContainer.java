@@ -37,8 +37,10 @@ public class RobotContainer {
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
-  private final MagicButton magic = new MagicButton(intake, revolver, joystick, 0, 0);
-
+  private final MagicIntake magicIntake = new MagicIntake(intake, joystick, 0, 0);
+  private final MagicRevolver magicRevolver = new MagicRevolver(revolver, joystick, 0, 0);
+  private final MagicShooter magicShooter = new MagicShooter(shooter, joystick, 0, 0);
+  private final TheMagicButton theMagicButton = new TheMagicButton();
 
   public RobotContainer() {
     // manualButtonBindings();
@@ -90,7 +92,13 @@ public class RobotContainer {
 
   private void magicButtonBindings(){
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new MagicButton(intake, revolver, joystick, .5, 1));
+    .whenPressed(new MagicIntake(intake, joystick, .5, 3));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whenPressed(new MagicRevolver(revolver, joystick, .5, 3));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    .whenPressed(new MagicShooter(shooter, joystick, .5, 3));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    .whenPressed(new TheMagicButton());
   }
 
   public Command getDefaultCommand(){return arcade;}

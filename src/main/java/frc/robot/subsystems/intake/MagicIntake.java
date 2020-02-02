@@ -1,4 +1,4 @@
-package frc.robot.subsystems.drive;
+package frc.robot.subsystems.intake;
 
 import java.security.Timestamp;
 import java.util.Date;
@@ -12,10 +12,9 @@ import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RevolverSub;
 
-public class MagicButton extends CommandBase {
+public class MagicIntake extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeSub intake;
-  private RevolverSub revolver;
   private PaddedXbox joystick;
   private double time;
   private double power;
@@ -24,9 +23,8 @@ public class MagicButton extends CommandBase {
   Date date = new Date();
   java.sql.Timestamp ts = new java.sql.Timestamp(date.getTime());
 
-  public MagicButton(IntakeSub intake, RevolverSub revolver, PaddedXbox joystick, double power, double time) {
+  public MagicIntake(IntakeSub intake, PaddedXbox joystick, double power, double time) {
     this.intake = intake;
-    this.revolver = revolver;
     this.joystick = joystick;
     this.power = power;
     this.time = time;
@@ -41,8 +39,6 @@ public class MagicButton extends CommandBase {
   @Override
   public void execute() {
     intake.setPower(power);
-    Timer.delay(time);
-    revolver.setPower(power);
     Timer.delay(time);
 
     done = true;
