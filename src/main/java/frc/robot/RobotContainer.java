@@ -38,6 +38,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
+    codeTestButtonBindings();
   }
 
   private void mechTesterButtonBindings() { // for dj
@@ -54,33 +55,23 @@ public class RobotContainer {
 
   private void codeTestButtonBindings(){ // for programmer
 
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-      .whenPressed(turnToTx); // limelight test command
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-      .whenPressed(arcade);
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
   }
 
   private void manualButtonBindings(){
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     .whileHeld(new RunRevolver(revolver, .5)); // previously .35
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
     .whileHeld(new RunRevolver(revolver, -.5)); // previously .35
-
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));
 
-    // new POVButton(joystick, 90).whileHeld(new RunIntake(intake, joystick, .5)); 
-    // new POVButton(joystick, 270).whileHeld(new RunIntake(intake, joystick, -.5)); 
-
-    /* untested button bindings for intake and triggers */
-    // new Trigger().toggleWhenActive(new RunIntake(intake, joystick, -.5));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisRightTrigger.value)
-    // .whileHeld(new RunIntake(intake, joystick, -.5));
   }
 
   public Command getDefaultCommand(){return arcade;}
