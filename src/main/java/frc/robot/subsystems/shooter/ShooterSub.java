@@ -90,6 +90,9 @@ public class ShooterSub extends SubsystemBase{
 
     public void setControlMethod(ControlMethod method){
         this.controlMethod = method;
+        if(method == ControlMethod.HOLDING){
+            setPIDF(0,0,0,kF);
+        }
     }
 
     public double lookUpkF(double nativeUnits){

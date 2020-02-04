@@ -9,7 +9,6 @@ public class OpenLoopFeedforward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
   private ShooterSub shooter;
-  private double shooterkF;
   private Dashboard dashboard;
   
   public OpenLoopFeedforward(ShooterSub shooter, Dashboard dashboard) {
@@ -26,7 +25,7 @@ public class OpenLoopFeedforward extends CommandBase {
       shooter.setkF(shooter.lookUpkF(rawSpeed));
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);
-      shooter.setPIDF(0,0,0,shooter.getkF());
+      // shooter.setPIDF(0,0,0,shooter.getkF());
   }
 
   @Override
