@@ -12,7 +12,8 @@ import com.team7419.TalonFuncs;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CanIds;;
+import frc.robot.Constants;
+import frc.robot.Constants.*;
 
 public class ShooterSub extends SubsystemBase{
 
@@ -89,6 +90,19 @@ public class ShooterSub extends SubsystemBase{
 
     public void setControlMethod(ControlMethod method){
         this.controlMethod = method;
+    }
+
+    public double lookUpkF(double nativeUnits){
+        double output = 0;
+        for(double[] pair : Constants.kSpeedToFf){
+            if(pair[0] == nativeUnits){output = pair[1];}
+        }
+        if(output == 0){output = computekF(nativeUnits);}
+        return output; 
+    }
+
+    public double computekF(double nativeUnits){
+        return 47.3172/rawSpeed + .0462152;
     }
 
     public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity(0);}
