@@ -34,13 +34,6 @@ public class ShooterSub extends SubsystemBase{
 
         talon = new TalonFX(CanIds.shooterFalcon.id);
         talon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        
-        // talon.neutralOutput();
-	    // talon.setSensorPhase(true);
-        // talon.configNominalOutputForward(0, 0);
-	    // talon.configNominalOutputReverse(0, 0);
-        // talon.configClosedloopRamp(.2, 0);
-
     }
 
     public enum ControlMethod{

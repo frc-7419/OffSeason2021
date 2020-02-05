@@ -1,6 +1,8 @@
 package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.Initers;
@@ -13,64 +15,49 @@ import frc.robot.Constants.CanIds;
 
 public class DriveBaseSub extends SubsystemBase {
   
-  private VictorSPX leftFol;
-	private VictorSPX rightFol;
-	public TalonSRX leftMast;
-  public TalonSRX rightMast;
-  public MotorGroup leftSide; 
-  public MotorGroup rightSide;
+  private TalonFX left1;
+	private TalonFX right1;
+	private TalonFX left2;
+  private TalonFX right2;
   
   public DriveBaseSub() {
-    
-    leftFol = new VictorSPX(CanIds.leftVictor.id);
-		rightFol = new VictorSPX(CanIds.rightVictor.id);
-		leftMast = new TalonSRX(CanIds.leftTalon.id);
-		rightMast = new TalonSRX(CanIds.rightTalon.id);
-
-    leftSide = new MotorGroup(leftMast, leftFol);
-    rightSide = new MotorGroup(rightMast, rightFol);
-
-    Initers.initVictors(leftFol, rightFol);
-
-    leftSide.followMaster();
-    rightSide.followMaster();
-
-    leftMast.neutralOutput();
-		leftMast.setSensorPhase(true);
-    leftMast.configNominalOutputForward(0, 0);
-		leftMast.configNominalOutputReverse(0, 0);
-    leftMast.configClosedloopRamp(.2, 0);
-        
-    rightMast.neutralOutput();
-    rightMast.configNominalOutputForward(0, 0);
-		rightMast.configNominalOutputReverse(0, 0);
-    rightMast.configClosedloopRamp(.2, 0);
-
-    rightSide.setInverted(true);
-    rightMast.setSensorPhase(true);
-    
-    TalonFuncs.configEncoder(leftMast);
-    TalonFuncs.configEncoder(rightMast);
+    left1 = new TalonFX(CanIds.leftVictor.id);
+		right1 = new TalonFX(CanIds.rightVictor.id);
+		left2 = new TalonFX(CanIds.leftTalon.id);
+		right2 = new TalonFX(CanIds.rightTalon.id);
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("right velocity", rightMast.getSelectedSensorVelocity());
   }
 
-  public TalonSRX getLeftMast(){return leftMast;}
-  public TalonSRX getRightMast(){return rightMast;}
+  public TalonFX getLeftMast(){return left1;}
+  public TalonFX getRightMast(){return right1;}
+
+  public void setLeftPower(double power){
+    left1.set(ControlMode.PercentOutput, power);
+    left2.set(ControlMode.PercentOutput, power);
+  }
+
+  public void setRightPower(double power){
+    right1.set(ControlMode.PercentOutput, power);
+    right2.set(ControlMode.PercentOutput, power);
+  }
 
   public void setAll(double power){
-    leftMast.set(ControlMode.PercentOutput, power);
-    rightMast.set(ControlMode.PercentOutput, power);
+    setLeftPower(power);
+    setRightPower(power);
   }
 
-  public void setLeft(double power){leftSide.setPower(power);}
-  public void setRight(double power){rightSide.setPower(power);}
+  public double getLeftVelocity(){return left1.getSelectedSensorVelocity();}
+  public double getRightVelocity(){return right1.getSelectedSensorVelocity();}
 
-  public double getLeftVelocity(){return leftMast.getSelectedSensorVelocity();}
-  public double getRightVelocity(){return rightMast.getSelectedSensorVelocity();}
+  public void factoryResetAll(){
+    right1.configFactoryDefault();
+    right2.configFactoryDefault();
+    left1.configFactoryDefault();
+    left2.configFactoryDefault();
+  }
 
 
 }
