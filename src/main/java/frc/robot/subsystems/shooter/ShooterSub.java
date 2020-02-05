@@ -3,10 +3,7 @@ package frc.robot.subsystems.shooter;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.team7419.Initers;
 import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
@@ -20,7 +17,6 @@ public class ShooterSub extends SubsystemBase{
     // private VictorSPX victor;
 	public TalonFX talon;
     public MotorGroup motors;
-    private double kRampingF;
     public double powerOutput = 0;
     public double kP = 0;
     public double kI = 0;
