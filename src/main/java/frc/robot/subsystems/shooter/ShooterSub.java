@@ -14,7 +14,6 @@ import frc.robot.Constants.*;
 
 public class ShooterSub extends SubsystemBase{
 
-    // private VictorSPX victor;
 	public TalonFX talon;
     public MotorGroup motors;
     public double powerOutput = 0;

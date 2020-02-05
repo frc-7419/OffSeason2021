@@ -4,8 +4,6 @@ import com.team7419.PaddedXbox;
 
 import frc.robot.subsystems.shooter.*;
 
-
-
 public class TestRobotContainer {
 
   private final ShooterSub shooter = new ShooterSub();
