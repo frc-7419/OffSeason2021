@@ -49,7 +49,9 @@ public class GetToTargetVelocity extends CommandBase {
   public void end(boolean interrupted) {
     if(interrupted){System.out.println("interrupted");}
     System.out.println("end rpm: " + shooter.getCurrentRawSpeed());
-    shooter.off();
+    double kF = 1023*shooter.getOutputVoltage() / 12 / shooter.getCurrentRawSpeed();
+    System.out.println("ff gain: " + kF);
+    shooter.setkF(kF);
   }
 
   @Override

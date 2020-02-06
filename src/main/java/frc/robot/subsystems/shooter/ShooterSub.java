@@ -80,6 +80,10 @@ public class ShooterSub extends SubsystemBase{
 
     public void setkF(double kF){this.kF = kF;}
 
+    public double getOutputVoltage(){
+        return talon.getMotorOutputVoltage();
+    }
+
     public void setTargetRpm(double rpm){this.rawSpeed = rpm * 1.7067;}
 
     public void setControlMethod(ControlMethod method){
