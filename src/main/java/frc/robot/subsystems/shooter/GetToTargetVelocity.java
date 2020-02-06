@@ -10,15 +10,10 @@ public class GetToTargetVelocity extends CommandBase {
 
   private ShooterSub shooter;
   private Dashboard dashboard;
-  private double kP = 0;
-  private double kI = 0;
-  private double kD = 0;
-  private double kF;
 
   private double target;
-  private double threshold = 100;
   private double steadyLoops = 0;
-  private boolean firstTime = true;
+  private boolean stable = true;
 
   public GetToTargetVelocity(ShooterSub shooter, Dashboard dashboard) {
     this.shooter = shooter;
@@ -45,9 +40,9 @@ public class GetToTargetVelocity extends CommandBase {
 
     if(shooter.onTarget()){
       steadyLoops++;
-      if(!firstTime){firstTime = true;}
+      if(!stable){stable = true;}
     }
-    else{firstTime = false;}
+    else{stable = false;}
   }
 
   @Override
