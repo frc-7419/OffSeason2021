@@ -25,7 +25,6 @@ public class OpenLoopFeedforward extends CommandBase {
       shooter.setkF(shooter.lookUpkF(rawSpeed));
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);
-      // shooter.setPIDF(0,0,0,shooter.getkF());
   }
 
   @Override

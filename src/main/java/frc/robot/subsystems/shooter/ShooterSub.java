@@ -23,6 +23,7 @@ public class ShooterSub extends SubsystemBase{
     public double kF = 0;
     public double targetVelocity = 0;
     public double rawSpeed = 500;
+    private double threshold = 100;
     public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     public ShooterSub(){
@@ -44,14 +45,15 @@ public class ShooterSub extends SubsystemBase{
 
     public void run(){
         ControlMethod method = this.controlMethod;
-        if(method == ControlMethod.PERCENT_OUTPUT){
-            talon.set(ControlMode.PercentOutput, powerOutput);
-        }
-        else if(method == ControlMethod.HOLDING){
-            talon.set(ControlMode.Velocity, rawSpeed);
-        }
-        else if(method == ControlMethod.SPIN_UP){
-            talon.set(ControlMode.Velocity, rawSpeed);
+        switch(method){
+            case PERCENT_OUTPUT:
+                talon.set(ControlMode.PercentOutput, powerOutput);
+            case HOLDING:
+                talon.set(ControlMode.Velocity, rawSpeed);
+            case SPIN_UP:
+                talon.set(ControlMode.Velocity, rawSpeed);
+            default:
+                this.off();    
         }
     }
 
@@ -68,6 +70,10 @@ public class ShooterSub extends SubsystemBase{
         this.kD = kD;
         this.kF = kF;
         TalonFuncs.setPIDFConstants(0, talon, kP, kI, kD, kF);
+    }
+
+    public boolean onTarget(){
+        return Math.abs(this.getCurrentRawSpeed() - rawSpeed) < threshold;
     }
 
     public void setOutputPower(double power){this.powerOutput = power;}

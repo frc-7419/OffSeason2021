@@ -18,10 +18,11 @@ public class Dashboard extends SubsystemBase{
 
     public NetworkTableEntry power = shooterTab.add("power", defaultPower).getEntry();
     public NetworkTableEntry targetSpeed = shooterTab.add("raw speed", 5000).getEntry();
-    public NetworkTableEntry shooterkF = shooterTab.add("shooter kF", 0).getEntry();
+    public NetworkTableEntry rampingP = shooterTab.add("kP", 0).getEntry();
+    public NetworkTableEntry rampingI = shooterTab.add("kI", 0).getEntry();
+    public NetworkTableEntry rampingD = shooterTab.add("kD", 0).getEntry();
 
 
-    
     public Dashboard(){}
 
     public double getkP(){
@@ -40,8 +41,13 @@ public class Dashboard extends SubsystemBase{
         return targetSpeed.getDouble(5000);
     }
 
-    public double getShooterkF(){
-        return shooterkF.getDouble(0);
+    public double[] getRampingGains(){
+        double[] out = {
+            rampingP.getDouble(0.0), 
+            rampingI.getDouble(0), 
+            rampingD.getDouble(0)
+        };
+        return out;
     }
 
     @Override

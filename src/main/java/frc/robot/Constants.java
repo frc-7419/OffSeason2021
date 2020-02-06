@@ -7,16 +7,6 @@
 
 package frc.robot;
 
-import java.util.ArrayList;
-
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants.  This class should not be used for any other purpose.  All constants should be
- * declared globally (i.e. public static).  Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
 public final class Constants {
 
     public static enum CanIds{
@@ -67,17 +57,17 @@ public final class Constants {
         {22000, .0472},
     };           
 
-    // these two arrays are parallel
-    public double[] kSpeedNativeUnits = {
-        1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 
-        9000, 10000, 11000, 12000, 13000, 14000, 15000, 
-        16000, 17000, 18000, 19000, 20000, 21000, 22000
-    };
+    // // these two arrays are parallel
+    // public double[] kSpeedNativeUnits = {
+    //     1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 
+    //     9000, 10000, 11000, 12000, 13000, 14000, 15000, 
+    //     16000, 17000, 18000, 19000, 20000, 21000, 22000
+    // };
 
-    public double[] kFeedForwardCoeffs = {
-        .09, .065, .0575, .0545, .0525, .051, .0505,
-        .0495, .049, .0485, .0482, .0478, .0475,
-        .0474, .0474, .0474, .0472, .047, .047, .047,
-        .0472, .0472,
-    };    
+    // public double[] kFeedForwardCoeffs = {
+    //     .09, .065, .0575, .0545, .0525, .051, .0505,
+    //     .0495, .049, .0485, .0482, .0478, .0475,
+    //     .0474, .0474, .0474, .0472, .047, .047, .047,
+    //     .0472, .0472,
+    // };    
 }

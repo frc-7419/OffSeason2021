@@ -35,7 +35,7 @@ public class RobotContainer {
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
   public RobotContainer() {
-    manualButtonBindings();
+    // manualButtonBindings();
     codeTestButtonBindings();
   }
 
@@ -52,11 +52,8 @@ public class RobotContainer {
   }
 
   private void codeTestButtonBindings(){ // for programmer
-
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
+    .whenPressed(new RunInMotors(driveBase, joystick));
   }
 
   private void manualButtonBindings(){

@@ -15,7 +15,10 @@ public class GetToTargetVelocity extends CommandBase {
   private double kD = 0;
   private double kF;
 
+  private double target;
   private double threshold = 100;
+  private double steadyLoops = 0;
+  private boolean firstTime = true;
 
   public GetToTargetVelocity(ShooterSub shooter, Dashboard dashboard) {
     this.shooter = shooter;
@@ -27,29 +30,35 @@ public class GetToTargetVelocity extends CommandBase {
 
       SmartDashboard.putString("command status", "ramping up");
 
-      double rawSpeed = dashboard.getRawSpeed();
-      kF = dashboard.getShooterkF();
+      target = dashboard.getRawSpeed();
+      shooter.setkF(shooter.lookUpkF(target));
       
-      shooter.configureOutputs();
-      shooter.setPIDF(kP, kI, kD, kF);
-      shooter.setTargetRawSpeed(rawSpeed);
+      double[] gains = dashboard.getRampingGains();
+      shooter.setPIDF(gains[0], gains[1], gains[2], 0);
+      shooter.setTargetRawSpeed(target);
       shooter.setControlMethod(ControlMethod.SPIN_UP);
   }
 
   @Override
   public void execute() {
-      shooter.run();
+    shooter.run();
+
+    if(shooter.onTarget()){
+      steadyLoops++;
+      if(!firstTime){firstTime = true;}
+    }
+    else{firstTime = false;}
   }
 
   @Override
   public void end(boolean interrupted) {
+    if(interrupted){System.out.println("interrupted");}
+    System.out.println("end rpm: " + shooter.getCurrentRawSpeed());
     shooter.off();
-    // double velocity = shooter.getCurrentRawSpeed();
-    // shooter.setkF(1023 / velocity); // where 1023 represents max output, might end up using 1150 (empirical value)
   }
 
   @Override
   public boolean isFinished() {
-    return false;
+    return steadyLoops > 15;
   }
 }
