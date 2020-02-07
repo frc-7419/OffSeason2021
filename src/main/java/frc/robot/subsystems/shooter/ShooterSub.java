@@ -29,6 +29,7 @@ public class ShooterSub extends SubsystemBase{
     public ShooterSub(){
 
         talon = new TalonFX(CanIds.shooterFalcon.id);
+        talon.setInverted(true);
         talon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     }
 
@@ -45,16 +46,16 @@ public class ShooterSub extends SubsystemBase{
 
     public void run(){
         ControlMethod method = this.controlMethod;
-        switch(method){
-            case PERCENT_OUTPUT:
-                talon.set(ControlMode.PercentOutput, powerOutput);
-            case HOLDING:
-                talon.set(ControlMode.Velocity, rawSpeed);
-            case SPIN_UP:
-                talon.set(ControlMode.Velocity, rawSpeed);
-            default:
-                this.off();    
+        if(method == ControlMethod.PERCENT_OUTPUT){
+            talon.set(ControlMode.PercentOutput, powerOutput);
         }
+        else if(method == ControlMethod.HOLDING){
+            talon.set(ControlMode.Velocity, rawSpeed);
+        }
+        else if(method == ControlMethod.SPIN_UP){
+            talon.set(ControlMode.Velocity, rawSpeed);
+        }
+
     }
 
     public void configureOutputs(){

@@ -11,11 +11,11 @@ public final class Constants {
 
     public static enum CanIds{
 
-        leftFalcon1(1),
+        leftFalcon1(5),
         rightFalcon1(2),
-        leftFalcon2(0),
+        leftFalcon2(4),
         rightFalcon2(3),
-        loaderVictor(10),
+        loaderFalcon(10),
         intakeVictor(11),
         revolverVictor(12),
         shooterFalcon(13);

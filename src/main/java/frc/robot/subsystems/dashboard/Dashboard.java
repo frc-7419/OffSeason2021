@@ -6,6 +6,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Dashboard extends SubsystemBase{
 
+    public NetworkTableEntry rampingP;
+    public NetworkTableEntry rampingI;
+    public NetworkTableEntry rampingD;
+    public NetworkTableEntry targetSpeed;
+
     ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
     double defaultP = .016;
     double defaultD = 1;
@@ -16,14 +21,23 @@ public class Dashboard extends SubsystemBase{
     ShuffleboardTab shooterTab = Shuffleboard.getTab("shooter power");
     double defaultPower = .5;
 
-    public NetworkTableEntry power = shooterTab.add("power", defaultPower).getEntry();
-    public NetworkTableEntry targetSpeed = shooterTab.add("raw speed", 5000).getEntry();
-    public NetworkTableEntry rampingP = shooterTab.add("kP", 0).getEntry();
-    public NetworkTableEntry rampingI = shooterTab.add("kI", 0).getEntry();
-    public NetworkTableEntry rampingD = shooterTab.add("kD", 0).getEntry();
+    public NetworkTableEntry power = shooterTab.add("shooter power", defaultPower).getEntry();
+    // targetSpeed = shooterTab.add("raw speed", 5000).getEntry();
+    // rampingP = shooterTab.add("kP", 0).getEntry();
+    // rampingI = shooterTab.add("kI", 0).getEntry();
+    // rampingD = shooterTab.add("kD", 0).getEntry();
 
+    public NetworkTableEntry driveCoeff = shooterTab.add("drive power", .4).getEntry();
+    public NetworkTableEntry revolverCoeff = shooterTab.add("revolver power", .5).getEntry();
+    public NetworkTableEntry loaderCoeff = shooterTab.add("loader power", .3).getEntry();
 
     public Dashboard(){}
+
+    public double getDriveCoeff(){return driveCoeff.getDouble(.4);}
+
+    public double getRevolverCoeff(){return revolverCoeff.getDouble(.5);}
+
+    public double getLoaderCoeff(){return loaderCoeff.getDouble(.3);}
 
     public double getkP(){
         return kP.getDouble(defaultP);
