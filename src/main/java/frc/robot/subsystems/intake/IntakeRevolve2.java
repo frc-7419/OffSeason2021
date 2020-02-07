@@ -12,21 +12,25 @@ import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RevolverSub;
 
-public class MagicRevolver extends CommandBase {
+public class IntakeRevolve2 extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private IntakeSub intake;
   private RevolverSub revolver;
   private PaddedXbox joystick;
-  private double time;
-  private double power;
+  private long time;
+  private double intakePower;
+  private double revolverPower;
   private boolean done = false;
 
   Date date = new Date();
   java.sql.Timestamp ts = new java.sql.Timestamp(date.getTime());
 
-  public MagicRevolver(RevolverSub revolver, PaddedXbox joystick, double power, double time) {
+  public IntakeRevolve2(IntakeSub intake, RevolverSub revolver, PaddedXbox joystick, double intakePower, double revolverPower, long time) {
+    this.intake = intake;
     this.revolver = revolver;
     this.joystick = joystick;
-    this.power = power;
+    this.intakePower = intakePower;
+    this.revolverPower = revolverPower;
     this.time = time;
     // uses addRequirements() instead of requires()
     // addRequirements(RobotContainer.driveBase);
@@ -38,15 +42,28 @@ public class MagicRevolver extends CommandBase {
 
   @Override
   public void execute() {
-    revolver.setPower(power);
+    intake.setPower(intakePower);
+    revolver.setPower(revolverPower);
+
+    //should work for this program...
     Timer.delay(time);
+
+
+    //test to see if this works for future needs (if i ever put anything after the delay i think)
+    try {
+      Thread.sleep(time);
+    // java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+  } catch (InterruptedException e) {
+      e.printStackTrace();
+  }
+
 
     done = true;
   }
 
   @Override
   public void end(boolean interrupted) {
-    revolver.setPower(0);
+    intake.setPower(0);
   }
 
   @Override
