@@ -29,14 +29,14 @@ public class RobotContainer {
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
 
-  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, .25, .25);
+  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
   public RobotContainer() {
     manualButtonBindings();
-    // codeTestButtonBindings();
+    codeTestButtonBindings();
   }
 
   private void mechTesterButtonBindings() { // for dj
@@ -53,7 +53,7 @@ public class RobotContainer {
 
   private void codeTestButtonBindings(){ // for programmer
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new RunInMotors(driveBase, joystick));
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
   }
 
   private void manualButtonBindings(){

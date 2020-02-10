@@ -3,6 +3,7 @@ package frc.robot.subsystems.drive;
 import com.team7419.PaddedXbox;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.dashboard.Dashboard;
 
 /**
  * Reusable arcade command
@@ -13,6 +14,7 @@ public class ArcadeDrive extends CommandBase {
   private double kStraight;
   private double kTurn;
   private PaddedXbox joystick;
+  private Dashboard dashboard;
 
   /**
    * reusable arcade command
@@ -21,9 +23,10 @@ public class ArcadeDrive extends CommandBase {
    * @param kStraight
    * @param kTurn
    */
-  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn){
+  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, Dashboard dashboard, double kStraight, double kTurn){
     this.joystick = joystick;
     this.driveBase = driveBase;
+    this.dashboard = dashboard;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
     addRequirements(driveBase);
@@ -33,6 +36,8 @@ public class ArcadeDrive extends CommandBase {
   public void initialize() {
     driveBase.factoryResetAll();     
     SmartDashboard.putString("command status", "init arcade");
+    kStraight = dashboard.getDriveCoeff();
+    kTurn = dashboard.getDriveCoeff();
   }
 
   @Override
