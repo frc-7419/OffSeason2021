@@ -8,7 +8,7 @@ public class RunLoader extends CommandBase{
   private LoaderSub loader;
   private Dashboard dashboard;
   private boolean reversed;
-  private double coeff;
+  private double negativeSign;
   
   /**
    * 
@@ -24,13 +24,13 @@ public class RunLoader extends CommandBase{
 
   @Override
   public void initialize() {
-    if(reversed){coeff = -1;}
-    else{coeff = 1;}
+    if(reversed){negativeSign = -1;}
+    else{negativeSign = 1;}
   }
 
   @Override
   public void execute() {
-    loader.setPower(coeff*dashboard.getLoaderCoeff());
+    loader.setPower(negativeSign*dashboard.getLoaderCoeff());
 }
 
   @Override
