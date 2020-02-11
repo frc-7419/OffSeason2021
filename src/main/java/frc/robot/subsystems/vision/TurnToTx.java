@@ -38,8 +38,8 @@ public class TurnToTx extends CommandBase {
 
   @Override
   public void initialize() {
-    driveBase.rightMast.configFactoryDefault();
-    driveBase.leftMast.configFactoryDefault();
+    // driveBase.rightMast.configFactoryDefault();
+    // driveBase.leftMast.configFactoryDefault();
     kP = .016; // gets P coefficient from dashboard
     kI = 0;
     kD = 1; 
@@ -59,8 +59,8 @@ public class TurnToTx extends CommandBase {
     boost = Math.abs(pidOutput) / pidOutput * .05;
     pidOutput += boost;
     SmartDashboard.putNumber("pidoutput", pidOutput);
-    driveBase.setLeft(-pidOutput);
-    driveBase.setRight(pidOutput);
+    driveBase.setLeftPower(-pidOutput);
+    driveBase.setRightPower(pidOutput);
 
     distanceToTarget =  (Constants.kTargetHeight - RobotConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
     distanceToTarget = 1.426*distanceToTarget - 52.372; // based on linear regression, hopefully accurate

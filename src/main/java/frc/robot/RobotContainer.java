@@ -17,8 +17,6 @@ import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-
 
 public class RobotContainer {
 
@@ -31,7 +29,7 @@ public class RobotContainer {
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
 
-  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
+  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
@@ -54,11 +52,8 @@ public class RobotContainer {
   }
 
   private void codeTestButtonBindings(){ // for programmer
-
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new OpenLoopFeedforward(shooter, dashboard), true);
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
   }
 
   private void manualButtonBindings(){
@@ -66,11 +61,11 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    .whileHeld(new RunRevolver(revolver, .5)); // previously .35
+    .whileHeld(new RunRevolver(revolver, dashboard, false)); // previously .35
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    .whileHeld(new RunRevolver(revolver, -.5)); // previously .35
-    new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
-    new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));
+    .whileHeld(new RunRevolver(revolver, dashboard, true)); // previously .35
+    new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
+    new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
 
   }
 
