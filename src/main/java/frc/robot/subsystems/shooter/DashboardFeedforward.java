@@ -5,13 +5,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
-public class OpenLoopFeedforward extends CommandBase {
+public class DashboardFeedforward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
   private ShooterSub shooter;
   private Dashboard dashboard;
   
-  public OpenLoopFeedforward(ShooterSub shooter, Dashboard dashboard) {
+  public DashboardFeedforward(ShooterSub shooter, Dashboard dashboard) {
     this.shooter = shooter;
     this.dashboard = dashboard;
   }
@@ -19,10 +19,10 @@ public class OpenLoopFeedforward extends CommandBase {
   @Override
   public void initialize() {
 
-      SmartDashboard.putString("shooter", "hold ff");
+      SmartDashboard.putString("shooter", "manual ff");
 
       double rawSpeed = dashboard.getRawSpeed();
-      shooter.setkF(shooter.lookUpkF(rawSpeed));
+    //   shooter.setkF(shooter.get);
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);
   }
