@@ -22,7 +22,7 @@ public class DashboardFeedforward extends CommandBase {
       SmartDashboard.putString("shooter", "manual ff");
 
       double rawSpeed = dashboard.getRawSpeed();
-      shooter.setkF(dashboard.getManualFf());
+    //   shooter.setkF(shooter.get);
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);
   }
