@@ -3,23 +3,19 @@ package frc.robot.subsystems.shooter;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.team7419.Initers;
 import com.team7419.MotorGroup;
 import com.team7419.TalonFuncs;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.CanIds;;
+import frc.robot.Constants.*;
 
 public class ShooterSub extends SubsystemBase{
 
-    // private VictorSPX victor;
 	public TalonFX talon;
     public MotorGroup motors;
-    private double kRampingF;
     public double powerOutput = 0;
     public double kP = 0;
     public double kI = 0;
@@ -27,20 +23,14 @@ public class ShooterSub extends SubsystemBase{
     public double kF = 0;
     public double targetVelocity = 0;
     public double target = 500;
-    public double rawSpeed = 500;
+    private double threshold = 100;
     public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     public ShooterSub(){
 
         talon = new TalonFX(CanIds.shooterFalcon.id);
+        talon.setInverted(true);
         talon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-        
-        talon.neutralOutput();
-	    talon.setSensorPhase(true);
-        talon.configNominalOutputForward(0, 0);
-	    talon.configNominalOutputReverse(0, 0);
-        talon.configClosedloopRamp(.2, 0);
-
     }
 
     public enum ControlMethod{
@@ -51,6 +41,7 @@ public class ShooterSub extends SubsystemBase{
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
     }
 
     public void run(){
@@ -59,12 +50,12 @@ public class ShooterSub extends SubsystemBase{
             talon.set(ControlMode.PercentOutput, powerOutput);
         }
         else if(method == ControlMethod.HOLDING){
-            feedforwardOnly();
+            talon.set(ControlMode.Velocity, target);
         }
         else if(method == ControlMethod.SPIN_UP){
-            this.setPIDF(kP, kI, kD, kF);
-            talon.set(ControlMode.Velocity, rawSpeed);
+            talon.set(ControlMode.Velocity, target);
         }
+
     }
 
     public void configureOutputs(){
@@ -82,15 +73,27 @@ public class ShooterSub extends SubsystemBase{
         TalonFuncs.setPIDFConstants(0, talon, kP, kI, kD, kF);
     }
 
+    public boolean onTarget(){
+        return Math.abs(this.getCurrentRawSpeed() - target) < threshold;
+    }
+
     public void setOutputPower(double power){this.powerOutput = power;}
 
     public void setkF(double kF){this.kF = kF;}
 
-    public void setTargetRpm(double rpm){this.rawSpeed = rpm * 1.7067;}
+    public double getOutputVoltage(){
+        return talon.getMotorOutputVoltage();
+    }
+
+    public void setTargetRpm(double rpm){this.target = rpm * 1.7067;}
 
     public void setControlMethod(ControlMethod method){
         this.controlMethod = method;
+        if(method == ControlMethod.HOLDING){
+            setPIDF(0,0,0,kF);
+        }
     }
+
     public double lookUpkF(double nativeUnits){
         double output = 0;
         for(double[] pair : Constants.kSpeedToFf){
@@ -106,7 +109,7 @@ public class ShooterSub extends SubsystemBase{
 
     public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity(0);}
 
-    public void setTargetRawSpeed(double speed){this.rawSpeed = speed;}
+    public void setTargetRawSpeed(double speed){this.target = speed;}
 
     public void percentOutput(){
         talon.set(ControlMode.PercentOutput,powerOutput);
@@ -114,11 +117,6 @@ public class ShooterSub extends SubsystemBase{
 
     public void off(){
         talon.set(ControlMode.PercentOutput, 0);
-    }
-
-    public void feedforwardOnly(){
-        this.setPIDF(0.0, 0.0, 0.0, kF);
-        talon.set(ControlMode.Velocity, rawSpeed);
     }
 
     public double getkP(){return kP;}
