@@ -19,7 +19,6 @@ public class RunLoader extends CommandBase{
     this.loader = loader;
     this.dashboard = dashboard;
     this.reversed = reversed;
-  
   }
 
   @Override

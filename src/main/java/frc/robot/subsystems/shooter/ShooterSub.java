@@ -22,7 +22,7 @@ public class ShooterSub extends SubsystemBase{
     public double kD = 0;
     public double kF = 0;
     public double targetVelocity = 0;
-    public double rawSpeed = 500;
+    public double target = 500;
     private double threshold = 100;
     public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
@@ -50,10 +50,10 @@ public class ShooterSub extends SubsystemBase{
             talon.set(ControlMode.PercentOutput, powerOutput);
         }
         else if(method == ControlMethod.HOLDING){
-            talon.set(ControlMode.Velocity, rawSpeed);
+            talon.set(ControlMode.Velocity, target);
         }
         else if(method == ControlMethod.SPIN_UP){
-            talon.set(ControlMode.Velocity, rawSpeed);
+            talon.set(ControlMode.Velocity, target);
         }
 
     }
@@ -74,7 +74,7 @@ public class ShooterSub extends SubsystemBase{
     }
 
     public boolean onTarget(){
-        return Math.abs(this.getCurrentRawSpeed() - rawSpeed) < threshold;
+        return Math.abs(this.getCurrentRawSpeed() - target) < threshold;
     }
 
     public void setOutputPower(double power){this.powerOutput = power;}
@@ -85,7 +85,7 @@ public class ShooterSub extends SubsystemBase{
         return talon.getMotorOutputVoltage();
     }
 
-    public void setTargetRpm(double rpm){this.rawSpeed = rpm * 1.7067;}
+    public void setTargetRpm(double rpm){this.target = rpm * 1.7067;}
 
     public void setControlMethod(ControlMethod method){
         this.controlMethod = method;
@@ -104,12 +104,12 @@ public class ShooterSub extends SubsystemBase{
     }
 
     public double computekF(double nativeUnits){
-        return 47.3172/rawSpeed + .0462152;
+        return 47.3172/target + .0462152;
     }
 
     public double getCurrentRawSpeed(){return talon.getSelectedSensorVelocity(0);}
 
-    public void setTargetRawSpeed(double speed){this.rawSpeed = speed;}
+    public void setTargetRawSpeed(double speed){this.target = speed;}
 
     public void percentOutput(){
         talon.set(ControlMode.PercentOutput,powerOutput);
