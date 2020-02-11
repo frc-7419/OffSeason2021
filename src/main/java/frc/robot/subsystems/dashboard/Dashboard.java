@@ -21,12 +21,13 @@ public class Dashboard extends SubsystemBase{
     ShuffleboardTab mechPowers = Shuffleboard.getTab("mech powers");
     double defaultPower = .5;
 
-    ShuffleboardTab autoShoot = Shuffleboard.getTab("shooter stuff");
+    ShuffleboardTab autoShoot = Shuffleboard.getTab("auto shoot");
 
     public NetworkTableEntry targetSpeed = autoShoot.add("raw speed", 5000).getEntry();
-    public NetworkTableEntry rampingP = autoShoot.add("kP", 0).getEntry();
+    public NetworkTableEntry rampingP = autoShoot.add("kP", .65).getEntry();
     public NetworkTableEntry rampingI = autoShoot.add("kI", 0).getEntry();
     public NetworkTableEntry rampingD = autoShoot.add("kD", 0).getEntry();
+    public NetworkTableEntry manualFf = autoShoot.add("set ff gain", 0).getEntry();
 
     public NetworkTableEntry driveCoeff = mechPowers.add("drive power", .4).getEntry();
     public NetworkTableEntry revolverCoeff = mechPowers.add("revolver power", .5).getEntry();
@@ -53,13 +54,17 @@ public class Dashboard extends SubsystemBase{
         return power.getDouble(defaultPower);
     }
 
+    public double getManualFf(){
+        return manualFf.getDouble(0);
+    }
+
     public double getRawSpeed(){
         return targetSpeed.getDouble(5000);
     }
 
     public double[] getRampingGains(){
         double[] out = {
-            rampingP.getDouble(0.0), 
+            rampingP.getDouble(.65), 
             rampingI.getDouble(0), 
             rampingD.getDouble(0)
         };

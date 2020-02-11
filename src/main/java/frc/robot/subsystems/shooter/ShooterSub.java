@@ -23,7 +23,7 @@ public class ShooterSub extends SubsystemBase{
     public double kF = 0;
     public double targetVelocity = 0;
     public double target = 500;
-    private double threshold = 100;
+    private double threshold = 200;
     public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
     public ShooterSub(){

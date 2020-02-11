@@ -10,6 +10,7 @@ public class GetToTargetVelocity extends CommandBase {
 
   private ShooterSub shooter;
   private Dashboard dashboard;
+  private double kF;
 
   private double target;
   private double steadyLoops = 0;
@@ -23,13 +24,13 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void initialize() {
 
-      SmartDashboard.putString("command status", "ramping up");
+      SmartDashboard.putString("shooter", "ramping up");
 
       target = dashboard.getRawSpeed();
       shooter.setkF(shooter.lookUpkF(target));
       
       double[] gains = dashboard.getRampingGains();
-      shooter.setPIDF(gains[0], gains[1], gains[2], 0);
+      shooter.setPIDF(gains[0], gains[1], gains[2], shooter.getkF());
       shooter.setTargetRawSpeed(target);
       shooter.setControlMethod(ControlMethod.SPIN_UP);
   }
@@ -37,7 +38,8 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void execute() {
     shooter.run();
-
+    kF = 1023*shooter.getOutputVoltage() / 12 / shooter.getCurrentRawSpeed();
+    SmartDashboard.putNumber("kF", kF);
     if(shooter.onTarget()){
       steadyLoops++;
       if(!stable){stable = true;}
@@ -49,9 +51,9 @@ public class GetToTargetVelocity extends CommandBase {
   public void end(boolean interrupted) {
     if(interrupted){System.out.println("interrupted");}
     System.out.println("end rpm: " + shooter.getCurrentRawSpeed());
-    double kF = 1023*shooter.getOutputVoltage() / 12 / shooter.getCurrentRawSpeed();
     System.out.println("ff gain: " + kF);
     shooter.setkF(kF);
+    // shooter.off();
   }
 
   @Override
