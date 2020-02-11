@@ -40,7 +40,7 @@ public class RobotContainer {
   private final MagicIntake magicIntake = new MagicIntake(intake, joystick, 0, 0);
   private final MagicRevolver magicRevolver = new MagicRevolver(revolver, joystick, 0, 0);
   private final MagicShooter magicShooter = new MagicShooter(shooter, joystick, 0, 0);
-  private final TheMagicButton theMagicButton = new TheMagicButton();
+  // private final TheMagicButton theMagicButton = new TheMagicButton();
 
   public RobotContainer() {
     // manualButtonBindings();
@@ -98,7 +98,9 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whenPressed(new MagicShooter(shooter, joystick, .5, 3));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whenPressed(new TheMagicButton());
+    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    // .whenPressed(new TheMagicButton());
   }
 
   public Command getDefaultCommand(){return arcade;}

@@ -43,7 +43,7 @@ public class Dashboard extends SubsystemBase{
     }
 
     public double getRawSpeed(){
-        return power.getDouble(5000);
+        return targetSpeed.getDouble(5000);
     }
 
     @Override

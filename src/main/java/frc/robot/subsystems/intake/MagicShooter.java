@@ -30,7 +30,7 @@ public class MagicShooter extends CommandBase {
     this.power = power;
     this.time = time;
     // uses addRequirements() instead of requires()
-    addRequirements(RobotContainer.driveBase);
+    // addRequirements(RobotContainer.driveBase);
   }
 
   @Override
