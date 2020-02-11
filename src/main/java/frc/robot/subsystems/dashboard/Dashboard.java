@@ -32,6 +32,9 @@ public class Dashboard extends SubsystemBase{
     public NetworkTableEntry revolverCoeff = mechPowers.add("revolver power", .5).getEntry();
     public NetworkTableEntry loaderCoeff = mechPowers.add("loader power", .3).getEntry();
     public NetworkTableEntry power = mechPowers.add("shooter power", defaultPower).getEntry();
+    ShuffleboardTab motionTab = Shuffleboard.getTab("Falcon Motion");
+    double defaultSetpoint = 10;
+    public NetworkTableEntry setpoint = motionTab.add("Setpoint", defaultSetpoint).getEntry();
 
     public Dashboard(){}
 
@@ -68,5 +71,8 @@ public class Dashboard extends SubsystemBase{
 
     @Override
     public void periodic(){}
+
+	public static void putString(String string, String string2) {
+	}
 
 }

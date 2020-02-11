@@ -7,9 +7,12 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -20,9 +23,9 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 public class RobotContainer {
 
-  private final DriveBaseSub driveBase = new DriveBaseSub();
+  public final static DriveBaseSub driveBase = new DriveBaseSub();
   private final ShooterSub shooter = new ShooterSub();
-  private final Dashboard dashboard = new Dashboard();
+  public final static Dashboard dashboard = new Dashboard();
   private final PaddedXbox joystick = new PaddedXbox();
   private final LimelightSub limelight = new LimelightSub();
   private final LoaderSub loader = new LoaderSub();
@@ -32,11 +35,16 @@ public class RobotContainer {
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
+  private final MagicIntake magicIntake = new MagicIntake(intake, joystick, 0, 0);
+  private final MagicRevolver magicRevolver = new MagicRevolver(revolver, joystick, 0, 0);
+  private final MagicShooter magicShooter = new MagicShooter(shooter, joystick, 0, 0);
+  private final TheMagicButton theMagicButton = new TheMagicButton();
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
-
+  
   public RobotContainer() {
-    manualButtonBindings();
-    codeTestButtonBindings();
+    // manualButtonBindings();
+    magicButtonBindings();
+
   }
 
   private void mechTesterButtonBindings() { // for dj
@@ -67,6 +75,17 @@ public class RobotContainer {
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
 
+  }
+
+  private void magicButtonBindings(){
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whenPressed(new MagicIntake(intake, joystick, .5, 3));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whenPressed(new MagicRevolver(revolver, joystick, .5, 3));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    .whenPressed(new MagicShooter(shooter, joystick, .5, 3));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    .whenPressed(new TheMagicButton());
   }
 
   public Command getDefaultCommand(){return arcade;}
