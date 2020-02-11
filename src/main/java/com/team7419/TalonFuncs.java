@@ -20,6 +20,5 @@ public abstract class TalonFuncs {
 		talon.config_kI(slot, kI, 0);
 		talon.config_kD(slot, kD, 0);
 		talon.config_kF(slot, kF, 0);
-	}
-
+    }
 }
