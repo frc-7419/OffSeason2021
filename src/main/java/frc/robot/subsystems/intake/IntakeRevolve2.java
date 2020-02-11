@@ -50,12 +50,12 @@ public class IntakeRevolve2 extends CommandBase {
 
 
     //test to see if this works for future needs (if i ever put anything after the delay i think)
-    try {
-      Thread.sleep(time);
-    // java.util.concurrent.TimeUnit.SECONDS.sleep(2);
-  } catch (InterruptedException e) {
-      e.printStackTrace();
-  }
+  //   try {
+  //     Thread.sleep(time);
+  //   // java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+  // } catch (InterruptedException e) {
+  //     e.printStackTrace();
+  // }
 
 
     done = true;

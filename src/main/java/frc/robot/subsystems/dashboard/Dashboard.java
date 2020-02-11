@@ -58,8 +58,6 @@ public class Dashboard extends SubsystemBase{
 
     public double getRawSpeed(){
         return targetSpeed.getDouble(5000);
-<<<<<<< HEAD
-=======
     }
 
     public double[] getRampingGains(){
@@ -69,7 +67,6 @@ public class Dashboard extends SubsystemBase{
             rampingD.getDouble(0)
         };
         return out;
->>>>>>> 484d69882cef64b54a7ef83f4be4c643b3006684
     }
 
     @Override

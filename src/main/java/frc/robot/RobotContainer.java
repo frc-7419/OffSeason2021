@@ -37,7 +37,7 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final MagicIntake magicIntake = new MagicIntake(intake, joystick, 0, 0);
   private final MagicRevolver magicRevolver = new MagicRevolver(revolver, joystick, 0, 0);
-  private final MagicShooter magicShooter = new MagicShooter(shooter, joystick, 0, 0);
+  private final MagicShooter magicShooter = new MagicShooter(shooter, dashboard, 0);
   private final TheMagicButton theMagicButton = new TheMagicButton();
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
   
@@ -78,16 +78,19 @@ public class RobotContainer {
   }
 
   private void magicButtonBindings(){
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whenPressed(new MagicIntake(intake, joystick, .5, 3));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whenPressed(new MagicRevolver(revolver, joystick, .5, 3));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    // .whenPressed(new MagicShooter(shooter, dashboard, 10));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new MagicIntake(intake, joystick, .5, 3));
+    .whenPressed(new IntakeRevolve2(intake, revolver, joystick, .5, .5, 8));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whenPressed(new MagicRevolver(revolver, joystick, .5, 3));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-    .whenPressed(new MagicShooter(shooter, joystick, .5, 3));
+    .whenPressed(new StartShooter());
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whileHeld(new OpenLoopFeedforward(shooter, dashboard));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    // .whenPressed(new TheMagicButton());
+    .whenPressed(new TheMagicButton());
   }
 
   public Command getDefaultCommand(){return arcade;}

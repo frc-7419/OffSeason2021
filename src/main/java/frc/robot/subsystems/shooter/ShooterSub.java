@@ -111,7 +111,7 @@ public class ShooterSub extends SubsystemBase{
 
     public void setTargetRawSpeed(double speed){this.target = speed;}
 
-    public void percentOutput(){
+    public void percentOutput(double powerOutput){
         talon.set(ControlMode.PercentOutput,powerOutput);
     }
 

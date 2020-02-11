@@ -11,6 +11,7 @@ import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.shooter.ShooterSub;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -26,15 +27,18 @@ public class StartShooter extends ParallelCommandGroup {
    private final RevolverSub revolver = new RevolverSub();
    private final ShooterSub shooter = new ShooterSub();
    private final LoaderSub loader = new LoaderSub();
+   private Dashboard dashboard;
    private double time = 5;
+   private double power = 0.5;
+  //  private double rawSpeed = dashboard.getRawSpeed();
 
   public StartShooter() {
     addCommands(new MagicLoader(loader, joystick, .5, time));
-    addCommands(new MagicShooter(shooter, joystick, .5, time));
+    addCommands(new MagicShooter(shooter, dashboard, time));
     Timer.delay(time);
     addCommands(new MagicRevolver(revolver, joystick, .5, time));
     addCommands(new MagicLoader(loader, joystick, .5, time));
-    addCommands(new MagicShooter(shooter, joystick, .5, time));
+    addCommands(new MagicShooter(shooter, dashboard, time));
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
   }
