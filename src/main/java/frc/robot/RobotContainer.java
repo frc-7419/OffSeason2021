@@ -36,7 +36,6 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
-    codeTestButtonBindings();
   }
 
   private void mechTesterButtonBindings() { // for dj
