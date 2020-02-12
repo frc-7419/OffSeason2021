@@ -6,11 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Dashboard extends SubsystemBase{
 
-    // public NetworkTableEntry rampingP;
-    // public NetworkTableEntry rampingI;
-    // public NetworkTableEntry rampingD;
-    // public NetworkTableEntry targetSpeed;
-
+    // new tap for auto align tuning
     ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
     double defaultP = .016;
     double defaultD = 1;
