@@ -29,13 +29,23 @@ public class StartShooter extends ParallelCommandGroup {
    private final LoaderSub loader = new LoaderSub();
    private Dashboard dashboard;
    private double time = 5;
+   private long pause = 5*1000;
    private double power = 0.5;
   //  private double rawSpeed = dashboard.getRawSpeed();
 
   public StartShooter() {
     addCommands(new MagicLoader(loader, joystick, .5, time));
     addCommands(new MagicShooter(shooter, dashboard, time));
-    Timer.delay(time);
+    // Timer.delay(time);
+
+    //test to see if this works for future needs (if i ever put anything after the delay i think)
+    try {
+      Thread.sleep(pause);
+    // java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+  } catch (InterruptedException e) {
+      e.printStackTrace();
+  }
+
     addCommands(new MagicRevolver(revolver, joystick, .5, time));
     addCommands(new MagicLoader(loader, joystick, .5, time));
     addCommands(new MagicShooter(shooter, dashboard, time));

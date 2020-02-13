@@ -37,6 +37,7 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final MagicIntake magicIntake = new MagicIntake(intake, joystick, 0, 0);
   private final MagicRevolver magicRevolver = new MagicRevolver(revolver, joystick, 0, 0);
+  private final MagicLoader magicLoader = new MagicLoader(loader, joystick, 0, 0);
   private final MagicShooter magicShooter = new MagicShooter(shooter, dashboard, 0);
   private final TheMagicButton theMagicButton = new TheMagicButton();
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
