@@ -77,7 +77,6 @@ public class RobotContainer {
   
   public void scheduleDefaultCommands(){
     arcade.schedule();
-    // calibrate.schedule();
     intakeDefault.schedule();
   }
 }
