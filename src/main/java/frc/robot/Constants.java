@@ -27,6 +27,8 @@ public final class Constants {
         }
     }
 
+    public static int hallEffectId = 0;
+
     public static double kTargetHeight = 80; // 98 ish in real game
 
     public static class RobotConstants{
