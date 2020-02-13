@@ -36,6 +36,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
+    codeTestButtonBindings();
   }
 
   private void mechTesterButtonBindings() { // for dj
@@ -60,7 +61,6 @@ public class RobotContainer {
   }
 
   private void manualButtonBindings(){
-
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
@@ -69,7 +69,6 @@ public class RobotContainer {
     .whileHeld(new RunRevolver(revolver, dashboard, true)); // previously .35
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
-
   }
 
   public Command getDefaultCommand(){return arcade;}

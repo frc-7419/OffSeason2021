@@ -18,8 +18,8 @@ public final class Constants {
         loaderFalcon(10),
         intakeVictor(11),
         revolverVictor(12),
-        shooterFalcon(13),
-        climberFalcon(14);
+        shooterFalcon(14),
+        climberFalcon(13);
 
         public final int id; 
         CanIds(int id){
