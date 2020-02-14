@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
+import frc.robot.subsystems.sensors.ColorSensor;
+import frc.robot.subsystems.sensors.RotationControl;
 import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -34,8 +36,10 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
+  private final ColorSensor colorSensor = new ColorSensor(intake, dashboard);
+
   public RobotContainer() {
-    manualButtonBindings();
+    // manualButtonBindings();
     codeTestButtonBindings();
   }
 
@@ -58,6 +62,9 @@ public class RobotContainer {
     .whenPressed(new GetToTargetVelocity(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whileHeld(new RampThenHold(shooter, dashboard));
+    
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    .whenPressed(new RotationControl(colorSensor));
   }
 
   private void manualButtonBindings(){
