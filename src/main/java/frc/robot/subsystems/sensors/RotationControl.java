@@ -8,9 +8,7 @@
 package frc.robot.subsystems.sensors;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class RotationControl extends CommandBase {
   private final ColorSensor colorSensor;

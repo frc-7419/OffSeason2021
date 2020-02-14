@@ -9,7 +9,7 @@ package frc.robot.subsystems.sensors;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.sensors.*;
+import frc.robot.subsystems.sensors.ColorSensor;
 
 public class PositionControl extends CommandBase {
   private final ColorSensor colorSensor;

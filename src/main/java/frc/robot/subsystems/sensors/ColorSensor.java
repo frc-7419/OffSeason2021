@@ -9,7 +9,7 @@ package frc.robot.subsystems.sensors;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.Constants;
+
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.intake.*;
 
@@ -20,9 +20,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 
 public class ColorSensor extends SubsystemBase {
