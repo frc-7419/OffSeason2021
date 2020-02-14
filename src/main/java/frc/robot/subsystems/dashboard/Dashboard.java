@@ -11,6 +11,11 @@ public class Dashboard extends SubsystemBase{
     // public NetworkTableEntry rampingD;
     // public NetworkTableEntry targetSpeed;
 
+    ShuffleboardTab colorTab = Shuffleboard.getTab("Color Sensor");
+    double defaultConfidence = 0.85;
+
+    public NetworkTableEntry colorConfidence = colorTab.add("Confidence Level", defaultConfidence).getEntry();
+
     ShuffleboardTab pidTab = Shuffleboard.getTab("auto align pid");
     double defaultP = .016;
     double defaultD = 1;
@@ -36,6 +41,8 @@ public class Dashboard extends SubsystemBase{
 
     public Dashboard(){}
 
+    public double getColorConfidence() {return colorConfidence.getDouble(0.85);}
+    
     public double getDriveCoeff(){return driveCoeff.getDouble(.4);}
 
     public double getRevolverCoeff(){return revolverCoeff.getDouble(.5);}

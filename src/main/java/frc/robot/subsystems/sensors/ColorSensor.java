@@ -10,6 +10,7 @@ package frc.robot.subsystems.sensors;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
+import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.intake.*;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -27,7 +28,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class ColorSensor extends SubsystemBase {
 
   public IntakeSub panelSpinner;
-  public ColorSensor m_colorSensor;
+  public Dashboard dashboard;
   // public RotationControl m_RotationControl; 
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
@@ -46,7 +47,9 @@ public class ColorSensor extends SubsystemBase {
   /**
    * Creates a new ColorWheel.
    */
-  public ColorSensor(IntakeSub panelSpinner) {
+  public ColorSensor(IntakeSub panelSpinner, Dashboard dashboard) {
+
+    this.dashboard = dashboard;
 
     this.panelSpinner = panelSpinner;
     rotationCount = 0;
@@ -54,7 +57,7 @@ public class ColorSensor extends SubsystemBase {
 
     cSensor = new ColorSensorV3(i2cPort);
     colorMatcher = new ColorMatch();
-    colorMatcher.setConfidenceThreshold(0.75);
+    colorMatcher.setConfidenceThreshold(dashboard.getColorConfidence());
     
      colorMatcher.addColorMatch(blueTarget);
      colorMatcher.addColorMatch(greenTarget);
