@@ -11,7 +11,7 @@ import frc.robot.Constants.CanIds;
  * shooter hood
  */
 public class HoodSub extends SubsystemBase{
-    
+    //test suggestion
     private VictorSPX victor;
     private HoodPosition currentPosition = HoodPosition.SHORT_SHOT;
     private long start;
