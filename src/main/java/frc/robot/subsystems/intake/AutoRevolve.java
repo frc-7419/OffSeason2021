@@ -10,6 +10,7 @@ package frc.robot.subsystems.intake;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class AutoRevolve extends CommandBase {
@@ -30,9 +31,9 @@ private double timestamp;
 
   @Override
   public void execute() {
-      
+    SmartDashboard.putString("revolver", "auto fancy thing");
     timestamp = System.currentTimeMillis();
-    if(joystick.getLeftTrig() > 0){
+    if(joystick.getRightTrig() > 0){
         if(timestamp % 5000 < 4000){
             revolver.setPower(.2);
         }
