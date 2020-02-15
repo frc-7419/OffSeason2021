@@ -35,10 +35,10 @@ private double timestamp;
     timestamp = System.currentTimeMillis();
     if(joystick.getRightTrig() > 0){
         if(timestamp % 5000 < 4000){
-            revolver.setPower(.2);
+            revolver.setPower(-.2);
         }
         else{
-            revolver.setPower(-.2);
+            revolver.setPower(.2);
         } 
     }
     else{
