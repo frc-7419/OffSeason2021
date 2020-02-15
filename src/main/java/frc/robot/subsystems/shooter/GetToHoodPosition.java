@@ -27,16 +27,13 @@ public class GetToHoodPosition extends CommandBase {
 
     @Override
     public void execute(){
-        if(targetPosition == hood.getCurrentPosition()){
-            System.out.println("you're already there"); // do nothing
-        }
-        else if(targetPosition == HoodPosition.LONG_SHOT){
-            hood.runForTime(power, time);
-            hood.updateHoodPosition(HoodPosition.LONG_SHOT);
-        }
-        else if(targetPosition == HoodPosition.SHORT_SHOT){
+        if(hood.getCurrentPosition() == HoodPosition.LONG_SHOT){
             hood.runForTime(-power, time);
-            hood.updateHoodPosition(HoodPosition.SHORT_SHOT);
+            hood.updatePosition(HoodPosition.SHORT_SHOT);
+        }
+        else if(hood.getCurrentPosition() == HoodPosition.SHORT_SHOT){
+            hood.runForTime(power, time);
+            hood.updatePosition(HoodPosition.LONG_SHOT);
         }
         else{System.out.println("hood is confused");} 
     }

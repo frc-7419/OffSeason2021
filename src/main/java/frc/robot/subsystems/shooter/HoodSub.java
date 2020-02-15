@@ -59,5 +59,5 @@ public class HoodSub extends SubsystemBase{
     public void setPower(double power){victor.set(ControlMode.PercentOutput, power);}
 
     public HoodPosition getCurrentPosition(){return this.currentPosition;}
-    public void updateHoodPosition(HoodPosition pos){this.currentPosition = pos;}
+    public void updatePosition(HoodPosition pos){this.currentPosition = pos;}
 }

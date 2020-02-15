@@ -28,7 +28,7 @@ public final class Constants {
         }
     }
 
-    public static int hallEffectId = 0;
+    public static int hallEffectId = 1;
 
     public static double kTargetHeight = 80; // 98 ish in real game
 

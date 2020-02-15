@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
+import frc.robot.subsystems.sensors.HallEffectSub;
+import frc.robot.subsystems.sensors.RevolverToMagnet;
 import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.shooter.HoodSub.HoodPosition;
 import frc.robot.subsystems.vision.*;
@@ -29,7 +31,8 @@ public class RobotContainer {
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
-  private final HoodSub hood = new HoodSub();
+  // private final HoodSub hood = new HoodSub();
+  private final HallEffectSub hallEffect = new HallEffectSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
@@ -68,10 +71,10 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.LONG_SHOT));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.SHORT_SHOT));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.LONG_SHOT));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.SHORT_SHOT));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     .whileHeld(new RunRevolver(revolver, dashboard, false)); // previously .35
@@ -80,6 +83,8 @@ public class RobotContainer {
 
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
+
+    new POVButton(joystick, 90).whenPressed(new RevolverToMagnet(hallEffect, revolver)); 
   }
 
   public Command getDefaultCommand(){return arcade;}
