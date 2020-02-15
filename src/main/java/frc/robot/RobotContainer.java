@@ -34,6 +34,7 @@ public class RobotContainer {
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
+  private final AutoRevolve revolverDefault = new AutoRevolve(revolver, joystick);
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
   public RobotContainer() {
@@ -71,7 +72,7 @@ public class RobotContainer {
     .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.LONG_SHOT));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.SHORT_SHOT));
-    
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     .whileHeld(new RunRevolver(revolver, dashboard, false)); // previously .35
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
@@ -87,5 +88,6 @@ public class RobotContainer {
   public void scheduleDefaultCommands(){
     arcade.schedule();
     intakeDefault.schedule();
+    revolverDefault.schedule();
   }
 }
