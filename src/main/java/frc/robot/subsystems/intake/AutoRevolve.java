@@ -34,12 +34,12 @@ private double timestamp;
     double triggerSum = joystick.getLeftTrig() + joystick.getRightTrig();
     SmartDashboard.putString("revolver", "auto fancy thing");
     timestamp = System.currentTimeMillis();
-    if(triggerSum > 0){
+    if(Math.abs(triggerSum) > 0){
         if(timestamp % 5000 < 4000){
-            revolver.setPower(-.2 * triggerSum);
+            revolver.setPower(-.4 * triggerSum);
         }
         else{ 
-            revolver.setPower(.2 * triggerSum);
+            revolver.setPower(.4 * triggerSum);
         } 
     }
     else{

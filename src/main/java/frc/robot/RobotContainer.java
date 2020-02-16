@@ -71,6 +71,9 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
 
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    .whileHeld(new GetToTargetVelocity(shooter, dashboard));
+
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     // .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.LONG_SHOT));
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)

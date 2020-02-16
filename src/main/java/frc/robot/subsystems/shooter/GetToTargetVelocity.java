@@ -53,11 +53,11 @@ public class GetToTargetVelocity extends CommandBase {
     System.out.println("end rpm: " + shooter.getCurrentRawSpeed());
     System.out.println("ff gain: " + kF);
     shooter.setkF(kF);
-    // shooter.off();
+    shooter.off();
   }
 
   @Override
   public boolean isFinished() {
-    return steadyLoops > 15;
+    return false;
   }
 }

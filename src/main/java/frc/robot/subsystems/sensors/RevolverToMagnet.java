@@ -22,7 +22,7 @@ public class RevolverToMagnet extends CommandBase {
 
   @Override
   public void execute() {
-    revolver.setPower(.3);
+    revolver.setPower(-.35);
     if(System.currentTimeMillis() - timestamp > 10000){
       timedOut = true;
     }
@@ -34,6 +34,6 @@ public class RevolverToMagnet extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return !hallEffect.get() || timedOut;
+    return !hallEffect.get();
   }
 }
