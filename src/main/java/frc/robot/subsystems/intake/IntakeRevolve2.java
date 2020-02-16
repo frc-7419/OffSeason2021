@@ -45,17 +45,17 @@ public class IntakeRevolve2 extends CommandBase {
     intake.setPower(intakePower);
     revolver.setPower(revolverPower);
 
-    //should work for this program...
-    Timer.delay(time);
+  //   //should work for this program...
+  //   Timer.delay(time);
 
 
-    //test to see if this works for future needs (if i ever put anything after the delay i think)
-    try {
-      Thread.sleep(time);
-    // java.util.concurrent.TimeUnit.SECONDS.sleep(2);
-  } catch (InterruptedException e) {
-      e.printStackTrace();
-  }
+  //   //test to see if this works for future needs (if i ever put anything after the delay i think)
+  //   try {
+  //     Thread.sleep(time);
+  //   // java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+  // } catch (InterruptedException e) {
+  //     e.printStackTrace();
+  // }
 
 
     done = true;

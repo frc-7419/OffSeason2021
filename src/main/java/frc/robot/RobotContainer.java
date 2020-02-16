@@ -38,7 +38,7 @@ public class RobotContainer {
   private final MagicIntake magicIntake = new MagicIntake(intake, joystick, 0, 0);
   private final MagicRevolver magicRevolver = new MagicRevolver(revolver, joystick, 0, 0);
   private final MagicLoader magicLoader = new MagicLoader(loader, joystick, 0, 0);
-  private final MagicShooter magicShooter = new MagicShooter(shooter, dashboard, 0);
+  private final MagicShooter magicShooter = new MagicShooter(shooter, dashboard);
   private final TheMagicButton theMagicButton = new TheMagicButton();
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
   
@@ -89,7 +89,8 @@ public class RobotContainer {
     .whenPressed(new IntakeRevolve2(intake, revolver, joystick, .5, .5, 8));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whenPressed(new StartShooter());
-
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    .whenPressed(new MagicShooter(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whenPressed(new TheMagicButton());
   }

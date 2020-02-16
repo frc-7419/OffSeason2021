@@ -35,7 +35,7 @@ public class StartShooter extends ParallelCommandGroup {
 
   public StartShooter() {
     addCommands(new MagicLoader(loader, joystick, .5, time));
-    addCommands(new MagicShooter(shooter, dashboard, time));
+    addCommands(new MagicShooter(shooter, dashboard));
     // Timer.delay(time);
 
     //test to see if this works for future needs (if i ever put anything after the delay i think)
@@ -48,7 +48,7 @@ public class StartShooter extends ParallelCommandGroup {
 
     addCommands(new MagicRevolver(revolver, joystick, .5, time));
     addCommands(new MagicLoader(loader, joystick, .5, time));
-    addCommands(new MagicShooter(shooter, dashboard, time));
+    addCommands(new MagicShooter(shooter, dashboard));
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
   }

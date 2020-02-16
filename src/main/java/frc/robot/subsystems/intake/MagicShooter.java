@@ -28,11 +28,11 @@ public class MagicShooter extends CommandBase {
   Date date = new Date();
   java.sql.Timestamp ts = new java.sql.Timestamp(date.getTime());
 
-  public MagicShooter(ShooterSub shooter, Dashboard dashboard, double time) {
+  public MagicShooter(ShooterSub shooter, Dashboard dashboard/*, double time*/) {
     this.shooter = shooter;
     this.dashboard = dashboard;
     // this.power = power;
-    this.time = time;
+    // this.time = time;
     // uses addRequirements() instead of requires()
     // addRequirements(RobotContainer.driveBase);
   }
@@ -47,6 +47,8 @@ public class MagicShooter extends CommandBase {
     // shooter.percentOutput(power);
     // shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
     shooter.setControlMethod(ControlMethod.HOLDING);
+
+    time = dashboard.getShooterTime();
   }
 
   @Override

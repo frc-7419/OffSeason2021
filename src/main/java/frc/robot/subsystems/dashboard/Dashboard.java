@@ -32,9 +32,13 @@ public class Dashboard extends SubsystemBase{
     public NetworkTableEntry revolverCoeff = mechPowers.add("revolver power", .5).getEntry();
     public NetworkTableEntry loaderCoeff = mechPowers.add("loader power", .3).getEntry();
     public NetworkTableEntry power = mechPowers.add("shooter power", defaultPower).getEntry();
+
     ShuffleboardTab motionTab = Shuffleboard.getTab("Falcon Motion");
+
     double defaultSetpoint = 10;
+    double defaultTime = 5;
     public NetworkTableEntry setpoint = motionTab.add("Setpoint", defaultSetpoint).getEntry();
+    public NetworkTableEntry shooterTime = motionTab.add("Shooter Time", defaultTime).getEntry();
 
     public Dashboard(){}
 
@@ -58,6 +62,10 @@ public class Dashboard extends SubsystemBase{
 
     public double getRawSpeed(){
         return targetSpeed.getDouble(5000);
+    }
+
+    public double getShooterTime(){
+        return shooterTime.getDouble(defaultTime);
     }
 
     public double[] getRampingGains(){
