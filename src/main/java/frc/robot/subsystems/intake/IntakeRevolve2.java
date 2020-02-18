@@ -46,7 +46,7 @@ public class IntakeRevolve2 extends CommandBase {
     revolver.setPower(revolverPower);
 
   //   //should work for this program...
-  //   Timer.delay(time);
+    Timer.delay(time);
 
 
   //   //test to see if this works for future needs (if i ever put anything after the delay i think)
@@ -64,6 +64,7 @@ public class IntakeRevolve2 extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.setPower(0);
+    revolver.setPower(0);
   }
 
   @Override

@@ -19,7 +19,7 @@ public final class Constants {
         loaderFalcon(10),
         intakeVictor(11),
         revolverVictor(12),
-        shooterFalcon(13);
+        shooterFalcon(14);
 
         public final int id; 
         CanIds(int id){
