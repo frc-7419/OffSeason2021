@@ -11,7 +11,7 @@ public class Dashboard extends SubsystemBase{
     // public NetworkTableEntry rampingD;
     // public NetworkTableEntry targetSpeed;
 
-    ShuffleboardTab colorTab = Shuffleboard.getTab("Color Sensor");
+    public ShuffleboardTab colorTab = Shuffleboard.getTab("Color Sensor");
     double defaultConfidence = 0.85;
 
     public NetworkTableEntry colorConfidence = colorTab.add("Confidence Level", defaultConfidence).getEntry();

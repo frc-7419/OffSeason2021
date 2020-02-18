@@ -19,13 +19,15 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
-
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import frc.robot.Constants.CanIds;
 
 
 public class ColorSensor extends SubsystemBase {
 
   public IntakeSub panelSpinner;
   public Dashboard dashboard;
+  public TalonFX hoodMotor;
   // public RotationControl m_RotationControl; 
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
@@ -47,7 +49,8 @@ public class ColorSensor extends SubsystemBase {
   public ColorSensor(IntakeSub panelSpinner, Dashboard dashboard) {
 
     this.dashboard = dashboard;
-
+    hoodMotor = new TalonFX(CanIds.hoodFalcon.id);
+    
     this.panelSpinner = panelSpinner;
     rotationCount = 0;
     colorFound = false;

@@ -25,7 +25,7 @@ public class RobotContainer {
   private final DriveBaseSub driveBase = new DriveBaseSub();
   private final ShooterSub shooter = new ShooterSub();
   private final Dashboard dashboard = new Dashboard();
-  private final PaddedXbox joystick = new PaddedXbox();
+  public final PaddedXbox joystick = new PaddedXbox();
   private final LimelightSub limelight = new LimelightSub();
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
@@ -36,7 +36,8 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
-  private final ColorSensor colorSensor = new ColorSensor(intake, dashboard);
+  public final ColorSensor colorSensor = new ColorSensor(intake, dashboard);
+  public final RotationControl rotationControl = new RotationControl(colorSensor);
 
   public RobotContainer() {
     // manualButtonBindings();

@@ -8,17 +8,22 @@
 package frc.robot.subsystems.sensors;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
+// import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RotationControl extends CommandBase {
   private final ColorSensor colorSensor;
   public String previousColor; 
   public String referenceColor;
+  // public RobotContainer robotContainer;
   // public int colorIndex;
   // public int manipulatedIndex;
   // public String[] colorArray = {"Red", "Yellow", "Blue", "Green", "Red", "Yellow", "Blue", "Green"};
   public int halfRotationCount;
   boolean isFinished;
+  boolean hasEnded;
   // public int changeCount;
 
   /**
@@ -27,6 +32,8 @@ public class RotationControl extends CommandBase {
   public RotationControl(ColorSensor colorSensor) {
     this.colorSensor = colorSensor;
     isFinished = false;
+    hasEnded = false;
+    // robotContainer = new RobotContainer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(colorSensor);
   }
@@ -74,9 +81,11 @@ public class RotationControl extends CommandBase {
     // the reference color TO the reference color
     String currentColor = colorSensor.colorDetected;
 
-    SmartDashboard.putNumber("(Half) Rotation Count:", halfRotationCount);
+    SmartDashboard.putNumber("Half Rotation Count", halfRotationCount);
     SmartDashboard.putString("Previous Color:", previousColor);
     SmartDashboard.putString("Current Color:", currentColor);
+    SmartDashboard.putString("Reference Color", referenceColor);
+    SmartDashboard.putBoolean("Has it Ended?", hasEnded);
 
     colorSensor.panelSpinner.setPower(0.250);
 
@@ -84,10 +93,14 @@ public class RotationControl extends CommandBase {
       colorSensor.panelSpinner.setPower(0.0);
       isFinished = true;
 
-    } else if (currentColor.equalsIgnoreCase(referenceColor) && (!previousColor.equalsIgnoreCase(referenceColor))) {
+    } 
+    
+    if (currentColor.equalsIgnoreCase(referenceColor) && (!previousColor.equalsIgnoreCase(referenceColor))) {
       halfRotationCount++;
 
-    } else if (!currentColor.equalsIgnoreCase(previousColor)) {
+    } 
+    
+    if (!currentColor.equalsIgnoreCase(previousColor)) {
       previousColor = currentColor;
 
     }
@@ -121,11 +134,17 @@ public class RotationControl extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+      hasEnded = true;
+      halfRotationCount = 0;
+      previousColor = "";
+      referenceColor = "";
+    // new JoystickButton(robotContainer.joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    // .whenPressed(new RotationControl(colorSensor), false);
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished() { 
     return isFinished;
   }
 }
