@@ -7,19 +7,19 @@
 
 package frc.robot;
 
+import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
-import frc.robot.subsystems.sensors.HallEffectSub;
-import frc.robot.subsystems.sensors.RevolverToMagnet;
+import frc.robot.subsystems.sensors.*;
 import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.shooter.HoodSub.HoodPosition;
 import frc.robot.subsystems.vision.*;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.*;
 
 public class RobotContainer {
 
@@ -33,6 +33,7 @@ public class RobotContainer {
   private final RevolverSub revolver = new RevolverSub();
   // private final HoodSub hood = new HoodSub();
   private final HallEffectSub hallEffect = new HallEffectSub();
+  private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
@@ -74,11 +75,6 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
 
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.LONG_SHOT));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    // .whileHeld(new GetToHoodPosition(hood, dashboard, HoodPosition.SHORT_SHOT));
-
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     .whileHeld(new RunRevolver(revolver, dashboard, false)); // previously .35
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
@@ -88,6 +84,10 @@ public class RobotContainer {
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
 
     new POVButton(joystick, 90).whenPressed(new RevolverToMagnet(hallEffect, revolver)); 
+  }
+
+  public void buttonBoardBindings(){
+    new JoystickButton(buttonBoard, 1).whenPressed(new HappyPrintCommand("button board tester"));
   }
 
   public Command getDefaultCommand(){return arcade;}
