@@ -1,12 +1,13 @@
 package com.team7419;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+// import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class MotorGroup {
     
-    private TalonSRX master;
+    private TalonFX master;
     private VictorSPX[] victors;
 
     /**
@@ -14,7 +15,7 @@ public class MotorGroup {
      * @param master
      * @param victors
      */
-    public MotorGroup(TalonSRX master, VictorSPX...victors){
+    public MotorGroup(TalonFX master, VictorSPX...victors){
         this.master = master;
         this.victors = victors;
         followMaster();

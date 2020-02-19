@@ -2,6 +2,14 @@ package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.team7419.Initers;
+import com.team7419.MotorGroup;
+import com.team7419.TalonFuncs;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
@@ -17,7 +25,6 @@ public class DriveBaseSub extends SubsystemBase {
 		right1 = new TalonFX(CanIds.rightFalcon1.id);
 		left2 = new TalonFX(CanIds.leftFalcon2.id);
     right2 = new TalonFX(CanIds.rightFalcon2.id);
-    
     right1.setInverted(true);
     right1.setSensorPhase(false);
     right2.setInverted(true);
@@ -28,8 +35,10 @@ public class DriveBaseSub extends SubsystemBase {
   public void periodic() {
   }
 
+
   public TalonFX getLeftMast(){return left1;}
   public TalonFX getRightMast(){return right1;}
+
 
   public void setLeftPower(double power){
     left1.set(ControlMode.PercentOutput, power);
