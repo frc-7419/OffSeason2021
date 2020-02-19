@@ -42,7 +42,7 @@ public class RobotContainer {
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
   
   public RobotContainer() {
-    manualButtonBindings();
+    magicButtonBindings();
   }
 
   private void mechTesterButtonBindings() { // for dj
