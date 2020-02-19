@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.*;
 
-public class ShooterSub extends SubsystemBase{
+public class MasterShooterSub extends SubsystemBase{
 
 	public TalonFX talon;
     public MotorGroup motors;
@@ -23,10 +23,10 @@ public class ShooterSub extends SubsystemBase{
     public double kF = 0;
     public double targetVelocity = 0;
     public double target = 500;
-    private double threshold = 100;
+    private double threshold = 200;
     public ControlMethod controlMethod = ControlMethod.PERCENT_OUTPUT;
 
-    public ShooterSub(){
+    public MasterShooterSub(){
 
         talon = new TalonFX(CanIds.shooterFalcon.id);
         talon.setInverted(true);
@@ -41,7 +41,7 @@ public class ShooterSub extends SubsystemBase{
 
     @Override
     public void periodic() {
-        // SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
     }
 
     public void run(){
@@ -111,7 +111,7 @@ public class ShooterSub extends SubsystemBase{
 
     public void setTargetRawSpeed(double speed){this.target = speed;}
 
-    public void percentOutput(double powerOutput){
+    public void percentOutput(){
         talon.set(ControlMode.PercentOutput,powerOutput);
     }
 

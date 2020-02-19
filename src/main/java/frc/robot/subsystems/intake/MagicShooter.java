@@ -20,7 +20,7 @@ public class MagicShooter extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSub shooter;
   private PaddedXbox joystick;
-  private double time;
+  private long time;
   private double power;
   private boolean done = false;
   private Dashboard dashboard;
@@ -28,9 +28,10 @@ public class MagicShooter extends CommandBase {
   Date date = new Date();
   java.sql.Timestamp ts = new java.sql.Timestamp(date.getTime());
 
-  public MagicShooter(ShooterSub shooter, Dashboard dashboard/*, double time*/) {
+  public MagicShooter(ShooterSub shooter, Dashboard dashboard, long time) {
     this.shooter = shooter;
     this.dashboard = dashboard;
+    this.time = time;
     // this.power = power;
     // this.time = time;
     // uses addRequirements() instead of requires()
@@ -48,13 +49,19 @@ public class MagicShooter extends CommandBase {
     // shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
     shooter.setControlMethod(ControlMethod.HOLDING);
 
-    time = dashboard.getShooterTime();
+    // time = dashboard.getShooterTime();
   }
 
   @Override
   public void execute() {
     shooter.run();
     Timer.delay(time);
+    // try {
+    //       Thread.sleep(time);
+    //     java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+    //   } catch (InterruptedException e) {
+    //       e.printStackTrace();
+    //   }
 
     done = true;
   }

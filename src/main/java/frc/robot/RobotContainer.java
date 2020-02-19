@@ -32,18 +32,22 @@ public class RobotContainer {
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
 
+  private final MasterShooterSub masterShooter = new MasterShooterSub();
+
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final MagicIntake magicIntake = new MagicIntake(intake, joystick, 0, 0);
   private final MagicRevolver magicRevolver = new MagicRevolver(revolver, joystick, 0, 0);
   private final MagicLoader magicLoader = new MagicLoader(loader, joystick, 0, 0);
-  private final MagicShooter magicShooter = new MagicShooter(shooter, dashboard);
+  private final MagicShooter magicShooter = new MagicShooter(shooter, dashboard, 0);
   private final IntakeRevolve2 intakeRevolve2 = new IntakeRevolve2(intake, revolver, joystick, 0, 0, 0);
   private final StartShooter startShooter = new StartShooter();
   private final TheMagicButton theMagicButton = new TheMagicButton();
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
   
+  private final RampThenHold rampThenHold = new RampThenHold(masterShooter, dashboard);
+
   public RobotContainer() {
     // manualButtonBindings();
     magicButtonBindings();
@@ -87,14 +91,16 @@ public class RobotContainer {
     // .whenPressed(new MagicRevolver(revolver, joystick, .5, 3));
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     // .whenPressed(new MagicShooter(shooter, dashboard, 10));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new IntakeRevolve2(intake, revolver, joystick, .5, .5, 8));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whenPressed(new IntakeRevolve2(intake, revolver, joystick, .5, .5, 8));
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     // .whenPressed(new StartShooter());
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-    // .whenPressed(new MagicShooter(shooter, dashboard));
+    // .whenPressed(new MagicShooter(shooter, dashboard, 5));
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     // .whenPressed(new TheMagicButton());
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whenPressed(new RampThenHold(masterShooter, dashboard));
   }
 
   public Command getDefaultCommand(){return arcade;}

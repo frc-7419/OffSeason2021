@@ -5,10 +5,10 @@ import frc.robot.subsystems.dashboard.Dashboard;
 
 public class RampThenHold extends SequentialCommandGroup{
 
-    public RampThenHold(ShooterSub shooter, Dashboard dashboard){
+    public RampThenHold(MasterShooterSub shooter, Dashboard dashboard){
         addCommands(
             new GetToTargetVelocity(shooter, dashboard),
-            new OpenLoopFeedforward(shooter, dashboard)
+            new LookUpFeedforward(shooter, dashboard)
         );
     }
 }
