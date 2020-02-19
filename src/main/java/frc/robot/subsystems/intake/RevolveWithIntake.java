@@ -13,15 +13,16 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class AutoRevolve extends CommandBase {
+public class RevolveWithIntake extends CommandBase {
   
 private RevolverSub revolver;
 private PaddedXbox joystick;
 private double timestamp;
 
-  public AutoRevolve(RevolverSub revolver, PaddedXbox joystick) {
+  public RevolveWithIntake(RevolverSub revolver, PaddedXbox joystick) {
     this.revolver = revolver;
     this.joystick = joystick;
+    addRequirements(revolver);
   }
 
   @Override

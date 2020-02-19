@@ -37,7 +37,7 @@ public class RobotContainer {
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
-  private final AutoRevolve revolverDefault = new AutoRevolve(revolver, joystick);
+  private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
   private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
   public RobotContainer() {
@@ -97,5 +97,9 @@ public class RobotContainer {
     arcade.schedule();
     intakeDefault.schedule();
     revolverDefault.schedule();
+  }
+
+  public void setDefaultCommands(){
+    revolver.setDefaultCommand(revolverDefault);
   }
 }
