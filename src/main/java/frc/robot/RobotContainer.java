@@ -49,9 +49,7 @@ public class RobotContainer {
   private final RampThenHold rampThenHold = new RampThenHold(masterShooter, dashboard);
 
   public RobotContainer() {
-    // manualButtonBindings();
     magicButtonBindings();
-
   }
 
   private void mechTesterButtonBindings() { // for dj
