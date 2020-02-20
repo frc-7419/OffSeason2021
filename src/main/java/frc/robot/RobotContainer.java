@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+
+import com.ctre.phoenix.motorcontrol.can.BaseMotorControllerConfiguration;
 import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
@@ -22,6 +25,7 @@ import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 
 public class RobotContainer {
+
 
   private final DriveBaseSub driveBase = new DriveBaseSub();
   private final ShooterSub shooter = new ShooterSub();
@@ -45,6 +49,10 @@ public class RobotContainer {
     manualButtonBindings();
     // codeTestButtonBindings();
   }
+
+  private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
+  private Trigger xboxLeftTrigger = new Trigger(bsLeftTrig);
+
 
   private void mechTesterButtonBindings() { // for dj
 
@@ -84,6 +92,8 @@ public class RobotContainer {
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
 
     new POVButton(joystick, 90).whenPressed(new RevolverToMagnet(hallEffect, revolver)); 
+
+    xboxLeftTrigger.whenActive(new HappyPrintCommand("lamba trigger"));
   }
 
   public void buttonBoardBindings(){
