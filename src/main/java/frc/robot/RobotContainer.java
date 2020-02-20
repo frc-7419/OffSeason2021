@@ -106,7 +106,7 @@ public class RobotContainer {
   public void scheduleDefaultCommands(){
     arcade.schedule();
     intakeDefault.schedule();
-    revolverDefault.schedule();
+    // revolverDefault.schedule();
   }
 
   public void setDefaultCommands(){
