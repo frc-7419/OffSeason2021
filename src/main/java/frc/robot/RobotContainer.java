@@ -53,7 +53,6 @@ public class RobotContainer {
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
   private Trigger xboxLeftTrigger = new Trigger(bsLeftTrig);
 
-
   private void mechTesterButtonBindings() { // for dj
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
