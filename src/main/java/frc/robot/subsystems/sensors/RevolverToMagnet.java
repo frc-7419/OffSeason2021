@@ -32,8 +32,17 @@ public class RevolverToMagnet extends CommandBase {
   public void end(boolean interrupted) {
   }
 
+  /**
+   * hallEffect.get() returns false when hall is triggered
+   * truth table:
+   * hall.get()   timedOut   isFinished
+   *    T             T           T
+   *    T             F           F
+   *    F             T           T
+   *    F             F           T
+   */ 
   @Override
   public boolean isFinished() {
-    return !hallEffect.get();
+    return !hallEffect.get() || timedOut; 
   }
 }

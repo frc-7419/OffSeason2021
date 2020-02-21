@@ -47,7 +47,6 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
-    // codeTestButtonBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
