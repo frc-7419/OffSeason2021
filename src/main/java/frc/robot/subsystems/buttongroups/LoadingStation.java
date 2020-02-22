@@ -7,17 +7,28 @@
 
 package frc.robot.subsystems.buttongroups;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import com.team7419.PaddedXbox;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.drive.DriveBaseSub;
+import frc.robot.subsystems.drive.StraightPercentOut;
+import frc.robot.subsystems.intake.IntakeSub;
+import frc.robot.subsystems.intake.RevolverSub;
+import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.intake.RunRevolver;
+
 public class LoadingStation extends ParallelCommandGroup {
-  /**
-   * Creates a new LoadingStation.
-   */
-  public LoadingStation() {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());super();
+  
+  private DriveBaseSub driveBase;
+  private IntakeSub intake;
+  private PaddedXbox joystick;
+  private RevolverSub revolver;
+  private Dashboard dashboard;
+  
+  public LoadingStation(DriveBaseSub driveBase, IntakeSub intake, PaddedXbox joystick, RevolverSub revolver, Dashboard dashboard) {
+    addCommands(new StraightPercentOut(driveBase, .2));
+    addCommands(new RunIntake(intake, joystick, .3));
+    addCommands(new RunRevolver(revolver, dashboard, true));
   }
 }
