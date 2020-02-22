@@ -33,7 +33,6 @@ public class RobotContainer {
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
-  // private final HoodSub hood = new HoodSub();
   private final HallEffectSub hallEffect = new HallEffectSub();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
@@ -43,10 +42,10 @@ public class RobotContainer {
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
-  private final CalibrateFalcon calibrate = new CalibrateFalcon(shooter, joystick);
 
   public RobotContainer() {
     manualButtonBindings();
+    buttonBoardBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
@@ -73,7 +72,7 @@ public class RobotContainer {
     .whileHeld(new RampThenHold(shooter, dashboard));
   }
 
-  private void manualButtonBindings(){
+  private void manualButtonBindings(){ // for johann
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
@@ -82,9 +81,9 @@ public class RobotContainer {
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    .whileHeld(new RunRevolver(revolver, dashboard, false)); // previously .35
+    .whileHeld(new RunRevolver(revolver, dashboard, false)); 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    .whileHeld(new RunRevolver(revolver, dashboard, true)); // previously .35
+    .whileHeld(new RunRevolver(revolver, dashboard, true)); 
 
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));

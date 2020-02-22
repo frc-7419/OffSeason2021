@@ -16,7 +16,7 @@ public class HappyPrintCommand extends CommandBase {
 
   @Override
   public void execute() {
-    System.out.println("Woo! Your " + caption + " looks like it's working!");
+    System.out.println(caption + " looks like it's working!");
   }
 
   @Override
