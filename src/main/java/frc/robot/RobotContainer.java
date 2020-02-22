@@ -88,7 +88,7 @@ public class RobotContainer {
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
 
-    new POVButton(joystick, 90).whenPressed(new RevolverToMagnet(magneticSensor, revolver)); 
+    new POVButton(joystick, 90).whenPressed(new RevolverToTape(colorSensor, revolver)); 
 
     xboxLeftTrigger.whenActive(new HappyPrintCommand("lamba trigger"));
   }

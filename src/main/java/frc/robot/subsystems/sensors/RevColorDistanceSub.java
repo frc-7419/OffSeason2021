@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class RevColorDistanceSub extends SubsystemBase {
   
-  private I2C.Port i2cPort = I2C.Port.kOnboard;
-  private ColorSensorV3 colorSensor;
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  private final ColorSensorV3 colorSensor;
 
   public RevColorDistanceSub() {
     colorSensor = new ColorSensorV3(i2cPort);
@@ -18,7 +18,10 @@ public class RevColorDistanceSub extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumberArray("rgb values", this.getRgb());
+    Color rgb = colorSensor.getColor();
+    SmartDashboard.putNumber("red", rgb.red);
+    SmartDashboard.putNumber("green", rgb.green);
+    SmartDashboard.putNumber("blue", rgb.blue);
     SmartDashboard.putNumber("proximity", this.getProximity());
   }
 
