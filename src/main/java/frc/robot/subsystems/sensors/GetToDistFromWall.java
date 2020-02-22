@@ -30,6 +30,7 @@ public class GetToDistFromWall extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    driveBase.stop();
   }
 
   @Override

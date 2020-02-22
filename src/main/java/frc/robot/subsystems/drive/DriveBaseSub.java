@@ -46,6 +46,8 @@ public class DriveBaseSub extends SubsystemBase {
     setRightPower(power);
   }
 
+  public void stop(){setAll(0);}
+
   public double getLeftVelocity(){return left1.getSelectedSensorVelocity();}
   public double getRightVelocity(){return right1.getSelectedSensorVelocity();}
 
