@@ -19,6 +19,7 @@ public class RevColorDistanceSub extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumberArray("rgb values", this.getRgb());
+    SmartDashboard.putNumber("proximity", this.getProximity());
   }
 
   public double getProximity(){

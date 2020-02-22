@@ -36,6 +36,7 @@ public class RobotContainer {
   // private final HoodSub hood = new HoodSub();
   private final HallEffectSub hallEffect = new HallEffectSub();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
+  private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
