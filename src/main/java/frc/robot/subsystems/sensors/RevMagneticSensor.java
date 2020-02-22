@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
-public class HallEffectSub extends SubsystemBase {
+public class RevMagneticSensor extends SubsystemBase {
     
     private DigitalInput sensor;
 
-    public HallEffectSub(){ 
+    public RevMagneticSensor() {
         sensor = new DigitalInput(Constants.hallEffectId);
     }
 

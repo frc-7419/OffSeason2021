@@ -33,7 +33,7 @@ public class RobotContainer {
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
-  private final HallEffectSub hallEffect = new HallEffectSub();
+  private final RevMagneticSensor magneticSensor = new RevMagneticSensor();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
@@ -88,7 +88,7 @@ public class RobotContainer {
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
 
-    new POVButton(joystick, 90).whenPressed(new RevolverToMagnet(hallEffect, revolver)); 
+    new POVButton(joystick, 90).whenPressed(new RevolverToMagnet(magneticSensor, revolver)); 
 
     xboxLeftTrigger.whenActive(new HappyPrintCommand("lamba trigger"));
   }

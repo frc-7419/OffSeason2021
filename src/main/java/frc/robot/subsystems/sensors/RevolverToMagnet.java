@@ -6,11 +6,11 @@ import frc.robot.subsystems.intake.RevolverSub;
 public class RevolverToMagnet extends CommandBase {
  
   private RevolverSub revolver;
-  private HallEffectSub hallEffect;
+  private RevMagneticSensor hallEffect;
   private double timestamp;
   private boolean timedOut = false;
 
-  public RevolverToMagnet(HallEffectSub hallEffect, RevolverSub revolver) {
+  public RevolverToMagnet(RevMagneticSensor hallEffect, RevolverSub revolver) {
     this.hallEffect = hallEffect;
     this.revolver = revolver;
   }
