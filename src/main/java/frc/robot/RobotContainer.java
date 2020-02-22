@@ -9,7 +9,6 @@ package frc.robot;
 
 import java.util.function.BooleanSupplier;
 
-import com.ctre.phoenix.motorcontrol.can.BaseMotorControllerConfiguration;
 import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
@@ -20,7 +19,6 @@ import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
 import frc.robot.subsystems.sensors.*;
 import frc.robot.subsystems.shooter.*;
-import frc.robot.subsystems.shooter.HoodSub.HoodPosition;
 import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 
@@ -37,6 +35,7 @@ public class RobotContainer {
   private final RevolverSub revolver = new RevolverSub();
   // private final HoodSub hood = new HoodSub();
   private final HallEffectSub hallEffect = new HallEffectSub();
+  private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
@@ -104,7 +103,6 @@ public class RobotContainer {
   public void scheduleDefaultCommands(){
     arcade.schedule();
     intakeDefault.schedule();
-    // revolverDefault.schedule();
   }
 
   public void setDefaultCommands(){
