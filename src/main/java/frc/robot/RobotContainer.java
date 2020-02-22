@@ -14,6 +14,7 @@ import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.buttongroups.ReadyToShoot;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -94,7 +95,12 @@ public class RobotContainer {
   }
 
   public void buttonBoardBindings(){
-    new JoystickButton(buttonBoard, 1).whenPressed(new HappyPrintCommand("button board tester"));
+    new JoystickButton(buttonBoard, 1)
+    .whenPressed(new ReadyToShoot(shooter, revolver, colorSensor, dashboard));
+    new JoystickButton(buttonBoard, 2)
+    .whileHeld(new RunRevolver(revolver, dashboard, true));
+    new JoystickButton(buttonBoard, 3)
+    .whileHeld(new RevolverToTape(colorSensor, revolver));
   }
 
   public Command getDefaultCommand(){return arcade;}
