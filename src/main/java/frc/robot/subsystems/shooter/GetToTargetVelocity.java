@@ -38,21 +38,21 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void execute() {
     shooter.run();
-    kF = 1023*shooter.getOutputVoltage() / 12 / shooter.getCurrentRawSpeed();
-    SmartDashboard.putNumber("kF", kF);
-    if(shooter.onTarget()){
-      steadyLoops++;
-      if(!stable){stable = true;}
-    }
-    else{stable = false;}
+    // kF = 1023*shooter.getOutputVoltage() / 12 / shooter.getCurrentRawSpeed();
+    // SmartDashboard.putNumber("kF", kF);
+    // if(shooter.onTarget()){
+    //   steadyLoops++;
+    //   if(!stable){stable = true;}
+    // }
+    // else{stable = false;}
   }
 
   @Override
   public void end(boolean interrupted) {
-    if(interrupted){System.out.println("interrupted");}
-    System.out.println("end rpm: " + shooter.getCurrentRawSpeed());
-    System.out.println("ff gain: " + kF);
-    shooter.setkF(kF);
+    // if(interrupted){System.out.println("interrupted");}
+    // System.out.println("end rpm: " + shooter.getCurrentRawSpeed());
+    // System.out.println("ff gain: " + kF);
+    // shooter.setkF(kF);
     shooter.off();
   }
 

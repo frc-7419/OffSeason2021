@@ -7,9 +7,9 @@ public class RampThenHold extends SequentialCommandGroup{
 
     public RampThenHold(ShooterSub shooter, Dashboard dashboard){
         addCommands(
-            new GetToTargetVelocity(shooter, dashboard), 
+            // new GetToTargetVelocity(shooter, dashboard);
             // awkwardly doesn't turn shooter off now
-            new LookUpFeedforward(shooter, dashboard)
+            // new LookUpFeedforward(shooter, dashboard)
         );
     }
 }

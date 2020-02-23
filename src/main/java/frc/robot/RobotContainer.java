@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.buttongroups.LoadingStation;
 import frc.robot.subsystems.buttongroups.ReadyToShoot;
+import frc.robot.subsystems.buttongroups.RunShooter;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -40,7 +41,7 @@ public class RobotContainer {
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
 
-  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .25, .25);
+  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .7, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
@@ -104,8 +105,8 @@ public class RobotContainer {
     .whileHeld(new RevolverToTape(colorSensor, revolver));
     new JoystickButton(buttonBoard, 4)
     .whileHeld(new LoadingStation(driveBase, intake, joystick, revolver, dashboard));
-    // new JoystickButton(buttonBoard, 5)
-    // .whileHeld(new );
+    new JoystickButton(buttonBoard, 5)
+    .whileHeld(new RunShooter(shooter, dashboard, loader, revolver));
   }
 
   public Command getDefaultCommand(){return arcade;}
