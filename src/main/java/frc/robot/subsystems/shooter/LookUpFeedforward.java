@@ -5,18 +5,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
-public class PercentOutput extends CommandBase {
+public class LookUpFeedforward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  
   private ShooterSub shooter;
   private Dashboard dashboard;
-
-  /**
-   *
-   * @param shooter
-   * @param kF
-   * @param holdRpm
-   */
-  public PercentOutput(ShooterSub shooter, Dashboard dashboard) {
+  
+  public LookUpFeedforward(ShooterSub shooter, Dashboard dashboard) {
     this.shooter = shooter;
     this.dashboard = dashboard;
   }
@@ -24,9 +19,12 @@ public class PercentOutput extends CommandBase {
   @Override
   public void initialize() {
 
-      SmartDashboard.putString("shooter", "percent power");
-      shooter.setOutputPower(dashboard.getPower());
-      shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
+      SmartDashboard.putString("shooter", "lookup ff");
+
+      double rawSpeed = dashboard.getRawSpeed();
+      shooter.setkF(shooter.lookUpkF(rawSpeed));
+      shooter.setTargetRawSpeed(rawSpeed);
+      shooter.setControlMethod(ControlMethod.HOLDING);
   }
 
   @Override

@@ -7,20 +7,26 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+
+import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.buttongroups.LoadingStation;
+import frc.robot.subsystems.buttongroups.ReadyToShoot;
+import frc.robot.subsystems.buttongroups.RunShooter;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
+import frc.robot.subsystems.sensors.*;
 import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.vision.*;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import edu.wpi.first.wpilibj2.command.button.*;
 
 public class RobotContainer {
+
 
   private final DriveBaseSub driveBase = new DriveBaseSub();
   private final ShooterSub shooter = new ShooterSub();
@@ -30,13 +36,23 @@ public class RobotContainer {
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
+  private final RevMagneticSensor magneticSensor = new RevMagneticSensor();
+  private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
+  private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
+  private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
 
-  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 1, .4);
+  private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .7, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
+  private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
+  private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
     manualButtonBindings();
+    buttonBoardBindings();
   }
+
+  private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
+  private Trigger xboxLeftTrigger = new Trigger(bsLeftTrig);
 
   private void mechTesterButtonBindings() { // for dj
 
@@ -51,35 +67,57 @@ public class RobotContainer {
   }
 
   private void codeTestButtonBindings(){ // for programmer
-
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-      .whenPressed(turnToTx); // limelight test command
+    .whileHeld(new LookUpFeedforward(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-      .whenPressed(arcade);
+    .whenPressed(new GetToTargetVelocity(shooter, dashboard));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whileHeld(new RampThenHold(shooter, dashboard));
   }
 
-  private void manualButtonBindings(){
+  private void manualButtonBindings(){ // for johann
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new PercentOutput(shooter, dashboard));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    .whileHeld(new GetToTargetVelocity(shooter, dashboard));
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
-    .whileHeld(new RunRevolver(revolver, .35));
+    .whileHeld(new RunRevolver(revolver, dashboard, false)); 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
-    .whileHeld(new RunRevolver(revolver, -.35));
+    .whileHeld(new RunRevolver(revolver, dashboard, true)); 
 
-    new POVButton(joystick, 0).whileHeld(new RunLoader(loader, .3)); 
-    new POVButton(joystick, 180).whileHeld(new RunLoader(loader, -.3));
+    new POVButton(joystick, 0).whileHeld(new RunLoader(loader, dashboard, true)); 
+    new POVButton(joystick, 180).whileHeld(new RunLoader(loader, dashboard, false));
 
-    new POVButton(joystick, 90).whileHeld(new RunIntake(intake, .5)); 
-    new POVButton(joystick, 270).whileHeld(new RunIntake(intake, -.5)); 
+    new POVButton(joystick, 90).whenPressed(new RevolverToTape(colorSensor, revolver)); 
 
-    /* untested button bindings for intake and triggers, unclear on how to get trigger vals still*/
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisLeftTrigger.value)
-    .whileHeld(new RunIntake(intake, .5));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadAxisRightTrigger.value)
-    .whileHeld(new RunIntake(intake, -.5));
+    xboxLeftTrigger.whenActive(new HappyPrintCommand("lamba trigger"));
+  }
+
+  public void buttonBoardBindings(){
+    new JoystickButton(buttonBoard, 1)
+    .whenPressed(new RevolverToTape(colorSensor, revolver));
+    new JoystickButton(buttonBoard, 1)
+    .whileHeld(new GetToTargetVelocity(shooter, dashboard));
+
+    // new JoystickButton(buttonBoard, 2)
+    // .whileHeld(() -> revolver.setPower(-.7));
+
+    new JoystickButton(buttonBoard, 2)
+    .whileHeld(new RunRevolver(revolver, -.5));
+
+    // new JoystickButton(buttonBoard, 4)
+    // .whileHeld(new RunRevolver(revolver, .5));
+
+    new JoystickButton(buttonBoard, 3)
+    .whenPressed(new RevolverToTape(colorSensor, revolver));
+    // new JoystickButton(buttonBoard, 4)
+    // .whileHeld(new LoadingStation(driveBase, intake, joystick, revolver, dashboard));
+    new JoystickButton(buttonBoard, 5)
+    .whileHeld(new RunShooter(shooter, dashboard, loader, revolver));
+    
   }
 
   public Command getDefaultCommand(){return arcade;}
@@ -87,5 +125,10 @@ public class RobotContainer {
   
   public void scheduleDefaultCommands(){
     arcade.schedule();
+    intakeDefault.schedule();
+  }
+
+  public void setDefaultCommands(){
+    revolver.setDefaultCommand(revolverDefault);
   }
 }

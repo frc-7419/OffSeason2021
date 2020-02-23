@@ -1,43 +1,44 @@
 package frc.robot.subsystems.shooter;
 
+import com.team7419.PaddedXbox;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
-public class OpenLoopFeedforward extends CommandBase {
+public class CalibrateFalcon extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSub shooter;
-  private double kF;
-  private double holdRpm;
+  private PaddedXbox joystick;
 
   /**
-   * @param shooter instance of ShooterSub 
-   * @param kF feedforward gain, for 40% power .3558 is okay
-   * @param holdRpm this doesnt do anything yet
+   *
+   * @param shooter
+   * @param kF
+   * @param holdRpm
    */
-  public OpenLoopFeedforward(ShooterSub shooter, double kF, double holdRpm) {
+  public CalibrateFalcon(ShooterSub shooter, PaddedXbox joystick) {
     this.shooter = shooter;
-    this.kF = kF;
-    this.holdRpm = holdRpm;
+    this.joystick = joystick;
   }
 
   @Override
   public void initialize() {
 
-      SmartDashboard.putString("shooter", "hold ff");
-
-      shooter.setkF(kF);
-      shooter.setTargetRawSpeed(1150);
-      shooter.setControlMethod(ControlMethod.HOLDING);
+      SmartDashboard.putString("shooter", "percent power");
+      shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
   }
 
   @Override
   public void execute() {
-      shooter.run();
+    SmartDashboard.putNumber("speed", shooter.talon.getSelectedSensorVelocity(0));
+    shooter.setOutputPower(joystick.getLeftY());
+    shooter.run();
   }
 
   @Override
   public void end(boolean interrupted) {
+    shooter.off();
   }
 
   @Override

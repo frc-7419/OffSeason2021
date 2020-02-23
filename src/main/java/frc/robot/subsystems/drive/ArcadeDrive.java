@@ -3,6 +3,7 @@ package frc.robot.subsystems.drive;
 import com.team7419.PaddedXbox;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.dashboard.Dashboard;
 
 /**
  * Reusable arcade command
@@ -13,6 +14,7 @@ public class ArcadeDrive extends CommandBase {
   private double kStraight;
   private double kTurn;
   private PaddedXbox joystick;
+  private Dashboard dashboard;
 
   /**
    * reusable arcade command
@@ -21,9 +23,10 @@ public class ArcadeDrive extends CommandBase {
    * @param kStraight
    * @param kTurn
    */
-  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn){
+  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, Dashboard dashboard, double kStraight, double kTurn){
     this.joystick = joystick;
     this.driveBase = driveBase;
+    this.dashboard = dashboard;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
     addRequirements(driveBase);
@@ -31,10 +34,7 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void initialize() {
-    /* factory default just so nothing acts up */
-		driveBase.rightMast.configFactoryDefault();
-    driveBase.leftMast.configFactoryDefault();
-        
+    driveBase.factoryResetAll();     
     SmartDashboard.putString("command status", "init arcade");
   }
 
@@ -46,13 +46,8 @@ public class ArcadeDrive extends CommandBase {
     double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY();
     double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY();
 
-    driveBase.leftSide.setPower(leftPower);
-    driveBase.rightSide.setPower(rightPower);
-
-    // if(joystick.getRightShoulder()){
-    //   driveBase.getLeftMast().getSensorCollection().setQuadraturePosition(0, 10);
-    //   driveBase.getRightMast().getSensorCollection().setQuadraturePosition(0, 10);
-    // }
+    driveBase.setLeftPower(leftPower);
+    driveBase.setRightPower(rightPower);
   }
 
   @Override
@@ -62,8 +57,7 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveBase.leftSide.setPower(0);
-    driveBase.rightSide.setPower(0);
+    driveBase.setAll(0);
   }
 
 }

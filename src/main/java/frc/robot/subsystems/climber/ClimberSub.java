@@ -1,4 +1,4 @@
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems.climber;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -6,18 +6,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
 /**
- * wheel that pulls balls out of the lazy susan into the shooter
+ * climber
  */
-public class LoaderSub extends SubsystemBase{
+public class ClimberSub extends SubsystemBase{
     
     private TalonFX falcon;
 
-    public LoaderSub(){
-        falcon = new TalonFX(CanIds.loaderFalcon.id);
+    public ClimberSub(){
+        falcon = new TalonFX(CanIds.climberFalcon.id);
     }
 
     @Override
     public void periodic(){}
 
+    public TalonFX getFalcon() {
+        return falcon;
+    }
+    
     public void setPower(double power){falcon.set(ControlMode.PercentOutput, power);}
 }

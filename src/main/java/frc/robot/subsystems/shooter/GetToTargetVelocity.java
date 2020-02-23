@@ -1,43 +1,51 @@
 package frc.robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
 public class GetToTargetVelocity extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
   private ShooterSub shooter;
-  private double kP = 0;
-  private double kI = 0;
-  private double kD = 0;
-  private double kF = .3558;
+  private Dashboard dashboard;
+  private double kF;
 
-  private double threshold = 100;
+  private double target;
+  private double steadyLoops = 0;
+  private boolean stable = true;
 
-  public GetToTargetVelocity(ShooterSub shooter, double targetRpm) {
+  public GetToTargetVelocity(ShooterSub shooter, Dashboard dashboard) {
     this.shooter = shooter;
+    this.dashboard = dashboard;
   }
 
   @Override
   public void initialize() {
 
-      SmartDashboard.putString("command status", "ramping up");
+      SmartDashboard.putString("shooter", "ramping up");
+
+      target = dashboard.getRawSpeed();
+      shooter.setkF(shooter.lookUpkF(target));
       
-      shooter.configureOutputs();
-      shooter.setPIDF(kP, kI, kD, kF);
-      shooter.setControlMethod(ControlMethod.SPIN_UP);
+      double[] gains = dashboard.getRampingGains();
+      shooter.setPIDF(0, 0, 0, shooter.getkF());
+      shooter.setTargetRawSpeed(target);
+      // shooter.setControlMethod(ControlMethod.SPIN_UP);
   }
 
   @Override
   public void execute() {
-      shooter.run();
+    shooter.talon.set(ControlMode.Velocity, target);
+
   }
 
   @Override
   public void end(boolean interrupted) {
-    double velocity = shooter.getCurrentRawSpeed();
-    shooter.setkF(1023 / velocity); // where 1023 represents max output, might end up using 1150 (empirical value)
+    shooter.off();
   }
 
   @Override
