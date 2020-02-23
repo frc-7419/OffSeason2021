@@ -98,15 +98,26 @@ public class RobotContainer {
 
   public void buttonBoardBindings(){
     new JoystickButton(buttonBoard, 1)
-    .whenPressed(new ReadyToShoot(shooter, revolver, colorSensor, dashboard));
+    .whenPressed(new RevolverToTape(colorSensor, revolver));
+    new JoystickButton(buttonBoard, 1)
+    .whileHeld(new GetToTargetVelocity(shooter, dashboard));
+
+    // new JoystickButton(buttonBoard, 2)
+    // .whileHeld(() -> revolver.setPower(-.7));
+
     new JoystickButton(buttonBoard, 2)
-    .whileHeld(new RunRevolver(revolver, dashboard, true));
+    .whileHeld(new RunRevolver(revolver, -.5));
+
+    // new JoystickButton(buttonBoard, 4)
+    // .whileHeld(new RunRevolver(revolver, .5));
+
     new JoystickButton(buttonBoard, 3)
-    .whileHeld(new RevolverToTape(colorSensor, revolver));
-    new JoystickButton(buttonBoard, 4)
-    .whileHeld(new LoadingStation(driveBase, intake, joystick, revolver, dashboard));
+    .whenPressed(new RevolverToTape(colorSensor, revolver));
+    // new JoystickButton(buttonBoard, 4)
+    // .whileHeld(new LoadingStation(driveBase, intake, joystick, revolver, dashboard));
     new JoystickButton(buttonBoard, 5)
     .whileHeld(new RunShooter(shooter, dashboard, loader, revolver));
+    
   }
 
   public Command getDefaultCommand(){return arcade;}

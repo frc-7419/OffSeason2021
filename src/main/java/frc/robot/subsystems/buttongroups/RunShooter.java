@@ -23,7 +23,7 @@ public class RunShooter extends ParallelCommandGroup {
     this.revolver = revolver;
 
     addCommands(new GetToTargetVelocity(shooter, dashboard));
-    addCommands(new RunLoader(loader, dashboard, false));
+    addCommands(new RunLoader(loader, dashboard, true));
     addCommands(new RunRevolver(revolver, dashboard, true));
   }
 
