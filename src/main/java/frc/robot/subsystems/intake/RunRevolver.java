@@ -10,24 +10,34 @@ public class RunRevolver extends CommandBase{
   private Dashboard dashboard;
   private boolean reversed;
   double coeff;
+  private double power;
 
 
   public RunRevolver(RevolverSub revolver, Dashboard dashboard, boolean reversed) {
     this.revolver = revolver;
     this.dashboard = dashboard;
     this.reversed = reversed;
+
+    if(reversed){coeff = -1;}
+    else{coeff = 1;}
+
+    power = coeff * dashboard.getRevolverCoeff();
+  }
+
+  public RunRevolver(RevolverSub revolver, double power){
+    this.revolver = revolver;
+    this.power = power;
   }
 
   @Override
   public void initialize() {
-    if(reversed){coeff = -1;}
-    else{coeff = 1;}
+    
   }
 
   @Override
   public void execute() {
     SmartDashboard.putString("revolver", "running");
-    revolver.setPower(coeff * dashboard.getRevolverCoeff());
+    revolver.setPower(power);
 }
 
   @Override

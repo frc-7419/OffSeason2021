@@ -19,6 +19,8 @@ public class Dashboard extends SubsystemBase{
 
     ShuffleboardTab autoShoot = Shuffleboard.getTab("auto shoot");
 
+    ShuffleboardTab hoodTuning = Shuffleboard.getTab("tune hood");
+
     public NetworkTableEntry targetSpeed = autoShoot.add("raw speed", 5000).getEntry();
     public NetworkTableEntry rampingP = autoShoot.add("kP", .65).getEntry();
     public NetworkTableEntry rampingI = autoShoot.add("kI", 0).getEntry();
@@ -30,7 +32,13 @@ public class Dashboard extends SubsystemBase{
     public NetworkTableEntry loaderCoeff = mechPowers.add("loader power", .3).getEntry();
     public NetworkTableEntry power = mechPowers.add("shooter power", defaultPower).getEntry();
 
+    public NetworkTableEntry hoodPower = hoodTuning.add("hood power", .2).getEntry();
+    public NetworkTableEntry hoodTime = hoodTuning.add("hood time", 1000).getEntry();
+
     public Dashboard(){}
+
+    public double getHoodPower(){return hoodPower.getDouble(.2);}
+    public double getHoodTime(){return hoodPower.getDouble(1000);}
 
     public double getDriveCoeff(){return driveCoeff.getDouble(.4);}
 

@@ -36,8 +36,6 @@ public class ArcadeDrive extends CommandBase {
   public void initialize() {
     driveBase.factoryResetAll();     
     SmartDashboard.putString("command status", "init arcade");
-    kStraight = dashboard.getDriveCoeff();
-    kTurn = dashboard.getDriveCoeff();
   }
 
   @Override

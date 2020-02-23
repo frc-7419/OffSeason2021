@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -19,6 +20,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
+    CameraServer.getInstance().startAutomaticCapture();
     // robotContainer = new TestRobotContainer();
   }
 
@@ -49,6 +51,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     robotContainer.scheduleDefaultCommands();
+    robotContainer.setDefaultCommands();
 
   }
 

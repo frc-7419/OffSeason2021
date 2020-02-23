@@ -1,5 +1,7 @@
 package frc.robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
@@ -30,34 +32,24 @@ public class GetToTargetVelocity extends CommandBase {
       shooter.setkF(shooter.lookUpkF(target));
       
       double[] gains = dashboard.getRampingGains();
-      shooter.setPIDF(gains[0], gains[1], gains[2], shooter.getkF());
+      shooter.setPIDF(0, 0, 0, shooter.getkF());
       shooter.setTargetRawSpeed(target);
-      shooter.setControlMethod(ControlMethod.SPIN_UP);
+      // shooter.setControlMethod(ControlMethod.SPIN_UP);
   }
 
   @Override
   public void execute() {
-    shooter.run();
-    kF = 1023*shooter.getOutputVoltage() / 12 / shooter.getCurrentRawSpeed();
-    SmartDashboard.putNumber("kF", kF);
-    if(shooter.onTarget()){
-      steadyLoops++;
-      if(!stable){stable = true;}
-    }
-    else{stable = false;}
+    shooter.talon.set(ControlMode.Velocity, target);
+
   }
 
   @Override
   public void end(boolean interrupted) {
-    if(interrupted){System.out.println("interrupted");}
-    System.out.println("end rpm: " + shooter.getCurrentRawSpeed());
-    System.out.println("ff gain: " + kF);
-    shooter.setkF(kF);
-    // shooter.off();
+    shooter.off();
   }
 
   @Override
   public boolean isFinished() {
-    return steadyLoops > 15;
+    return false;
   }
 }

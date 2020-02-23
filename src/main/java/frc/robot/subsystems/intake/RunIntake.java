@@ -12,7 +12,8 @@ public class RunIntake extends CommandBase{
   
   /**
    * 
-   * @param loader
+   * @param intake
+   * @param joystick
    * @param power
    */
   public RunIntake(IntakeSub intake, PaddedXbox joystick, double power) {

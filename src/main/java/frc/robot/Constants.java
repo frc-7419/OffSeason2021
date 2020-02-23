@@ -18,13 +18,18 @@ public final class Constants {
         loaderFalcon(10),
         intakeVictor(11),
         revolverVictor(12),
-        shooterFalcon(13);
+        climberFalcon(13),
+        shooterFalcon(14), 
+        hoodVictor(15);
 
         public final int id; 
         CanIds(int id){
         this.id = id;
         }
     }
+
+    public static int maxboticsUltrasonicId = 1;
+    public static int hallEffectId = 1;
 
     public static double kTargetHeight = 80; // 98 ish in real game
 

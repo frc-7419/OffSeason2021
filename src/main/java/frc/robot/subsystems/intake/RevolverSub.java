@@ -1,6 +1,7 @@
 package frc.robot.subsystems.intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.Initers;
 
@@ -23,4 +24,8 @@ public class RevolverSub extends SubsystemBase{
     public void periodic(){}
 
     public void setPower(double power){victor.set(ControlMode.PercentOutput, power);}
+
+    public void brakeMode(){
+        victor.setNeutralMode(NeutralMode.Brake);
+    }
 }
