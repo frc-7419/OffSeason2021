@@ -49,6 +49,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
+    colorDistanceBindings();
     // buttonBoardBindings();
   }
 
@@ -78,20 +79,8 @@ public class RobotContainer {
 
   private void manualButtonBindings(){ // for johann
 
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whenPressed(new GetToDistFromWall(driveBase, ultrasonic, 5));
-
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new ReversePercentOutput(shooter, dashboard));
-
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    // .whileHeld(new PrintColorDistance(colorSensor));
-
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whenPressed(new GetToColorDistFromWall(driveBase, colorSensor, dashboard));
-
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    // .whileHeld(new PrintDistance(driveBase, ultrasonic));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
@@ -110,6 +99,22 @@ public class RobotContainer {
     new POVButton(joystick, 90).whenPressed(new RevolverToTape(colorSensor, revolver)); 
 
     xboxLeftTrigger.whenActive(new HappyPrintCommand("lambda trigger"));
+  }
+
+  public void colorDistanceBindings(){
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whenPressed(new GetToDistFromWall(driveBase, ultrasonic, 5));
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new PrintColorDistance(colorSensor));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whenPressed(new GetToColorDistFromWall(driveBase, colorSensor, dashboard));
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new PrintDistance(driveBase, ultrasonic));
+
   }
 
   public void buttonBoardBindings(){
