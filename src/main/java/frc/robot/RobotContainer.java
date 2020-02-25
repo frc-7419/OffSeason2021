@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.buttons.ButtonBoardDefault;
 import frc.robot.subsystems.buttons.RunShooter;
+import frc.robot.subsystems.climber.ClimberSub;
+import frc.robot.subsystems.climber.RunClimber;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -38,6 +40,7 @@ public class RobotContainer {
   private final RevMagneticSensor magneticSensor = new RevMagneticSensor();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
+  private final ClimberSub climber = new ClimberSub();
   private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .7, .4);
@@ -85,6 +88,12 @@ public class RobotContainer {
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whileHeld(new RunClimber(climber, 1, false));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whileHeld(new RunClimber(climber, 1, true));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
