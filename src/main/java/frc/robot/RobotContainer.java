@@ -54,6 +54,12 @@ public class RobotContainer {
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
   private Trigger xboxLeftTrigger = new Trigger(bsLeftTrig);
 
+  private BooleanSupplier bsExternalJoyRight = () -> buttonBoard.getX() == 1;
+  private Trigger externalJoyRight = new Trigger(bsExternalJoyRight);
+
+  private BooleanSupplier bsExternalJoyLeft = () -> buttonBoard.getX() == -1;
+  private Trigger externalJoyLeft = new Trigger(bsExternalJoyLeft);
+
   private void mechTesterButtonBindings() { // for dj
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
@@ -117,7 +123,9 @@ public class RobotContainer {
     // .whileHeld(new LoadingStation(driveBase, intake, joystick, revolver, dashboard));
     new JoystickButton(buttonBoard, 5)
     .whileHeld(new RunShooter(shooter, dashboard, loader, revolver));
-    
+
+    externalJoyRight.whenActive(new RunRevolver(revolver, -.35));
+    externalJoyLeft.whenActive(new RunRevolver(revolver, .35));   
   }
 
   public Command getDefaultCommand(){return arcade;}
