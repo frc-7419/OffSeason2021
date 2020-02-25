@@ -14,9 +14,8 @@ import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.buttongroups.LoadingStation;
-import frc.robot.subsystems.buttongroups.ReadyToShoot;
-import frc.robot.subsystems.buttongroups.RunShooter;
+import frc.robot.subsystems.buttons.ButtonBoardDefault;
+import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -45,10 +44,11 @@ public class RobotContainer {
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
+  private final ButtonBoardDefault buttonBoardDefault = new ButtonBoardDefault(buttonBoard);
 
   public RobotContainer() {
     manualButtonBindings();
-    buttonBoardBindings();
+    // buttonBoardBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
@@ -126,6 +126,7 @@ public class RobotContainer {
   public void scheduleDefaultCommands(){
     arcade.schedule();
     intakeDefault.schedule();
+    buttonBoardDefault.schedule();
   }
 
   public void setDefaultCommands(){
