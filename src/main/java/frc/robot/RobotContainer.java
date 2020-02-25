@@ -41,6 +41,7 @@ public class RobotContainer {
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
 
+
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .7, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
@@ -48,7 +49,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
-    buttonBoardBindings();
+    // buttonBoardBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
@@ -77,6 +78,21 @@ public class RobotContainer {
 
   private void manualButtonBindings(){ // for johann
 
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whenPressed(new GetToDistFromWall(driveBase, ultrasonic, 5));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whileHeld(new ReversePercentOutput(shooter, dashboard));
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new PrintColorDistance(colorSensor));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whenPressed(new GetToColorDistFromWall(driveBase, colorSensor, dashboard));
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new PrintDistance(driveBase, ultrasonic));
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard));
 
@@ -93,7 +109,7 @@ public class RobotContainer {
 
     new POVButton(joystick, 90).whenPressed(new RevolverToTape(colorSensor, revolver)); 
 
-    xboxLeftTrigger.whenActive(new HappyPrintCommand("lamba trigger"));
+    xboxLeftTrigger.whenActive(new HappyPrintCommand("lambda trigger"));
   }
 
   public void buttonBoardBindings(){
@@ -124,11 +140,12 @@ public class RobotContainer {
   public Command getLimelightTest(){return turnToTx;}
   
   public void scheduleDefaultCommands(){
-    arcade.schedule();
+    // arcade.schedule();
     intakeDefault.schedule();
   }
 
   public void setDefaultCommands(){
     revolver.setDefaultCommand(revolverDefault);
+    driveBase.setDefaultCommand(arcade);
   }
 }
