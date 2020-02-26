@@ -1,4 +1,4 @@
-package frc.robot.subsystems.buttongroups;
+package frc.robot.subsystems.buttons;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.dashboard.Dashboard;
