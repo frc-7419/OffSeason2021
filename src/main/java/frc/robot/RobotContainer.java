@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.buttongroups.LoadingStation;
 import frc.robot.subsystems.buttongroups.ReadyToShoot;
 import frc.robot.subsystems.buttongroups.RunShooter;
+import frc.robot.subsystems.climber.ClimberSub;
+import frc.robot.subsystems.climber.RunInClimber;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -36,6 +38,7 @@ public class RobotContainer {
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
+  private final ClimberSub climber = new ClimberSub();
   private final RevMagneticSensor magneticSensor = new RevMagneticSensor();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
