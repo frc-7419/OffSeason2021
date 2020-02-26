@@ -23,12 +23,16 @@ public class RevColorDistanceSub extends SubsystemBase {
     SmartDashboard.putNumber("green", rgb.green);
     SmartDashboard.putNumber("blue", rgb.blue);
     SmartDashboard.putNumber("proximity", this.getProximity());
+    SmartDashboard.putNumber("distance (in)", this.getInches());
   }
 
   public double getProximity(){
     return colorSensor.getProximity();
   }
 
+  public double getInches(){
+    return this.getProximity() /* MULTIPLY BY COEFF IN HENRY'S GOOGLE SHEETS */; //hopefully this will convert to inches
+  }
   public Color getNormalizedColor(){
     return colorSensor.getColor();
   }

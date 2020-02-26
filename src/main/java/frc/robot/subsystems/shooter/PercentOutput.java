@@ -9,6 +9,8 @@ public class PercentOutput extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSub shooter;
   private Dashboard dashboard;
+  private boolean reversed;
+  private double negative;
 
   /**
    *
@@ -16,16 +18,19 @@ public class PercentOutput extends CommandBase {
    * @param kF
    * @param holdRpm
    */
-  public PercentOutput(ShooterSub shooter, Dashboard dashboard) {
+  public PercentOutput(ShooterSub shooter, Dashboard dashboard, boolean reversed) {
     this.shooter = shooter;
     this.dashboard = dashboard;
+    this.reversed = reversed;
   }
 
   @Override
   public void initialize() {
+    if(reversed){negative = -1;}
+    else{negative = 1;}
 
       SmartDashboard.putString("shooter", "percent power");
-      shooter.setOutputPower(dashboard.getPower());
+      shooter.setOutputPower(negative * dashboard.getPower());
       shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
   }
 

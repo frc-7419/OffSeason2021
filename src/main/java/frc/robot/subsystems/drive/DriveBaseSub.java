@@ -1,6 +1,7 @@
 package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
@@ -47,6 +48,17 @@ public class DriveBaseSub extends SubsystemBase {
   }
 
   public void stop(){setAll(0);}
+
+  public void setAllMode(NeutralMode mode){
+    right1.setNeutralMode(mode);
+    right2.setNeutralMode(mode);
+    left1.setNeutralMode(mode);
+    left2.setNeutralMode(mode);
+  }
+
+  public void brake(){setAllMode(NeutralMode.Brake);}
+
+  public void coast(){setAllMode(NeutralMode.Coast);}
 
   public double getLeftVelocity(){return left1.getSelectedSensorVelocity();}
   public double getRightVelocity(){return right1.getSelectedSensorVelocity();}

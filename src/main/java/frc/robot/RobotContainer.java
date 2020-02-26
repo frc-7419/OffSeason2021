@@ -13,11 +13,13 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.ButtonBoardDefault;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
+
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -36,11 +38,12 @@ public class RobotContainer {
   private final LoaderSub loader = new LoaderSub();
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
+  private final ClimberSub climber = new ClimberSub();
   private final RevMagneticSensor magneticSensor = new RevMagneticSensor();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
-  private final ClimberSub climber = new ClimberSub();
   private final ButtonBoard buttonBoard = new ButtonBoard();
+
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .7, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
@@ -49,6 +52,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
+//     colorDistanceBindings();
     buttonBoardBindings();
   }
 
@@ -83,16 +87,15 @@ public class RobotContainer {
   }
 
   private void manualButtonBindings(){ // for johann
-
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whileHeld(new PercentOutput(shooter, dashboard));
-
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new RunClimber(climber, .5, false));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whileHeld(new RunClimber(climber, .5, true));
 
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    .whileHeld(new PercentOutput(shooter, dashboard, true));
+  
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
 
@@ -107,6 +110,22 @@ public class RobotContainer {
     new POVButton(joystick, 90).whenPressed(new RevolverToTape(colorSensor, revolver)); 
 
     xboxLeftTrigger.whileActiveOnce(new HappyPrintCommand("lambda trigger"));
+
+  }
+
+  public void colorDistanceBindings(){
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whenPressed(new GetToDistFromWall(driveBase, ultrasonic, 5));
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new PrintColorDistance(colorSensor));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whenPressed(new GetToColorDistFromWall(driveBase, colorSensor, dashboard));
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new PrintDistance(driveBase, ultrasonic));
   }
 
   public void buttonBoardBindings(){
@@ -133,11 +152,12 @@ public class RobotContainer {
   public Command getLimelightTest(){return turnToTx;}
   
   public void scheduleDefaultCommands(){
-    arcade.schedule();
+    // arcade.schedule();
     intakeDefault.schedule();
   }
 
   public void setDefaultCommands(){
     revolver.setDefaultCommand(revolverDefault);
+    driveBase.setDefaultCommand(arcade);
   }
 }

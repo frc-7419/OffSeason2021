@@ -21,6 +21,8 @@ public class Dashboard extends SubsystemBase{
 
     ShuffleboardTab hoodTuning = Shuffleboard.getTab("tune hood");
 
+    ShuffleboardTab distanceFromWall = Shuffleboard.getTab("distance from wall");
+
     public NetworkTableEntry targetSpeed = autoShoot.add("raw speed", 5000).getEntry();
     public NetworkTableEntry rampingP = autoShoot.add("kP", .65).getEntry();
     public NetworkTableEntry rampingI = autoShoot.add("kI", 0).getEntry();
@@ -35,7 +37,11 @@ public class Dashboard extends SubsystemBase{
     public NetworkTableEntry hoodPower = hoodTuning.add("hood power", .2).getEntry();
     public NetworkTableEntry hoodTime = hoodTuning.add("hood time", 1000).getEntry();
 
+    public NetworkTableEntry desiredDistance = distanceFromWall.add("desired distance", 9).getEntry();
+
     public Dashboard(){}
+
+    public double getDesiredDistance(){return desiredDistance.getDouble(9);}
 
     public double getHoodPower(){return hoodPower.getDouble(.2);}
     public double getHoodTime(){return hoodPower.getDouble(1000);}
