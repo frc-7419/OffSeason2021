@@ -1,23 +1,24 @@
 package frc.robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.dashboard.Dashboard;
 
 public class RunLoader extends CommandBase{
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+
   private LoaderSub loader;
-  private Dashboard dashboard;
+  private double power;
   private boolean reversed;
   private double negativeSign;
   
-  /**
-   * 
-   * @param loader
-   * @param power
-   */
-  public RunLoader(LoaderSub loader, Dashboard dashboard, boolean reversed) {
+ /**
+  * 
+  * @param loader
+  * @param power can have dashboard dependencies
+  * @param reversed
+  */
+  public RunLoader(LoaderSub loader, double power, boolean reversed) {
     this.loader = loader;
-    this.dashboard = dashboard;
+    this.power = power;
     this.reversed = reversed;
   }
 
@@ -29,7 +30,7 @@ public class RunLoader extends CommandBase{
 
   @Override
   public void execute() {
-    loader.setPower(negativeSign*dashboard.getLoaderCoeff());
+    loader.setPower(negativeSign * power);
 }
 
   @Override

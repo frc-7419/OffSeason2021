@@ -18,20 +18,18 @@ public class GetToTargetVelocity extends CommandBase {
   private double steadyLoops = 0;
   private boolean stable = true;
 
-  public GetToTargetVelocity(ShooterSub shooter, Dashboard dashboard) {
+  public GetToTargetVelocity(ShooterSub shooter, double target) {
     this.shooter = shooter;
-    this.dashboard = dashboard;
+    this.target = target;
   }
 
   @Override
   public void initialize() {
 
       SmartDashboard.putString("shooter", "ramping up");
-
-      target = dashboard.getRawSpeed();
       shooter.setkF(shooter.lookUpkF(target));
       
-      double[] gains = dashboard.getRampingGains();
+      // double[] gains = dashboard.getRampingGains();
       shooter.setPIDF(0, 0, 0, shooter.getkF());
       shooter.setTargetRawSpeed(target);
       // shooter.setControlMethod(ControlMethod.SPIN_UP);

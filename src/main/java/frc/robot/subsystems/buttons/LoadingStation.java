@@ -4,6 +4,7 @@ import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
 import frc.robot.subsystems.drive.DriveBaseSub;
 import frc.robot.subsystems.drive.StraightPercentOut;
 import frc.robot.subsystems.intake.IntakeSub;
@@ -20,8 +21,8 @@ public class LoadingStation extends ParallelCommandGroup {
   private Dashboard dashboard;
   
   public LoadingStation(DriveBaseSub driveBase, IntakeSub intake, PaddedXbox joystick, RevolverSub revolver, Dashboard dashboard) {
-    addCommands(new StraightPercentOut(driveBase, .2));
-    addCommands(new RunIntake(intake, joystick, .3));
-    addCommands(new RunRevolver(revolver, dashboard, true));
+    addCommands(new StraightPercentOut(driveBase, Dashboard.get(DashboardValue.DriveBaseLoadingStation)));
+    addCommands(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannPlayerStation)));
+    addCommands(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverJohann), true));
   }
 }
