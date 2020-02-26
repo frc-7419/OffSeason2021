@@ -12,13 +12,14 @@ import java.util.function.BooleanSupplier;
 import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.buttongroups.LoadingStation;
-import frc.robot.subsystems.buttongroups.ReadyToShoot;
-import frc.robot.subsystems.buttongroups.RunShooter;
+
+import frc.robot.subsystems.buttons.ButtonBoard;
+import frc.robot.subsystems.buttons.ButtonBoardDefault;
+import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
-import frc.robot.subsystems.climber.RunInClimber;
+import frc.robot.subsystems.climber.RunClimber;
+
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
@@ -28,7 +29,6 @@ import frc.robot.subsystems.vision.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 
 public class RobotContainer {
-
 
   private final DriveBaseSub driveBase = new DriveBaseSub();
   private final ShooterSub shooter = new ShooterSub();
@@ -42,7 +42,8 @@ public class RobotContainer {
   private final RevMagneticSensor magneticSensor = new RevMagneticSensor();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
-  private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
+  private final ClimberSub climber = new ClimberSub();
+  private final ButtonBoard buttonBoard = new ButtonBoard();
 
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .7, .4);
@@ -52,19 +53,25 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
-    colorDistanceBindings();
-    // buttonBoardBindings();
+//     colorDistanceBindings();
+    buttonBoardBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
   private Trigger xboxLeftTrigger = new Trigger(bsLeftTrig);
 
+  // private BooleanSupplier bsExternalRightJoystick = () -> buttonBoard.getJoystickX() == 1;
+  // private Trigger externalRightJoystick = new Trigger(bsExternalRightJoystick);
+
+  // private BooleanSupplier bsExternalLeftJoystick = () -> buttonBoard.getJoystickX() == -1;
+  // private Trigger externalLeftJoystick = new Trigger(bsExternalLeftJoystick);
+
   private void mechTesterButtonBindings() { // for dj
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-        .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
+      .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-        .whileHeld(new RunOneSide(driveBase, "left", dashboard, false)); 
+      .whileHeld(new RunOneSide(driveBase, "left", dashboard, false)); 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
       .whileHeld(new RunOneSide(driveBase, "right", dashboard, false));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
@@ -90,6 +97,12 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard, false));
 
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whileHeld(new RunClimber(climber, .5, false));
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whileHeld(new RunClimber(climber, .5, true));
+
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
 
@@ -103,7 +116,8 @@ public class RobotContainer {
 
     new POVButton(joystick, 90).whenPressed(new RevolverToTape(colorSensor, revolver)); 
 
-    xboxLeftTrigger.whenActive(new HappyPrintCommand("lambda trigger"));
+    xboxLeftTrigger.whileActiveOnce(new HappyPrintCommand("lambda trigger"));
+
   }
 
   public void colorDistanceBindings(){
@@ -119,31 +133,26 @@ public class RobotContainer {
 
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     // .whileHeld(new PrintDistance(driveBase, ultrasonic));
-
   }
 
   public void buttonBoardBindings(){
+
     new JoystickButton(buttonBoard, 1)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
     new JoystickButton(buttonBoard, 1)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
 
-    // new JoystickButton(buttonBoard, 2)
-    // .whileHeld(() -> revolver.setPower(-.7));
-
     new JoystickButton(buttonBoard, 2)
     .whileHeld(new RunRevolver(revolver, -.5));
 
-    // new JoystickButton(buttonBoard, 4)
-    // .whileHeld(new RunRevolver(revolver, .5));
-
     new JoystickButton(buttonBoard, 3)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
-    // new JoystickButton(buttonBoard, 4)
-    // .whileHeld(new LoadingStation(driveBase, intake, joystick, revolver, dashboard));
+  
     new JoystickButton(buttonBoard, 5)
     .whileHeld(new RunShooter(shooter, dashboard, loader, revolver));
-    
+
+    // externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, -.35));
+    // externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, .35));   
   }
 
   public Command getDefaultCommand(){return arcade;}
