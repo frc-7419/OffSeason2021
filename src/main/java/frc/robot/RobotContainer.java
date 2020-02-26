@@ -12,8 +12,8 @@ import java.util.function.BooleanSupplier;
 import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.ButtonBoardDefault;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -28,7 +28,6 @@ import edu.wpi.first.wpilibj2.command.button.*;
 
 public class RobotContainer {
 
-
   private final DriveBaseSub driveBase = new DriveBaseSub();
   private final ShooterSub shooter = new ShooterSub();
   private final Dashboard dashboard = new Dashboard();
@@ -41,13 +40,12 @@ public class RobotContainer {
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final ClimberSub climber = new ClimberSub();
-  private final Joystick buttonBoard = new Joystick(1); // verify that this port is correct
+  private final ButtonBoard buttonBoard = new ButtonBoard();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, dashboard, .7, .4);
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight, dashboard);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
-  private final ButtonBoardDefault buttonBoardDefault = new ButtonBoardDefault(buttonBoard);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -57,11 +55,11 @@ public class RobotContainer {
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
   private Trigger xboxLeftTrigger = new Trigger(bsLeftTrig);
 
-  private BooleanSupplier bsExternalJoyRight = () -> buttonBoard.getX() == 1;
-  private Trigger externalJoyRight = new Trigger(bsExternalJoyRight);
+  // private BooleanSupplier bsExternalRightJoystick = () -> buttonBoard.getJoystickX() == 1;
+  // private Trigger externalRightJoystick = new Trigger(bsExternalRightJoystick);
 
-  private BooleanSupplier bsExternalJoyLeft = () -> buttonBoard.getX() == -1;
-  private Trigger externalJoyLeft = new Trigger(bsExternalJoyLeft);
+  // private BooleanSupplier bsExternalLeftJoystick = () -> buttonBoard.getJoystickX() == -1;
+  // private Trigger externalLeftJoystick = new Trigger(bsExternalLeftJoystick);
 
   private void mechTesterButtonBindings() { // for dj
 
@@ -90,10 +88,10 @@ public class RobotContainer {
     .whileHeld(new PercentOutput(shooter, dashboard));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new RunClimber(climber, 1, false));
+    .whileHeld(new RunClimber(climber, .5, false));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whileHeld(new RunClimber(climber, 1, true));
+    .whileHeld(new RunClimber(climber, .5, true));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
@@ -108,33 +106,27 @@ public class RobotContainer {
 
     new POVButton(joystick, 90).whenPressed(new RevolverToTape(colorSensor, revolver)); 
 
-    xboxLeftTrigger.whenActive(new HappyPrintCommand("lamba trigger"));
+    xboxLeftTrigger.whileActiveOnce(new HappyPrintCommand("lambda trigger"));
   }
 
   public void buttonBoardBindings(){
+
     new JoystickButton(buttonBoard, 1)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
     new JoystickButton(buttonBoard, 1)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
 
-    // new JoystickButton(buttonBoard, 2)
-    // .whileHeld(() -> revolver.setPower(-.7));
-
     new JoystickButton(buttonBoard, 2)
     .whileHeld(new RunRevolver(revolver, -.5));
 
-    // new JoystickButton(buttonBoard, 4)
-    // .whileHeld(new RunRevolver(revolver, .5));
-
     new JoystickButton(buttonBoard, 3)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
-    // new JoystickButton(buttonBoard, 4)
-    // .whileHeld(new LoadingStation(driveBase, intake, joystick, revolver, dashboard));
+  
     new JoystickButton(buttonBoard, 5)
     .whileHeld(new RunShooter(shooter, dashboard, loader, revolver));
 
-    externalJoyRight.whenActive(new RunRevolver(revolver, -.35));
-    externalJoyLeft.whenActive(new RunRevolver(revolver, .35));   
+    // externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, -.35));
+    // externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, .35));   
   }
 
   public Command getDefaultCommand(){return arcade;}
@@ -143,7 +135,6 @@ public class RobotContainer {
   public void scheduleDefaultCommands(){
     arcade.schedule();
     intakeDefault.schedule();
-    buttonBoardDefault.schedule();
   }
 
   public void setDefaultCommands(){
