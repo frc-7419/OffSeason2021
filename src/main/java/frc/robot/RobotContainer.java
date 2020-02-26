@@ -85,7 +85,7 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new PercentOutput(shooter, dashboard, true));
 
-    //Joystick button B unused weee
+    //Joystick button B unused weeee
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, dashboard, false));
