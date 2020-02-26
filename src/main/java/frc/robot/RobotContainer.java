@@ -51,7 +51,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
-    // buttonBoardBindings();
+    buttonBoardBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
@@ -66,9 +66,9 @@ public class RobotContainer {
   private void mechTesterButtonBindings() { // for dj
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-        .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
+      .whileHeld(new RunOneSide(driveBase, "left", dashboard, true));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-        .whileHeld(new RunOneSide(driveBase, "left", dashboard, false)); 
+      .whileHeld(new RunOneSide(driveBase, "left", dashboard, false)); 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
       .whileHeld(new RunOneSide(driveBase, "right", dashboard, false));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
