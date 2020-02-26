@@ -17,7 +17,8 @@ public class RunClimber extends CommandBase {
 
   @Override
   public void initialize() {
-    if(reversed){power *= -1;}
+    if(reversed){power = -Math.abs(power);}
+    else{power = Math.abs(power);}
   }
 
   @Override
