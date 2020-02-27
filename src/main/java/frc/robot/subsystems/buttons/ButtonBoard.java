@@ -9,13 +9,13 @@ public class ButtonBoard extends Joystick {
     }
 
     public double getJoystickX(){
-        double out = -getX();
+        double out = -getY();
         if(Math.abs(out) < .01){out = 0;}
         return out;
     }
     
     public double getJoystickY(){
-        double out = -getY();
+        double out = -getX();
         if(Math.abs(out) < .01){out = 0;}
         return out;
     }

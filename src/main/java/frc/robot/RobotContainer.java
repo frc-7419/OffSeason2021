@@ -59,11 +59,11 @@ public class RobotContainer {
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
   private Trigger xboxLeftTrigger = new Trigger(bsLeftTrig);
 
-  // private BooleanSupplier bsExternalRightJoystick = () -> buttonBoard.getJoystickX() == 1;
-  // private Trigger externalRightJoystick = new Trigger(bsExternalRightJoystick);
+  private BooleanSupplier bsExternalRightJoystick = () -> buttonBoard.getJoystickX() == 1;
+  private Trigger externalRightJoystick = new Trigger(bsExternalRightJoystick);
 
-  // private BooleanSupplier bsExternalLeftJoystick = () -> buttonBoard.getJoystickX() == -1;
-  // private Trigger externalLeftJoystick = new Trigger(bsExternalLeftJoystick);
+  private BooleanSupplier bsExternalLeftJoystick = () -> buttonBoard.getJoystickX() == -1;
+  private Trigger externalLeftJoystick = new Trigger(bsExternalLeftJoystick);
 
   private void mechTesterButtonBindings() { // for dj
 
@@ -135,17 +135,17 @@ public class RobotContainer {
     new JoystickButton(buttonBoard, 1)
     .whileHeld(new GetToTargetVelocity(shooter, dashboard));
 
-    new JoystickButton(buttonBoard, 2)
-    .whileHeld(new RunRevolver(revolver, -.5));
+    // new JoystickButton(buttonBoard, 2)
+    // .whileHeld(new RunRevolver(revolver, -.5));
 
     new JoystickButton(buttonBoard, 3)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
   
-    new JoystickButton(buttonBoard, 5)
+    new JoystickButton(buttonBoard, 2)
     .whileHeld(new RunShooter(shooter, dashboard, loader, revolver));
 
-    // externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, -.35));
-    // externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, .35));   
+    externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, -.5));
+    externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, .5));   
   }
 
   public Command getDefaultCommand(){return arcade;}

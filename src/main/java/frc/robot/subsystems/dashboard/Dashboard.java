@@ -14,7 +14,7 @@ public class Dashboard extends SubsystemBase{
     public NetworkTableEntry kP = pidTab.add("P", defaultP).getEntry();
     public NetworkTableEntry kD = pidTab.add("D", defaultD).getEntry(); 
 
-    ShuffleboardTab mechPowers = Shuffleboard.getTab("mech powers");
+    public ShuffleboardTab mechPowers = Shuffleboard.getTab("mech powers");
     double defaultPower = .5;
 
     ShuffleboardTab autoShoot = Shuffleboard.getTab("auto shoot");
@@ -28,6 +28,7 @@ public class Dashboard extends SubsystemBase{
     public NetworkTableEntry rampingI = autoShoot.add("kI", 0).getEntry();
     public NetworkTableEntry rampingD = autoShoot.add("kD", 0).getEntry();
     public NetworkTableEntry manualFf = autoShoot.add("set ff gain", 0).getEntry();
+    public NetworkTableEntry operatorRevolverCoeff = autoShoot.add("operator revolver power", .5).getEntry();
 
     public NetworkTableEntry driveCoeff = mechPowers.add("drive power", .4).getEntry();
     public NetworkTableEntry revolverCoeff = mechPowers.add("revolver power", .5).getEntry();
@@ -49,6 +50,8 @@ public class Dashboard extends SubsystemBase{
     public double getDriveCoeff(){return driveCoeff.getDouble(.4);}
 
     public double getRevolverCoeff(){return revolverCoeff.getDouble(.5);}
+
+    public double getOperatorRevolverCoeff(){return operatorRevolverCoeff.getDouble(.5);}
 
     public double getLoaderCoeff(){return loaderCoeff.getDouble(.3);}
 
