@@ -29,6 +29,11 @@ public class DriveBaseSub extends SubsystemBase {
   public void periodic() {
   }
 
+  public enum TurnDirection{
+    LEFT,
+    RIGHT,
+  }
+
   public TalonFX getLeftMast(){return left1;}
   public TalonFX getRightMast(){return right1;}
 
