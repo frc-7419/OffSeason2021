@@ -10,7 +10,6 @@ package frc.robot.subsystems.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.TalonFuncs;
 import com.team7419.math.DriveBaseConversions;
-import com.team7419.math.UnitConversions;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,36 +39,39 @@ public class MotionMagic extends CommandBase {
     @Override
     public void initialize(){
 
-      SmartDashboard.putString("command status", "motion magic test");
-      /* factory default just so nothing acts up */
-	  driveBase.getRightMast().configFactoryDefault();
-      driveBase.getLeftMast().configFactoryDefault();
+        SmartDashboard.putString("command status", "motion magic test");
+        /* factory default just so nothing acts up */
+        // driveBase.getRightMast().configFactoryDefault();
+    //   driveBase.getLeftMast().configFactoryDefault();
 
-      driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
-      driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
+    //   driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
+    //   driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
 
-      // velocity: 5375, acc. converting .7
-      driveBase.getLeftMast().configMotionCruiseVelocity(5375, 0);
-	  driveBase.getLeftMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);
+        driveBase.getLeftMast().setSelectedSensorPosition(0);
+        driveBase.getRightMast().setSelectedSensorPosition(0);
 
-      driveBase.getRightMast().configMotionCruiseVelocity(5375, 0);
-      driveBase.getRightMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);  
-      
-      TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
-      TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
-      setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
-      double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
-      double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
+        // because sample code 
+        driveBase.getLeftMast().configMotionCruiseVelocity(15000, 0);
+        driveBase.getLeftMast().configMotionAcceleration(6000, 0);
 
-      SmartDashboard.putNumber("leftSet", leftSet);
-      SmartDashboard.putNumber("rightSet", rightSet);
+        driveBase.getRightMast().configMotionCruiseVelocity(15000, 0);
+        driveBase.getRightMast().configMotionAcceleration(6000, 0);  
 
-      started = false;
+        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
+        setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
+        double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
+        double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
 
-      driveBase.getLeftMast().set(ControlMode.MotionMagic, leftSet);
-      driveBase.getRightMast().set(ControlMode.MotionMagic, rightSet);
-      
-      startTime = System.currentTimeMillis();
+        SmartDashboard.putNumber("leftSet", leftSet);
+        SmartDashboard.putNumber("rightSet", rightSet);
+
+        started = false;
+
+        driveBase.getLeftMast().set(ControlMode.MotionMagic, leftSet);
+        driveBase.getRightMast().set(ControlMode.MotionMagic, rightSet);
+
+        startTime = System.currentTimeMillis();
 
     }
 
@@ -85,7 +87,7 @@ public class MotionMagic extends CommandBase {
         double rightMastOutput = driveBase.getRightMast().getMotorOutputPercent();
         SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
         SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
-
+        SmartDashboard.putNumber("error", driveBase.getLeftMast().getClosedLoopError());
         if(System.currentTimeMillis() - startTime > 500){
             started = true;
         }

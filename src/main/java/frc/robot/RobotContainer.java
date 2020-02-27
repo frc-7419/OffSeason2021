@@ -38,14 +38,14 @@ public class RobotContainer {
   private final IntakeSub intake = new IntakeSub();
   private final RevolverSub revolver = new RevolverSub();
   private final ClimberSub climber = new ClimberSub();
-  private final RevMagneticSensor magneticSensor = new RevMagneticSensor();
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final ButtonBoard buttonBoard = new ButtonBoard();
   private final Dashboard dashboard = new Dashboard();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 
-  Dashboard.get(DashboardValue.driveBaseStraight), Dashboard.get(DashboardValue.driveBaseTurn));
+  Dashboard.get(DashboardValue.driveBaseStraight), Dashboard.get(DashboardValue.driveBaseTurn), 
+  Dashboard.get(DashboardValue.driveBaseRight));
 
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);

@@ -13,6 +13,7 @@ public class ArcadeDrive extends CommandBase {
   private DriveBaseSub driveBase;
   private double kStraight;
   private double kTurn;
+  private double kRight;
   private PaddedXbox joystick;
   private Dashboard dashboard;
 
@@ -23,11 +24,12 @@ public class ArcadeDrive extends CommandBase {
    * @param kStraight
    * @param kTurn
    */
-  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn){
+  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn, double kRight){
     this.joystick = joystick;
     this.driveBase = driveBase;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
+    this.kRight = kRight;
     addRequirements(driveBase);
   }
 
@@ -43,8 +45,8 @@ public class ArcadeDrive extends CommandBase {
 
     SmartDashboard.putString("command status", "exec arcade");
     
-    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY();
-    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY();
+    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() - kRight * joystick.getRightY();
+    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() - kRight * joystick.getRightY();
 
     driveBase.setLeftPower(leftPower);
     driveBase.setRightPower(rightPower);

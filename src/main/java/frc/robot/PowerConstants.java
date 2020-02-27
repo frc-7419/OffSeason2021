@@ -10,6 +10,7 @@ public enum PowerConstants{
     // drive base
     DriveBaseStraight(.7),
     DriveBaseTurn(.4),
+    DriveBaseRight(.5),
     DriveBaseLoadingStation(.2),
     DriveBaseMotionMagickP(.01),
     DriveBaseMotionMagickD(0),

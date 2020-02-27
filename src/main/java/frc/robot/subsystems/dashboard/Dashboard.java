@@ -23,6 +23,8 @@ public class Dashboard{
     = driveBase.add("straight", PowerConstants.DriveBaseStraight.val).getEntry();
     public static NetworkTableEntry kDriveBaseTurn 
     = driveBase.add("turn", PowerConstants.DriveBaseTurn.val).getEntry();
+    public static NetworkTableEntry kDriveBaseRight 
+    = driveBase.add("right stick", PowerConstants.DriveBaseRight.val).getEntry();
     public static NetworkTableEntry kDriveBaseLoadingStation 
     = driveBase.add("loader station", PowerConstants.DriveBaseLoadingStation.val).getEntry();
     public static NetworkTableEntry kDriveBaseMotionMagickP 
@@ -85,6 +87,7 @@ public class Dashboard{
 
         driveBaseStraight(kDriveBaseStraight.getDouble(PowerConstants.DriveBaseStraight.val)),
         driveBaseTurn(kDriveBaseTurn.getDouble(PowerConstants.DriveBaseTurn.val)),
+        driveBaseRight(kDriveBaseRight.getDouble(PowerConstants.DriveBaseRight.val)),
         driveBaseLoadingStation(kDriveBaseLoadingStation.getDouble(PowerConstants.DriveBaseLoadingStation.val)),
         driveBaseMotionMagickP(kDriveBaseMotionMagickP.getDouble(PowerConstants.DriveBaseMotionMagickP.val)),
         driveBaseMotionMagickD(kDriveBaseMotionMagickD.getDouble(PowerConstants.DriveBaseMotionMagickD.val)),
