@@ -53,7 +53,6 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
-//     colorDistanceBindings();
     buttonBoardBindings();
   }
 

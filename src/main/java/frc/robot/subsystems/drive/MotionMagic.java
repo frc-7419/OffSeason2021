@@ -27,6 +27,11 @@ public class MotionMagic extends CommandBase {
     private boolean started;
     private long startTime;
 
+    /**
+     * 
+     * @param driveBase
+     * @param setpoint in inches
+     */
     public MotionMagic(DriveBaseSub driveBase, double setpoint){
         this.setpoint = setpoint;
         this.driveBase = driveBase;

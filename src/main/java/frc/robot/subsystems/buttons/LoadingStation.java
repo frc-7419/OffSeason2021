@@ -14,13 +14,7 @@ import frc.robot.subsystems.intake.RunRevolver;
 
 public class LoadingStation extends ParallelCommandGroup {
   
-  private DriveBaseSub driveBase;
-  private IntakeSub intake;
-  private PaddedXbox joystick;
-  private RevolverSub revolver;
-  private Dashboard dashboard;
-  
-  public LoadingStation(DriveBaseSub driveBase, IntakeSub intake, PaddedXbox joystick, RevolverSub revolver, Dashboard dashboard) {
+  public LoadingStation(DriveBaseSub driveBase, IntakeSub intake, PaddedXbox joystick, RevolverSub revolver) {
     addCommands(new StraightPercentOut(driveBase, Dashboard.get(DashboardValue.driveBaseLoadingStation)));
     addCommands(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannPlayerStation)));
     addCommands(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverJohann), true));
