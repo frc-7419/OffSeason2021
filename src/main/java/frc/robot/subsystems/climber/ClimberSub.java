@@ -15,7 +15,7 @@ public class ClimberSub extends SubsystemBase{
 
     public ClimberSub(){
         falcon = new TalonFX(CanIds.climberFalcon.id);
-        falcon.setNeutralMode(NeutralMode.Coast);
+        falcon.setNeutralMode(NeutralMode.Brake);
     }
 
     @Override

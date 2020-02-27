@@ -18,7 +18,7 @@ import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
-
+import frc.robot.subsystems.climber.ToggleClimberNeutralMode;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
 import frc.robot.subsystems.drive.*;
@@ -124,6 +124,18 @@ public class RobotContainer {
 
     new JoystickButton(buttonBoard, 3)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
+
+    new JoystickButton(buttonBoard, 5)
+    .whileHeld(new RunClimber(climber, .5, false));
+
+    new JoystickButton(buttonBoard, 6)
+    .whileHeld(new RunClimber(climber, .5, true));
+
+    new JoystickButton(buttonBoard, 7)
+    .whileHeld(new RunClimber(climber, 1, false));
+
+    new JoystickButton(buttonBoard, 8)
+    .whileHeld(new RunClimber(climber, 1, true));
   
 
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));
