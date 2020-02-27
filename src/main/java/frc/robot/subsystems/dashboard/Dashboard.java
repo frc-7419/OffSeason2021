@@ -35,6 +35,8 @@ public class Dashboard{
     = revolver.add("revolve to color", PowerConstants.RevolverToTape.val).getEntry();
     public static NetworkTableEntry kRevolverWithIntake 
     = revolver.add("revolve w intake", PowerConstants.RevolverWithIntake.val).getEntry();
+    public static NetworkTableEntry kRevolverButtonBoard 
+    = revolver.add("revolve button board", PowerConstants.RevolverButtonBoard.val).getEntry();
 
     public static ShuffleboardTab intake = Shuffleboard.getTab("intake");
 
@@ -58,7 +60,7 @@ public class Dashboard{
     public static ShuffleboardTab hood = Shuffleboard.getTab("hood");
 
     public static NetworkTableEntry kHoodPower 
-    = hood.add("hood time", PowerConstants.HoodPower.val).getEntry();
+    = hood.add("hood power", PowerConstants.HoodPower.val).getEntry();
     public static NetworkTableEntry kHoodTime
     = hood.add("hood time", PowerConstants.HoodTime.val).getEntry();
 
@@ -76,6 +78,7 @@ public class Dashboard{
         revolverJohann(kRevolverJohann.getDouble(PowerConstants.RevolverJohann.val)),
         revolverToTape(kRevolverToTape.getDouble(PowerConstants.RevolverToTape.val)),
         revolverWithIntake(kRevolverWithIntake.getDouble(PowerConstants.RevolverWithIntake.val)),
+        revolverButtonBoard(kRevolverButtonBoard.getDouble(PowerConstants.RevolverButtonBoard.val)),
 
         intakeJohannGround(kIntakeJohannGround.getDouble(PowerConstants.IntakeJohannGround.val)),
         intakeJohannPlayerStation(kIntakeJohannPlayerStation.getDouble(PowerConstants.IntakeJohannPlayerStation.val)),

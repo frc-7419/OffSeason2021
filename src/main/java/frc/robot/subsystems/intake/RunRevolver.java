@@ -15,28 +15,19 @@ public class RunRevolver extends CommandBase{
     this.revolver = revolver;
     this.power = power;
     this.reversed = reversed;
-
-    if(reversed){coeff = -1;}
-    else{coeff = 1;}
-
-    power *= coeff;
-  }
-
-  public RunRevolver(RevolverSub revolver, double power){
-    this.revolver = revolver;
-    this.power = power;
   }
 
   @Override
   public void initialize() {
-    
+    if(reversed){coeff = -1;}
+    else{coeff = 1;}
   }
 
   @Override
   public void execute() {
     SmartDashboard.putString("revolver", "running");
-    revolver.setPower(power);
-}
+    revolver.setPower(power * coeff);
+  }
 
   @Override
   public void end(boolean interrupted) {
