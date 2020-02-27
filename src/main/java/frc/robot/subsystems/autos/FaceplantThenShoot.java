@@ -21,8 +21,8 @@ public class FaceplantThenShoot extends SequentialCommandGroup {
   private Dashboard dashboard;
 
   public FaceplantThenShoot() {
-    addCommands(new StraightWithMotionMagic(driveBase));
-    addCommands(new StraightPercentOut(driveBase, -.2, 500));
+    // addCommands(new StraightWithMotionMagic(driveBase));
+    // addCommands(new StraightPercentOut(driveBase, -.2, 500));
     // addCommands(new ParallelCommandGroup( new GetToTargetVelocity(shooter, dashboard), 
     //                                       new ));
   }
