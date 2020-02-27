@@ -130,10 +130,10 @@ public class RobotContainer {
     new JoystickButton(buttonBoard, 6)
     .whileHeld(new RunClimber(climber, .5, true));
 
-    new JoystickButton(buttonBoard, 7)
+    new JoystickButton(buttonBoard, 8)
     .whileHeld(new RunClimber(climber, 1, false));
 
-    new JoystickButton(buttonBoard, 8)
+    new JoystickButton(buttonBoard, 7)
     .whileHeld(new RunClimber(climber, 1, true));
   
 
