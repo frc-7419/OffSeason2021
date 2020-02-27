@@ -2,6 +2,7 @@ package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
 import frc.robot.subsystems.shooter.HoodSub.HoodPosition;
 
 public class GetToHoodPosition extends CommandBase {
@@ -21,8 +22,8 @@ public class GetToHoodPosition extends CommandBase {
 
     @Override
     public void initialize(){
-        power = dashboard.getHoodPower();
-        time = dashboard.getHoodTime();
+        power = Dashboard.get(DashboardValue.hoodPower);
+        time = Dashboard.get(DashboardValue.hoodTime);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class GetToHoodPosition extends CommandBase {
             hood.runForTime(power, time);
             hood.updatePosition(HoodPosition.LONG_SHOT);
         }
-        else{System.out.println("hood is confused");} 
+        else{System.out.println("hood is confusion");} 
     }
 
     @Override

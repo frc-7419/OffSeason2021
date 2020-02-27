@@ -14,7 +14,6 @@ public class TurnToTx extends CommandBase {
   private DriveBaseSub driveBase;
   private LimelightSub limelight;
   private PIDController pidController;
-  private Dashboard dashboard;
   
   private double kP;
   private double kI;
@@ -29,10 +28,9 @@ public class TurnToTx extends CommandBase {
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
-  public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight, Dashboard dashboard) {
+  public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight) {
     this.driveBase = driveBase;
     this.limelight = limelight;
-    this.dashboard = dashboard;
     addRequirements(driveBase, limelight);
   }
 

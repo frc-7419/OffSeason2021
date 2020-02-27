@@ -7,38 +7,27 @@ import frc.robot.subsystems.dashboard.Dashboard;
 public class RunRevolver extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private RevolverSub revolver;
-  private Dashboard dashboard;
+  private double power;
   private boolean reversed;
   double coeff;
-  private double power;
 
-
-  public RunRevolver(RevolverSub revolver, Dashboard dashboard, boolean reversed) {
-    this.revolver = revolver;
-    this.dashboard = dashboard;
-    this.reversed = reversed;
-
-    if(reversed){coeff = -1;}
-    else{coeff = 1;}
-
-    power = coeff * dashboard.getRevolverCoeff();
-  }
-
-  public RunRevolver(RevolverSub revolver, double power){
+  public RunRevolver(RevolverSub revolver, double power, boolean reversed) {
     this.revolver = revolver;
     this.power = power;
+    this.reversed = reversed;
   }
 
   @Override
   public void initialize() {
-    
+    if(reversed){coeff = -1;}
+    else{coeff = 1;}
   }
 
   @Override
   public void execute() {
     SmartDashboard.putString("revolver", "running");
-    revolver.setPower(power);
-}
+    revolver.setPower(power * coeff);
+  }
 
   @Override
   public void end(boolean interrupted) {

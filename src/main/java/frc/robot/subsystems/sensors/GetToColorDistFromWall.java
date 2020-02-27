@@ -24,12 +24,12 @@ public class GetToColorDistFromWall extends CommandBase {
   private double kP = .2;
   private boolean done = false;
 
-  public GetToColorDistFromWall(DriveBaseSub driveBase, RevColorDistanceSub colorDistanceSensor, Dashboard dashboard) {
+  public GetToColorDistFromWall(DriveBaseSub driveBase, RevColorDistanceSub colorDistanceSensor) {
     this.driveBase = driveBase;
     this.colorDistanceSensor = colorDistanceSensor;
     // this.desiredDistance = desiredDistance;
 
-    desiredDistance = dashboard.getDesiredDistance();
+    desiredDistance = 9;
     // addRequirements(driveBase);
     // Use addRequirements() here to declare subsystem dependencies.
   }

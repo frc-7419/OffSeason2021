@@ -3,6 +3,7 @@ package frc.robot.subsystems.drive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
 
 public class RunOneSide extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
@@ -33,12 +34,9 @@ public class RunOneSide extends CommandBase {
       coeff = -1;
     }
     if(isLeft){
-      driveBase.setLeftPower(coeff * dashboard.getPower());
-      // SmartDashboard.putNumber("leftVelocity", driveBase.getLeftMast().getSelectedSensorVelocity());
+      driveBase.setLeftPower(coeff * Dashboard.get(DashboardValue.driveBaseStraight));
     } else {
-      driveBase.setRightPower(coeff * dashboard.getPower());
-      // SmartDashboard.putNumber("rightVelocity", driveBase.getRightMast().getSelectedSensorVelocity());
-
+      driveBase.setRightPower(coeff * Dashboard.get(DashboardValue.driveBaseStraight));
     }
   }
 

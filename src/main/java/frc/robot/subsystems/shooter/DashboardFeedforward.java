@@ -3,6 +3,7 @@ package frc.robot.subsystems.shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
+import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
 public class DashboardFeedforward extends CommandBase {
@@ -21,7 +22,7 @@ public class DashboardFeedforward extends CommandBase {
 
       SmartDashboard.putString("shooter", "manual ff");
 
-      double rawSpeed = dashboard.getRawSpeed();
+      double rawSpeed = Dashboard.get(DashboardValue.shooterJohann);
     //   shooter.setkF(shooter.get);
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);
