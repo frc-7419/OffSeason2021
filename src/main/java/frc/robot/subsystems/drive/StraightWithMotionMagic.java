@@ -31,9 +31,10 @@ public class StraightWithMotionMagic extends CommandBase {
      * @param driveBase
      * @param setpoint in inches
      */
-    public StraightWithMotionMagic(DriveBaseSub driveBase) {
+    public StraightWithMotionMagic(DriveBaseSub driveBase, double setpoint) {
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
+        this.setpoint = setpoint;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class StraightWithMotionMagic extends CommandBase {
 
         TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
         TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
-        setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
+        // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
         double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
         double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
 
@@ -72,7 +73,6 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBase.getRightMast().set(ControlMode.MotionMagic, rightSet);
 
         startTime = System.currentTimeMillis();
-
     }
 
     @Override

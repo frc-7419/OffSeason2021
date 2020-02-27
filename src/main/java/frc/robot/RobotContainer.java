@@ -69,7 +69,7 @@ public class RobotContainer {
 
   private void codeTestButtonBindings(){ // for programmer
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new StraightWithMotionMagic(driveBase));
+    .whileHeld(new StraightWithMotionMagic(driveBase, Dashboard.get(DashboardValue.driveBaseSetpoint)));
   }
 
   private void manualButtonBindings(){ // for johann
