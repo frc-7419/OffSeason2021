@@ -18,7 +18,6 @@ import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
-import frc.robot.subsystems.climber.ToggleClimberNeutralMode;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
 import frc.robot.subsystems.drive.*;
