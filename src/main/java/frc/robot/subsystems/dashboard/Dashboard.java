@@ -11,7 +11,7 @@ public class Dashboard{
     public static NetworkTableEntry kShooterShotsButton 
     = shooter.add("shots button", PowerConstants.ShooterShotsButton.val).getEntry();
     public static NetworkTableEntry kShooterReverse 
-    = shooter.add("shooter reverse", PowerConstants.ShooterReverse.val).getEntry();
+    = shooter.add("reversed", PowerConstants.ShooterReverse.val).getEntry();
     public static NetworkTableEntry kShooterJohann 
     = shooter.add("johann", PowerConstants.ShooterJohann.val).getEntry();
 
@@ -19,11 +19,11 @@ public class Dashboard{
     public static ShuffleboardTab driveBase = Shuffleboard.getTab("drive base");
 
     public static NetworkTableEntry kDriveBaseStraight 
-    = driveBase.add("straight power", PowerConstants.DriveBaseStraight.val).getEntry();
+    = driveBase.add("straight", PowerConstants.DriveBaseStraight.val).getEntry();
     public static NetworkTableEntry kDriveBaseTurn 
-    = driveBase.add("turn power", PowerConstants.DriveBaseTurn.val).getEntry();
+    = driveBase.add("turn", PowerConstants.DriveBaseTurn.val).getEntry();
     public static NetworkTableEntry kDriveBaseLoadingStation 
-    = driveBase.add("loader station power", PowerConstants.DriveBaseLoadingStation.val).getEntry();
+    = driveBase.add("loader station", PowerConstants.DriveBaseLoadingStation.val).getEntry();
     public static NetworkTableEntry kDriveBaseMotionMagickP 
     = driveBase.add("motion magic kP", PowerConstants.DriveBaseMotionMagickP.val).getEntry();
     public static NetworkTableEntry kDriveBaseMotionMagickD
@@ -37,18 +37,18 @@ public class Dashboard{
     public static NetworkTableEntry kRevolverJohann 
     = revolver.add("johann", PowerConstants.RevolverJohann.val).getEntry();
     public static NetworkTableEntry kRevolverToTape 
-    = revolver.add("revolve to color", PowerConstants.RevolverToTape.val).getEntry();
+    = revolver.add("to color", PowerConstants.RevolverToTape.val).getEntry();
     public static NetworkTableEntry kRevolverWithIntake 
-    = revolver.add("revolve w intake", PowerConstants.RevolverWithIntake.val).getEntry();
+    = revolver.add("w intake", PowerConstants.RevolverWithIntake.val).getEntry();
     public static NetworkTableEntry kRevolverButtonBoard 
-    = revolver.add("revolve button board", PowerConstants.RevolverButtonBoard.val).getEntry();
+    = revolver.add("button board", PowerConstants.RevolverButtonBoard.val).getEntry();
 
     public static ShuffleboardTab intake = Shuffleboard.getTab("intake");
 
     public static NetworkTableEntry kIntakeJohannGround 
-    = intake.add("ground intake power", PowerConstants.IntakeJohannGround.val).getEntry();
+    = intake.add("ground pickup", PowerConstants.IntakeJohannGround.val).getEntry();
     public static NetworkTableEntry kIntakeJohannPlayerStation 
-    = intake.add("player station intake power", PowerConstants.IntakeJohannPlayerStation.val).getEntry();
+    = intake.add("player station", PowerConstants.IntakeJohannPlayerStation.val).getEntry();
 
     public static ShuffleboardTab climber = Shuffleboard.getTab("climber");
 
