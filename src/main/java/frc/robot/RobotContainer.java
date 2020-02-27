@@ -112,12 +112,17 @@ public class RobotContainer {
     .whileHeld(new GetToTargetVelocity(shooter, Dashboard.get(DashboardValue.shooterShotsButton)));
 
     // new JoystickButton(buttonBoard, 2)
+
     // .whileHeld(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));
+
+    // .whileHeld(new RunRevolver(revolver, -.5));
+
 
     new JoystickButton(buttonBoard, 3)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
   
     new JoystickButton(buttonBoard, 2)
+
     .whileHeld(new RunShooter(shooter, loader, revolver));
 
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));

@@ -27,6 +27,7 @@ public class Dashboard{
 
     public static ShuffleboardTab revolver = Shuffleboard.getTab("revolver");
 
+
     public static NetworkTableEntry kRevolverShotsButton 
     = revolver.add("shots button", PowerConstants.RevolverShotsButton.val).getEntry();
     public static NetworkTableEntry kRevolverJohann 
@@ -64,7 +65,9 @@ public class Dashboard{
     public static NetworkTableEntry kHoodTime
     = hood.add("hood time", PowerConstants.HoodTime.val).getEntry();
 
+
     public static enum DashboardValue{
+
 
         shooterShotsButton(kShooterShotsButton.getDouble(PowerConstants.ShooterShotsButton.val)),
         shooterReverse(kShooterReverse.getDouble(PowerConstants.ShooterReverse.val)),
