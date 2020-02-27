@@ -52,13 +52,11 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     robotContainer.scheduleDefaultCommands();
     robotContainer.setDefaultCommands();
-
   }
 
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-
   }
 
   @Override

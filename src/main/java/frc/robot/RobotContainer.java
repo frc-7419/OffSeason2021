@@ -52,7 +52,8 @@ public class RobotContainer {
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
-    manualButtonBindings();
+    // manualButtonBindings();
+    codeTestButtonBindings();
     buttonBoardBindings();
   }
 
@@ -67,7 +68,8 @@ public class RobotContainer {
 
 
   private void codeTestButtonBindings(){ // for programmer
-
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whenPressed(new MotionMagic(driveBase));
   }
 
   private void manualButtonBindings(){ // for johann

@@ -13,6 +13,7 @@ public enum PowerConstants{
     DriveBaseLoadingStation(.2),
     DriveBaseMotionMagickP(.01),
     DriveBaseMotionMagickD(0),
+    DriveBaseSetpoint(5),
 
     // revolver
     RevolverShotsButton(.5),

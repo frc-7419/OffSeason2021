@@ -32,8 +32,8 @@ public class MotionMagic extends CommandBase {
      * @param driveBase
      * @param setpoint in inches
      */
-    public MotionMagic(DriveBaseSub driveBase, double setpoint){
-        this.setpoint = setpoint;
+    public MotionMagic(DriveBaseSub driveBase){
+        // this.setpoint = setpoint;
         this.driveBase = driveBase;
     }
 
@@ -42,7 +42,7 @@ public class MotionMagic extends CommandBase {
 
       SmartDashboard.putString("command status", "motion magic test");
       /* factory default just so nothing acts up */
-		  driveBase.getRightMast().configFactoryDefault();
+	  driveBase.getRightMast().configFactoryDefault();
       driveBase.getLeftMast().configFactoryDefault();
 
       driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
@@ -50,14 +50,14 @@ public class MotionMagic extends CommandBase {
 
       // velocity: 5375, acc. converting .7
       driveBase.getLeftMast().configMotionCruiseVelocity(5375, 0);
-		  driveBase.getLeftMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);
+	  driveBase.getLeftMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);
 
       driveBase.getRightMast().configMotionCruiseVelocity(5375, 0);
       driveBase.getRightMast().configMotionAcceleration(UnitConversions.mPSToTicksP100Ms(.7), 0);  
       
       TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
       TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
-
+      setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
       double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
       double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
 
@@ -97,11 +97,10 @@ public class MotionMagic extends CommandBase {
     @Override
     public boolean isFinished(){
         if(started && Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
-            SmartDashboard.putString("command status", "awkwardly stalling");
+            SmartDashboard.putString("command status", "moving");
             Timer.delay(1);
             return true;
-        }
-        else{return false;}
+        } else{return false;}
     }
 
     @Override
