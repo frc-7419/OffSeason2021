@@ -13,21 +13,17 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
 
-  // private Command teleOpCommand;
   private RobotContainer robotContainer;
-  // private TestRobotContainer robotContainer;
 
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
     CameraServer.getInstance().startAutomaticCapture();
-    // robotContainer = new TestRobotContainer();
   }
 
   
   @Override
   public void robotPeriodic() {
-    // RobotContainer.arcade.start();
     CommandScheduler.getInstance().run();
   }
 
@@ -50,7 +46,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    robotContainer.scheduleDefaultCommands();
+    // robotContainer.scheduleDefaultCommands();
     robotContainer.setDefaultCommands();
   }
 

@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
 
-public class MotionMagic extends CommandBase {
+public class StraightWithMotionMagic extends CommandBase {
   
     private DriveBaseSub driveBase;
     private double setpoint;
@@ -31,7 +31,7 @@ public class MotionMagic extends CommandBase {
      * @param driveBase
      * @param setpoint in inches
      */
-    public MotionMagic(DriveBaseSub driveBase){
+    public StraightWithMotionMagic(DriveBaseSub driveBase) {
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
     }

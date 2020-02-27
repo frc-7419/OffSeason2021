@@ -69,7 +69,7 @@ public class RobotContainer {
 
   private void codeTestButtonBindings(){ // for programmer
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new MotionMagic(driveBase));
+    .whenPressed(new StraightWithMotionMagic(driveBase));
   }
 
   private void manualButtonBindings(){ // for johann
@@ -112,18 +112,14 @@ public class RobotContainer {
     .whileHeld(new GetToTargetVelocity(shooter, Dashboard.get(DashboardValue.shooterShotsButton)));
 
     // new JoystickButton(buttonBoard, 2)
-
     // .whileHeld(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));
 
-    // .whileHeld(new RunRevolver(revolver, -.5));
-
+    new JoystickButton(buttonBoard, 2)
+    .whileHeld(new RunShooter(shooter, loader, revolver));
 
     new JoystickButton(buttonBoard, 3)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
   
-    new JoystickButton(buttonBoard, 2)
-
-    .whileHeld(new RunShooter(shooter, loader, revolver));
 
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));
     externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), false));   
@@ -134,11 +130,12 @@ public class RobotContainer {
   
   public void scheduleDefaultCommands(){
     // arcade.schedule();
-    intakeDefault.schedule();
+    // intakeDefault.schedule();
   }
 
   public void setDefaultCommands(){
     revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
+    intake.setDefaultCommand(intakeDefault);
   }
 }

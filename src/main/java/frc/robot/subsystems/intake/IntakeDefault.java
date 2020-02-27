@@ -13,6 +13,7 @@ public class IntakeDefault extends CommandBase{
   public IntakeDefault(IntakeSub intake, PaddedXbox joystick) {
     this.intake = intake;
     this.joystick = joystick;
+    addRequirements(intake);
   }
 
   @Override
