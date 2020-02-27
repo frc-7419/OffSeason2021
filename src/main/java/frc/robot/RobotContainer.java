@@ -52,8 +52,8 @@ public class RobotContainer {
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
-    // manualButtonBindings();
-    codeTestButtonBindings();
+    manualButtonBindings();
+    // codeTestButtonBindings();
     buttonBoardBindings();
   }
 
@@ -66,6 +66,11 @@ public class RobotContainer {
   private BooleanSupplier bsExternalLeftJoystick = () -> buttonBoard.getJoystickX() == -1;
   private Trigger externalLeftJoystick = new Trigger(bsExternalLeftJoystick);
 
+  private BooleanSupplier bsExternalUpJoystick = () -> buttonBoard.getJoystickY() == 1;
+  private Trigger externalUpJoystick = new Trigger(bsExternalUpJoystick);
+
+  private BooleanSupplier bsExternalDownJoystick = () -> buttonBoard.getJoystickY() == -1;
+  private Trigger externalDownJoystick = new Trigger(bsExternalDownJoystick);
 
   private void codeTestButtonBindings(){ // for programmer
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
@@ -122,7 +127,9 @@ public class RobotContainer {
   
 
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));
-    externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), false));   
+    externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), false));
+    externalUpJoystick.whileActiveOnce(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannGround)));
+    externalDownJoystick.whileActiveOnce(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannPlayerStation)));   
   }
 
   public Command getDefaultCommand(){return arcade;}
