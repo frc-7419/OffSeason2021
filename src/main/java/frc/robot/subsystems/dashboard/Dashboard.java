@@ -24,6 +24,10 @@ public class Dashboard{
     = driveBase.add("turn power", PowerConstants.DriveBaseTurn.val).getEntry();
     public static NetworkTableEntry kDriveBaseLoadingStation 
     = driveBase.add("loader station power", PowerConstants.DriveBaseLoadingStation.val).getEntry();
+    public static NetworkTableEntry kDriveBaseMotionMagickP 
+    = driveBase.add("motion magic kP", PowerConstants.DriveBaseMotionMagickP.val).getEntry();
+    public static NetworkTableEntry kDriveBaseMotionMagickD
+    = driveBase.add("motion magic kD", PowerConstants.DriveBaseMotionMagickD.val).getEntry();
 
     public static ShuffleboardTab revolver = Shuffleboard.getTab("revolver");
 
@@ -75,7 +79,9 @@ public class Dashboard{
 
         driveBaseStraight(kDriveBaseStraight.getDouble(PowerConstants.DriveBaseStraight.val)),
         driveBaseTurn(kDriveBaseTurn.getDouble(PowerConstants.DriveBaseTurn.val)),
-        DriveBaseLoadingStation(kDriveBaseLoadingStation.getDouble(PowerConstants.DriveBaseLoadingStation.val)),
+        driveBaseLoadingStation(kDriveBaseLoadingStation.getDouble(PowerConstants.DriveBaseLoadingStation.val)),
+        driveBaseMotionMagickP(kDriveBaseMotionMagickP.getDouble(PowerConstants.DriveBaseMotionMagickP.val)),
+        driveBaseMotionMagickD(kDriveBaseMotionMagickD.getDouble(PowerConstants.DriveBaseMotionMagickD.val)),
 
         revolverShotsButton(kRevolverShotsButton.getDouble(PowerConstants.RevolverShotsButton.val)),
         revolverJohann(kRevolverJohann.getDouble(PowerConstants.RevolverJohann.val)),

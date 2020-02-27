@@ -11,6 +11,8 @@ public enum PowerConstants{
     DriveBaseStraight(.7),
     DriveBaseTurn(.4),
     DriveBaseLoadingStation(.2),
+    DriveBaseMotionMagickP(.01),
+    DriveBaseMotionMagickD(0),
 
     // revolver
     RevolverShotsButton(.5),

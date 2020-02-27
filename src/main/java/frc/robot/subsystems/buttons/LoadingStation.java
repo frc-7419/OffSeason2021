@@ -21,7 +21,7 @@ public class LoadingStation extends ParallelCommandGroup {
   private Dashboard dashboard;
   
   public LoadingStation(DriveBaseSub driveBase, IntakeSub intake, PaddedXbox joystick, RevolverSub revolver, Dashboard dashboard) {
-    addCommands(new StraightPercentOut(driveBase, Dashboard.get(DashboardValue.DriveBaseLoadingStation)));
+    addCommands(new StraightPercentOut(driveBase, Dashboard.get(DashboardValue.driveBaseLoadingStation)));
     addCommands(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannPlayerStation)));
     addCommands(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverJohann), true));
   }

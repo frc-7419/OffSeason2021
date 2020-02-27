@@ -15,7 +15,6 @@ import com.team7419.PaddedXbox;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.buttons.ButtonBoard;
-import frc.robot.subsystems.buttons.ButtonBoardDefault;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
