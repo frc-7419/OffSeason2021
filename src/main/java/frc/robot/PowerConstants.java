@@ -13,9 +13,9 @@ public enum PowerConstants{
     DriveBaseLeftTurn(.2),
     DriveBaseRightStraight(.4),
     DriveBaseLoadingStation(.2),
-    DriveBaseMotionMagickP(.01),
+    DriveBaseMotionMagickP(.2),
     DriveBaseMotionMagickD(0),
-    DriveBaseSetpoint(5),
+    DriveBaseSetpoint(48),
 
     // revolver
     RevolverShotsButton(.8),
@@ -39,7 +39,14 @@ public enum PowerConstants{
 
     // hood
     HoodPower(.2),
-    HoodTime(1000);
+    HoodTime(1000),
+
+    // gyro
+    GyrokP(.1),
+    GyrokI(0),
+    GyrokD(0),
+
+    ;
 
     public final double val; 
     PowerConstants(double val){

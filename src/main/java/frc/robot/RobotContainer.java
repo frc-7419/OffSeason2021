@@ -6,7 +6,6 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -31,6 +30,7 @@ public class RobotContainer {
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final ButtonBoard buttonBoard = new ButtonBoard();
+  private final GyroSub gyro = new GyroSub();
   private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 
@@ -42,7 +42,8 @@ public class RobotContainer {
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
-    manualButtonBindings();
+    codeTestButtonBindings();
+    // manualButtonBindings();
     buttonBoardBindings();
   }
 
@@ -63,7 +64,7 @@ public class RobotContainer {
 
   private void codeTestButtonBindings(){ // for programmer
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new StraightWithMotionMagic(driveBase, PowerConstants.DriveBaseSetpoint.val));
+    .whenPressed(new StraightWithMotionMagic(driveBase, PowerConstants.DriveBaseSetpoint.val));
   }
 
   private void manualButtonBindings(){ // for johann

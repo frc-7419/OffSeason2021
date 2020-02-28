@@ -3,6 +3,8 @@ package frc.robot.subsystems.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 
@@ -24,13 +26,15 @@ public class DriveBaseSub extends SubsystemBase {
     right2.setInverted(true);
     right2.setSensorPhase(false);
 
-    left2.follow(left1);
-    right2.follow(right1);
+    // left2.follow(left1);
+    // right2.follow(right1);
     
   }
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("leftMast", this.getLeftMast().getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("rightMast", this.getRightMast().getSelectedSensorPosition(0));
   }
 
   public enum TurnDirection{
