@@ -3,7 +3,6 @@ package frc.robot.subsystems.drive;
 import com.team7419.PaddedXbox;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.dashboard.Dashboard;
 
 /**
  * Reusable arcade command
@@ -13,9 +12,9 @@ public class ArcadeDrive extends CommandBase {
   private DriveBaseSub driveBase;
   private double kStraight;
   private double kTurn;
-  private double kRight;
+  private double kSlowStraight;
+  private double kSlowTurn;
   private PaddedXbox joystick;
-  private Dashboard dashboard;
 
   /**
    * reusable arcade command
@@ -24,12 +23,13 @@ public class ArcadeDrive extends CommandBase {
    * @param kStraight
    * @param kTurn
    */
-  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn, double kRight){
+  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
     this.joystick = joystick;
     this.driveBase = driveBase;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
-    this.kRight = kRight;
+    this.kSlowStraight = kSlowStraight;
+    this.kSlowTurn = kSlowTurn;
     addRequirements(driveBase);
   }
 
@@ -45,8 +45,18 @@ public class ArcadeDrive extends CommandBase {
 
     SmartDashboard.putString("command status", "exec arcade");
     
-    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() - kRight * joystick.getRightY();
-    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() - kRight * joystick.getRightY();
+    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
+    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
+
+    double leftX = joystick.getLeftX();
+
+    if(leftX > 0){
+      rightPower -= kSlowTurn * leftX;
+    }
+    else if(leftX < 0){
+      leftPower += kSlowTurn * leftX;
+    }
+    else{}
 
     driveBase.setLeftPower(leftPower);
     driveBase.setRightPower(rightPower);

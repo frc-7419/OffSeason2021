@@ -3,31 +3,29 @@ package frc.robot.subsystems.vision;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.Constants.RobotConstants;
 import frc.robot.subsystems.drive.DriveBaseSub;
+import frc.robot.subsystems.drive.GyroSub;
 
-public class TurnToTx extends CommandBase {
+public class TurnToTxWithGyro extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   private DriveBaseSub driveBase;
   private LimelightSub limelight;
   private PIDController pidController;
+  private GyroSub gyro;
   
   private double kP;
   private double kI;
   private double kD;
 
   private double pidOutput;
-  private double tx;
-  private double ty;
-  private double distanceToTarget;
-  private double boost;
+  private double initAngle;
+  private double gyroAngle;
 
   private double velocityThreshold = 115;
   private boolean velocityBelow = false;
 
-  public TurnToTx(DriveBaseSub driveBase, LimelightSub limelight) {
+  public TurnToTxWithGyro(DriveBaseSub driveBase, LimelightSub limelight, GyroSub gyro) {
     this.driveBase = driveBase;
     this.limelight = limelight;
     addRequirements(driveBase, limelight);
@@ -38,29 +36,29 @@ public class TurnToTx extends CommandBase {
 
     kP = .016; // gets P coefficient from dashboard
     kI = 0;
-    kD = 1; 
+    kD = 1;
     pidController = new PIDController(kP, kI, kD);
-    pidController.setSetpoint(0);
+
+    initAngle = limelight.getTx();
+    gyroAngle = gyro.getGyroAngle();
+
+    pidController.setSetpoint(initAngle + gyroAngle);
     pidController.setTolerance(1);
+
   }
 
   @Override
   public void execute() {
     SmartDashboard.putString("command status", "pid");
 
-    tx = limelight.getTx();
-    ty = limelight.getTy();
+    gyroAngle = gyro.getGyroAngle();
 
-    pidOutput = pidController.calculate(tx);
-    boost = Math.abs(pidOutput) / pidOutput * .05;
-    pidOutput += boost;
+    pidOutput = pidController.calculate(gyroAngle);
+    
     SmartDashboard.putNumber("pidoutput", pidOutput);
+
     driveBase.setLeftPower(-pidOutput);
     driveBase.setRightPower(pidOutput);
-
-    distanceToTarget =  (Constants.kTargetHeight - RobotConstants.kCameraHeight) / Math.tan(Math.toRadians(ty));
-    distanceToTarget = 1.426*distanceToTarget - 52.372; // based on linear regression, hopefully accurate
-    SmartDashboard.putNumber("distance", distanceToTarget);
 
     if(Math.abs(driveBase.getLeftVelocity()) < velocityThreshold){
       if(Math.abs(driveBase.getRightVelocity()) < velocityThreshold){
