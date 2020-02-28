@@ -72,44 +72,5 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
-  }
-
-  private SubsystemBase[] subsystems = robotContainer.getSubsystems();
-  private SubsystemBase[] sensors = robotContainer.getSensors();
-
-  public DriveBaseSub getDriveBase(){
-    return (DriveBaseSub) subsystems[0];
-  }
-
-  public IntakeSub getIntake(){
-    return (IntakeSub) subsystems[1];
-  }
-
-  public RevolverSub getRevolver(){
-    return (RevolverSub) subsystems[2];
-  }
-
-  public LoaderSub getLoader(){
-    return (LoaderSub) subsystems[3];
-  }
-
-  public ShooterSub getShooter(){
-    return (ShooterSub) subsystems[4];
-  }
-
-  public ClimberSub getClimber(){
-    return (ClimberSub) subsystems[5];
-  }
-
-  public RevColorDistanceSub getColorSensor(){
-    return (RevColorDistanceSub) sensors[0];
-  }
-  
-  public LimelightSub getLimelight(){
-    return (LimelightSub) sensors[1];
-  }
-
-  public Dashboard getDashboard(){
-    return robotContainer.getDashboard();
-  }
+  }  
 }

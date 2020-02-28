@@ -139,21 +139,14 @@ public class RobotContainer {
     intake.setDefaultCommand(intakeDefault);
   }
 
-  /**
-   * 
-   * @return driveBase, intake, revolver, loader, shooter, climber, limelight
-   */
-  public SubsystemBase[] getSubsystems(){
-    SubsystemBase[] out = {driveBase, intake, revolver, loader, shooter, climber};
-    return out;
-  }
-
-  public SubsystemBase[] getSensors(){
-    SubsystemBase[] out = {colorSensor, limelight};
-    return out;
-  }
-
-  public Dashboard getDashboard(){
-    return dashboard;
-  }
+    public Dashboard getDashboard(){return dashboard;}
+    public DriveBaseSub getDriveBase(){return driveBase;}
+    public IntakeSub getIntake(){return intake;}
+    public RevolverSub getRevolver(){return revolver;}
+    public LoaderSub getLoader(){return loader;}
+    public ShooterSub getShooter(){return shooter;}
+    public ClimberSub getClimber(){return climber;}
+    public RevColorDistanceSub getColorSensor(){return colorSensor;}
+    public LimelightSub getLimelight(){return limelight;}
+  
 }

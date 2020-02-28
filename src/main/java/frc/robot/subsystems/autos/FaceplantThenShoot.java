@@ -11,7 +11,7 @@ import com.team7419.Sleep;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.buttons.ReadyToShoot;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.dashboard.Dashboard;
@@ -30,7 +30,7 @@ public class FaceplantThenShoot extends SequentialCommandGroup {
   private RevolverSub revolver;
   private LoaderSub loader;
 
-  public FaceplantThenShoot(Robot robot) {
+  public FaceplantThenShoot(RobotContainer robot) {
     
     driveBase = robot.getDriveBase();
     shooter = robot.getShooter();
