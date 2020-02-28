@@ -41,7 +41,7 @@ public class ColorSensor extends SubsystemBase {
   public String colorDetected = "";
   public int rotationCount;
   public int changeCount = 1;
-  public boolean colorFound;
+  
 
   /**
    * Creates a new ColorWheel.
@@ -53,7 +53,7 @@ public class ColorSensor extends SubsystemBase {
     
     this.panelSpinner = panelSpinner;
     rotationCount = 0;
-    colorFound = false;
+    
 
     cSensor = new ColorSensorV3(i2cPort);
     colorMatcher = new ColorMatch();
@@ -97,28 +97,7 @@ public class ColorSensor extends SubsystemBase {
 
   }
 
-  public void positionControl(String FMSColor) {
-    String sensorColor = "";
-    String[] colorArray = {"Red", "Yellow", "Blue", "Green", "Red", "Yellow", "Blue", "Green"}; 
-
-    for (int i = 4; i < colorArray.length; i++) {
-      if (colorArray[i].equalsIgnoreCase(FMSColor)) {
-        sensorColor = colorArray[i-2];
-        SmartDashboard.putString("SENSOR COLOR", sensorColor);
-        break; 
-      }
-    }
-
-    if (colorDetected.equalsIgnoreCase(sensorColor)) {
-        panelSpinner.setPower(0.0);
-        colorFound = true;
-    } else {
-        panelSpinner.setPower(0.250);
-    }
-
-    // This ensures that the sensor is within the wedge
-    // panelSpinner.rotate(1.5 revolutions)
-  }
+ 
 
   
 

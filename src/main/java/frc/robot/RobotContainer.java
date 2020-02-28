@@ -14,6 +14,7 @@ import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.*;
 import frc.robot.subsystems.sensors.ColorSensor;
+import frc.robot.subsystems.sensors.PositionControl;
 import frc.robot.subsystems.sensors.RotationControl;
 import frc.robot.subsystems.shooter.*;
 import frc.robot.subsystems.vision.*;
@@ -57,7 +58,7 @@ public class RobotContainer {
   }
 
   private void codeTestButtonBindings(){ // for programmer
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+   /* new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new LookUpFeedforward(shooter, dashboard));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whenPressed(new GetToTargetVelocity(shooter, dashboard));
@@ -65,7 +66,17 @@ public class RobotContainer {
     .whileHeld(new RampThenHold(shooter, dashboard));
     
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whenPressed(new RotationControl(colorSensor));
+    .whenHeld(new RotationControl(colorSensor));
+    */
+
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whenHeld(new PositionControl(colorSensor, "Green"));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    .whenHeld(new PositionControl(colorSensor, "Red"));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    .whenHeld(new PositionControl(colorSensor, "Blue"));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    .whenHeld(new PositionControl(colorSensor, "Yellow"));
   }
 
   private void manualButtonBindings(){
