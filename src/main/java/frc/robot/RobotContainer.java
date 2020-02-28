@@ -52,8 +52,8 @@ public class RobotContainer {
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
-    // manualButtonBindings();
-    codeTestButtonBindings();
+    manualButtonBindings();
+    // codeTestButtonBindings();
     buttonBoardBindings();
   }
 

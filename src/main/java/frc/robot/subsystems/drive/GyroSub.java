@@ -28,4 +28,9 @@ public class GyroSub extends SubsystemBase {
     public double getGyroAngle(){
         return ahrs.getAngle();
     }
+
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("gyro", this.getGyroAngle());
+    }
 }
