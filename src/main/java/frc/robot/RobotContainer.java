@@ -50,7 +50,8 @@ public class RobotContainer {
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
-    manualButtonBindings();
+    // manualButtonBindings();
+    colorDistanceBindings();
     // codeTestButtonBindings();
     buttonBoardBindings();
   }
@@ -105,6 +106,8 @@ public class RobotContainer {
   public void colorDistanceBindings(){
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whenPressed(new GetToColorDistFromWall(driveBase, colorSensor));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whenPressed(new GetTo2mDistFromWall(driveBase, distanceSensor));
   }
 
   public void buttonBoardBindings(){
