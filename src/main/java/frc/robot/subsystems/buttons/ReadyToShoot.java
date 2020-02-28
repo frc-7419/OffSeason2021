@@ -2,6 +2,7 @@ package frc.robot.subsystems.buttons;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.PowerConstants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.RevolverSub;
 import frc.robot.subsystems.sensors.RevColorDistanceSub;
 import frc.robot.subsystems.sensors.RevolverToMagnet;
@@ -16,10 +17,12 @@ public class ReadyToShoot extends ParallelCommandGroup {
   private RevolverSub revolver;
   private RevColorDistanceSub colorSensor;
 
-  public ReadyToShoot(ShooterSub shooter, RevolverSub revolver, RevColorDistanceSub colorSensor) {
-    this.shooter = shooter;
-    this.revolver = revolver;
-    this.colorSensor = colorSensor;
+  public ReadyToShoot(RobotContainer robot) {
+    shooter = robot.getShooter();
+    revolver = robot.getRevolver();
+    colorSensor = robot.getColorSensor();
+    dashboard = robot.getDashboard();
+
 
     addCommands(new RevolverToTape(colorSensor, revolver));
     addCommands(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));

@@ -6,7 +6,7 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -137,4 +137,15 @@ public class RobotContainer {
     driveBase.setDefaultCommand(arcade);
     intake.setDefaultCommand(intakeDefault);
   }
+
+    public Dashboard getDashboard(){return dashboard;}
+    public DriveBaseSub getDriveBase(){return driveBase;}
+    public IntakeSub getIntake(){return intake;}
+    public RevolverSub getRevolver(){return revolver;}
+    public LoaderSub getLoader(){return loader;}
+    public ShooterSub getShooter(){return shooter;}
+    public ClimberSub getClimber(){return climber;}
+    public RevColorDistanceSub getColorSensor(){return colorSensor;}
+    public LimelightSub getLimelight(){return limelight;}
+  
 }
