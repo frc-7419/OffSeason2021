@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Constants.RobotConstants;
-import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSub;
 
 public class TurnToTx extends CommandBase {

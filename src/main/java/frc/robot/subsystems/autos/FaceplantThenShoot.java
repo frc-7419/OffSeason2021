@@ -8,7 +8,6 @@
 package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSub;
 import frc.robot.subsystems.drive.StraightPercentOut;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
@@ -18,7 +17,6 @@ public class FaceplantThenShoot extends SequentialCommandGroup {
   
   private DriveBaseSub driveBase;
   private ShooterSub shooter;
-  private Dashboard dashboard;
 
   public FaceplantThenShoot() {
     // addCommands(new StraightWithMotionMagic(driveBase));
