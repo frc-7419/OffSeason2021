@@ -138,7 +138,6 @@ public class RobotContainer {
     intake.setDefaultCommand(intakeDefault);
   }
 
-    public Dashboard getDashboard(){return dashboard;}
     public DriveBaseSub getDriveBase(){return driveBase;}
     public IntakeSub getIntake(){return intake;}
     public RevolverSub getRevolver(){return revolver;}
