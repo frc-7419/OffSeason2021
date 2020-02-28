@@ -31,12 +31,11 @@ public class RobotContainer {
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final ButtonBoard buttonBoard = new ButtonBoard();
-  // private final Dashboard dashboard = new Dashboard();
   private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 
-  PowerConstants.DriveBaseStraight.val, PowerConstants.DriveBaseTurn.val, 
-  PowerConstants.DriveBaseRight.val);
+  PowerConstants.DriveBaseLeftStraight.val, PowerConstants.DriveBaseRightTurn.val, 
+  PowerConstants.DriveBaseRightStraight.val, PowerConstants.DriveBaseLeftTurn.val);
 
   private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
@@ -106,9 +105,6 @@ public class RobotContainer {
     new JoystickButton(buttonBoard, 1)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
 
-    // new JoystickButton(buttonBoard, 2)
-    // .whileHeld(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));
-
     new JoystickButton(buttonBoard, 2)
     .whileHeld(new RunShooter(shooter, loader, revolver));
 
@@ -116,17 +112,16 @@ public class RobotContainer {
     .whenPressed(new RevolverToTape(colorSensor, revolver));
 
     new JoystickButton(buttonBoard, 5)
-    .whileHeld(new RunClimber(climber, .5, false));
+    .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperatorSlow.val, false));
 
     new JoystickButton(buttonBoard, 6)
-    .whileHeld(new RunClimber(climber, .5, true));
+    .whileHeld(new RunClimber(climber, PowerConstants.ClimberOperatorSlow.val, true));
 
     new JoystickButton(buttonBoard, 8)
-    .whileHeld(new RunClimber(climber, 1, false));
+    .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperatorFast.val, false));
 
     new JoystickButton(buttonBoard, 7)
-    .whileHeld(new RunClimber(climber, 1, true));
-  
+    .whileHeld(new RunClimber(climber, PowerConstants.ClimberOperatorFast.val, true));
 
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, PowerConstants.RevolverButtonBoard.val, true));
     externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, PowerConstants.RevolverButtonBoard.val, false));
@@ -137,11 +132,6 @@ public class RobotContainer {
   public Command getDefaultCommand(){return arcade;}
   public Command getLimelightTest(){return turnToTx;}
   
-  public void scheduleDefaultCommands(){
-    // arcade.schedule();
-    // intakeDefault.schedule();
-  }
-
   public void setDefaultCommands(){
     revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);

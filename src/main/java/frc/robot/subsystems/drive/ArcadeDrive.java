@@ -12,7 +12,8 @@ public class ArcadeDrive extends CommandBase {
   private DriveBaseSub driveBase;
   private double kStraight;
   private double kTurn;
-  private double kRight;
+  private double kSlowStraight;
+  private double kSlowTurn;
   private PaddedXbox joystick;
 
   /**
@@ -22,12 +23,13 @@ public class ArcadeDrive extends CommandBase {
    * @param kStraight
    * @param kTurn
    */
-  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn, double kRight){
+  public ArcadeDrive(PaddedXbox joystick, DriveBaseSub driveBase, double kStraight, double kTurn, double kSlowStraight, double kSlowTurn){
     this.joystick = joystick;
     this.driveBase = driveBase;
     this.kStraight = kStraight;
     this.kTurn = kTurn;
-    this.kRight = kRight;
+    this.kSlowStraight = kSlowStraight;
+    this.kSlowTurn = kSlowTurn;
     addRequirements(driveBase);
   }
 
@@ -43,16 +45,16 @@ public class ArcadeDrive extends CommandBase {
 
     SmartDashboard.putString("command status", "exec arcade");
     
-    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kRight * joystick.getRightY();
-    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kRight * joystick.getRightY();
+    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
+    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
 
     double leftX = joystick.getLeftX();
 
     if(leftX > 0){
-      rightPower -= leftX;
+      rightPower -= kSlowTurn * leftX;
     }
     else if(leftX < 0){
-      leftPower += leftX;
+      leftPower += kSlowTurn * leftX;
     }
     else{}
 

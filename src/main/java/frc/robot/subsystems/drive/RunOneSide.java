@@ -31,9 +31,9 @@ public class RunOneSide extends CommandBase {
       coeff = -1;
     }
     if(isLeft){
-      driveBase.setLeftPower(coeff * PowerConstants.DriveBaseStraight.val);
+      driveBase.setLeftPower(coeff * PowerConstants.DriveBaseLeftStraight.val);
     } else {
-      driveBase.setRightPower(coeff * PowerConstants.DriveBaseStraight.val);
+      driveBase.setRightPower(coeff * PowerConstants.DriveBaseLeftStraight.val);
     }
   }
 
