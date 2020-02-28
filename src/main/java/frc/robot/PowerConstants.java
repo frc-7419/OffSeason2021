@@ -36,7 +36,14 @@ public enum PowerConstants{
 
     // hood
     HoodPower(.2),
-    HoodTime(1000);
+    HoodTime(1000),
+
+    // gyro
+    GyrokP(.1),
+    GyrokI(0),
+    GyrokD(0),
+
+    ;
 
     public final double val; 
     PowerConstants(double val){

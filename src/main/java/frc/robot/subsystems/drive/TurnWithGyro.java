@@ -2,6 +2,7 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.PowerConstants;
 import frc.robot.subsystems.drive.DriveBaseSub.TurnDirection;
 
 public class TurnWithGyro extends CommandBase {
@@ -32,9 +33,9 @@ public class TurnWithGyro extends CommandBase {
 
   @Override
   public void initialize() {
-    kP = .1; 
-    kI = 0;
-    kD = 0; 
+    kP = PowerConstants.GyrokP.val; 
+    kI = PowerConstants.GyrokI.val;
+    kD = PowerConstants.GyrokD.val; 
     pidController = new PIDController(kP, kI, kD);
     pidController.setSetpoint(angle);
     pidController.setTolerance(1);
@@ -42,15 +43,15 @@ public class TurnWithGyro extends CommandBase {
 
   @Override
   public void execute() {
-
     pidOutput = pidController.calculate(ahrs.getGyroAngle());
     driveBase.setLeftPower(pidOutput);
     driveBase.setRightPower(-pidOutput);
-
   }
 
   @Override
   public void end(boolean interrupted) {
+    driveBase.stop();
+    driveBase.brake();
   }
 
   @Override

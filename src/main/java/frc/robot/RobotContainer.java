@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import java.util.function.BooleanSupplier;
@@ -53,7 +46,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     manualButtonBindings();
-    // codeTestButtonBindings();
+    codeTestButtonBindings();
     buttonBoardBindings();
   }
 
@@ -69,7 +62,9 @@ public class RobotContainer {
 
   private void codeTestButtonBindings(){ // for programmer
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new StraightWithMotionMagic(driveBase, Dashboard.get(DashboardValue.driveBaseSetpoint)));
+    .whenPressed(new StraightWithMotionMagic(driveBase, Dashboard.get(DashboardValue.driveBaseSetpoint)));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whenPr
   }
 
   private void manualButtonBindings(){ // for johann
