@@ -45,8 +45,18 @@ public class ArcadeDrive extends CommandBase {
 
     SmartDashboard.putString("command status", "exec arcade");
     
-    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() - kRight * joystick.getRightY();
-    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() - kRight * joystick.getRightY();
+    double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kRight * joystick.getRightY();
+    double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kRight * joystick.getRightY();
+
+    double rightX = joystick.getRightX();
+
+    if(rightX > 0){
+      rightPower -= rightX;
+    }
+    else if(rightX < 0){
+      leftPower += rightX;
+    }
+    else{}
 
     driveBase.setLeftPower(leftPower);
     driveBase.setRightPower(rightPower);

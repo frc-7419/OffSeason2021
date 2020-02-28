@@ -139,8 +139,8 @@ public class RobotContainer {
 
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), true));
     externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, Dashboard.get(DashboardValue.revolverButtonBoard), false));
-    externalUpJoystick.whileActiveOnce(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannGround)));
-    externalDownJoystick.whileActiveOnce(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannPlayerStation)));   
+    externalDownJoystick.whileActiveOnce(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannGround)));
+    externalUpJoystick.whileActiveOnce(new RunIntake(intake, joystick, Dashboard.get(DashboardValue.intakeJohannPlayerStation)));   
   }
 
   public Command getDefaultCommand(){return arcade;}
