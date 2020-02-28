@@ -21,8 +21,6 @@ public class ReadyToShoot extends ParallelCommandGroup {
     shooter = robot.getShooter();
     revolver = robot.getRevolver();
     colorSensor = robot.getColorSensor();
-    dashboard = robot.getDashboard();
-
 
     addCommands(new RevolverToTape(colorSensor, revolver));
     addCommands(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
