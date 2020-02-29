@@ -34,7 +34,7 @@ public class TurnToTxWithGyro extends CommandBase {
   @Override
   public void initialize() {
 
-    kP = .016; // gets P coefficient from dashboard
+    kP = .016; // gets P coefficient from dashboard ah yes dashboard
     kI = 0;
     kD = 1;
     pidController = new PIDController(kP, kI, kD);

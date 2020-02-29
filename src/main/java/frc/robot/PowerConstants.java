@@ -42,7 +42,7 @@ public enum PowerConstants{
     HoodTime(1000),
 
     // gyro
-    GyrokP(.1),
+    GyrokP(.01),
     GyrokI(0),
     GyrokD(0),
 
