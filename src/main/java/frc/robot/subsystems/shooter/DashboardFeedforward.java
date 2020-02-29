@@ -2,19 +2,16 @@ package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.dashboard.Dashboard;
-import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
+import frc.robot.PowerConstants;
 import frc.robot.subsystems.shooter.ShooterSub.ControlMethod;
 
 public class DashboardFeedforward extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   
   private ShooterSub shooter;
-  private Dashboard dashboard;
   
-  public DashboardFeedforward(ShooterSub shooter, Dashboard dashboard) {
+  public DashboardFeedforward(ShooterSub shooter) {
     this.shooter = shooter;
-    this.dashboard = dashboard;
   }
 
   @Override
@@ -22,7 +19,7 @@ public class DashboardFeedforward extends CommandBase {
 
       SmartDashboard.putString("shooter", "manual ff");
 
-      double rawSpeed = Dashboard.get(DashboardValue.shooterJohann);
+      double rawSpeed = PowerConstants.ShooterJohann.val;
     //   shooter.setkF(shooter.get);
       shooter.setTargetRawSpeed(rawSpeed);
       shooter.setControlMethod(ControlMethod.HOLDING);

@@ -14,8 +14,7 @@ import com.team7419.math.DriveBaseConversions;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.dashboard.Dashboard;
-import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
+import frc.robot.PowerConstants;
 
 public class StraightWithMotionMagic extends CommandBase {
   
@@ -58,8 +57,8 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBase.getRightMast().configMotionCruiseVelocity(15000, 0);
         driveBase.getRightMast().configMotionAcceleration(6000, 0);  
 
-        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
-        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), Dashboard.get(DashboardValue.driveBaseMotionMagickP), 0, Dashboard.get(DashboardValue.driveBaseMotionMagickD), 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
         // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
         double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
         double rightSet = DriveBaseConversions.inchesToTicks(setpoint);

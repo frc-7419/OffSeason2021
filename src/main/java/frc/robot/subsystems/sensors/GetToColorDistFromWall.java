@@ -11,13 +11,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.dashboard.Dashboard;
 import frc.robot.subsystems.drive.DriveBaseSub;
 
 public class GetToColorDistFromWall extends CommandBase {
   private RevColorDistanceSub colorDistanceSensor;
   private DriveBaseSub driveBase;
-  private Dashboard dashboard;
   private double desiredDistance;
   private double error;
   private double threshold;

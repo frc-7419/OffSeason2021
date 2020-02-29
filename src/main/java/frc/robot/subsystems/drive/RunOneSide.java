@@ -2,20 +2,17 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.dashboard.Dashboard;
-import frc.robot.subsystems.dashboard.Dashboard.DashboardValue;
+import frc.robot.PowerConstants;
 
 public class RunOneSide extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private DriveBaseSub driveBase;
-  private Dashboard dashboard;
   private boolean isLeft;
   private boolean reversed;
   private double coeff = 1;
 
-  public RunOneSide(DriveBaseSub driveBase, String direction, Dashboard dashboard, boolean reversed) {
+  public RunOneSide(DriveBaseSub driveBase, String direction, boolean reversed) {
     this.driveBase = driveBase;
-    this.dashboard = dashboard;
     this.reversed = reversed;
     if(direction == "left"){isLeft = true;}
     else{isLeft = false;}
@@ -34,9 +31,9 @@ public class RunOneSide extends CommandBase {
       coeff = -1;
     }
     if(isLeft){
-      driveBase.setLeftPower(coeff * Dashboard.get(DashboardValue.driveBaseStraight));
+      driveBase.setLeftPower(coeff * PowerConstants.DriveBaseLeftStraight.val);
     } else {
-      driveBase.setRightPower(coeff * Dashboard.get(DashboardValue.driveBaseStraight));
+      driveBase.setRightPower(coeff * PowerConstants.DriveBaseLeftStraight.val);
     }
   }
 
