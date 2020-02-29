@@ -37,7 +37,7 @@ public class TurnWithGyro extends CommandBase {
 
   @Override
   public void initialize() {
-    if(direction == TurnDirection.RIGHT){negative = 1;}
+    if(target > 0){negative = 1;}
     else{negative = -1;}
     initAngle = ahrs.getGyroAngle();
     kP = PowerConstants.GyrokP.val; 
@@ -50,9 +50,10 @@ public class TurnWithGyro extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("command status", "turn w gyro");
     pidOutput = pidController.calculate(ahrs.getGyroAngle());
-    driveBase.setLeftPower(pidOutput);
-    driveBase.setRightPower(-pidOutput);
+    driveBase.setLeftPower(negative * pidOutput);
+    driveBase.setRightPower(negative * -pidOutput);
   }
 
   @Override

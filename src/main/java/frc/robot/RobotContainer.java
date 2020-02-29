@@ -66,8 +66,8 @@ public class RobotContainer {
   private void codeTestButtonBindings(){ // for programmer
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     // .whenPressed(new StraightWithMotionMagic(driveBase, PowerConstants.DriveBaseSetpoint.val));
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new TurnWithGyro(driveBase, gyro, 90, TurnDirection.LEFT));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whenPressed(new TurnWithGyro(driveBase, gyro, 90, TurnDirection.LEFT));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whenPressed(new TurnWithGyro(driveBase, gyro, limelight.getTx(), TurnDirection.LEFT));
   }
