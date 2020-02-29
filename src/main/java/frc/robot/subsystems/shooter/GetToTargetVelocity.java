@@ -35,7 +35,6 @@ public class GetToTargetVelocity extends CommandBase {
   @Override
   public void execute() {
     shooter.talon.set(ControlMode.Velocity, target);
-
   }
 
   @Override
