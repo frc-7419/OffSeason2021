@@ -6,6 +6,7 @@ public enum PowerConstants{
     ShooterShotsButton(13000),
     ShooterReverse(5000), // 100% power
     ShooterJohann(13000),
+    Shooter5419Shots(17000),
 
     // drive base
     DriveBaseLeftStraight(.6),
@@ -23,6 +24,7 @@ public enum PowerConstants{
     RevolverToTape(-.35),
     RevolverWithIntake(.4),
     RevolverButtonBoard(.5),
+    Revolver5419Shots(.5),
 
     // intake
     IntakeJohannGround(-1),
@@ -32,6 +34,7 @@ public enum PowerConstants{
     ClimberJohann(.5),
     ClimberOperatorSlow(.5),
     ClimberOperatorFast(1),
+    ClimberOperator(.9),
 
     // loader
     LoaderShotsButton(.7),

@@ -1,6 +1,7 @@
 package frc.robot.subsystems.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.Initers;
 
@@ -19,6 +20,7 @@ public class HoodSub extends SubsystemBase{
     public HoodSub(){
         victor = new VictorSPX(CanIds.hoodVictor.id);
         Initers.initVictors(victor);
+        victor.setNeutralMode(NeutralMode.Brake);
     }
 
     public enum HoodPosition{

@@ -14,17 +14,21 @@ public class RunShooter extends ParallelCommandGroup {
   private ShooterSub shooter;
   private LoaderSub loader;
   private RevolverSub revolver;
+  private double shooterSpeed;
+  private double revolverSpeed;
   // private boolean operator = false;  //so i want to make a boolean passed thru the constructor that
                                         //decides which dashboard coeff to take but for now we're gonna go with separate files :/
   
-  public RunShooter(ShooterSub shooter, LoaderSub loader, RevolverSub revolver) {
+  public RunShooter(ShooterSub shooter, LoaderSub loader, RevolverSub revolver, double shooterSpeed, double revolverSpeed) {
     this.shooter = shooter;
     this.loader = loader;
     this.revolver = revolver;
+    this.shooterSpeed = shooterSpeed;
+    this.revolverSpeed = revolverSpeed;
 
-    addCommands(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
+    addCommands(new GetToTargetVelocity(shooter, shooterSpeed));
     addCommands(new RunLoader(loader, PowerConstants.LoaderShotsButton.val, true));
-    addCommands(new RunRevolver(revolver, PowerConstants.RevolverShotsButton.val, true));
+    addCommands(new RunRevolver(revolver, revolverSpeed, true));
   }
 
 }

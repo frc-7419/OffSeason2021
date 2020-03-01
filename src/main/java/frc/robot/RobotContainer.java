@@ -10,6 +10,9 @@ import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
+import frc.robot.subsystems.controlpanel.ControlPanelSub;
+import frc.robot.subsystems.controlpanel.RaiseCpMech;
+import frc.robot.subsystems.controlpanel.UpThenSpin;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.drive.DriveBaseSub.TurnDirection;
 import frc.robot.subsystems.intake.*;
@@ -33,6 +36,8 @@ public class RobotContainer {
   private final ButtonBoard buttonBoard = new ButtonBoard();
   private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
   private final GyroSub gyro = new GyroSub();
+  private final HoodSub hood = new HoodSub();
+  private final ControlPanelSub cpMech = new ControlPanelSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 
   PowerConstants.DriveBaseLeftStraight.val, PowerConstants.DriveBaseRightTurn.val, 
@@ -43,8 +48,8 @@ public class RobotContainer {
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
-    // manualButtonBindings();
-    codeTestButtonBindings();
+    manualButtonBindings();
+    // codeTestButtonBindings();
     buttonBoardBindings();
   }
 
@@ -105,31 +110,55 @@ public class RobotContainer {
 
   public void buttonBoardBindings(){
 
+    // 1: pregame button
     new JoystickButton(buttonBoard, 1)
     .whenPressed(new RevolverToTape(colorSensor, revolver));
     new JoystickButton(buttonBoard, 1)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
 
+    // 2: SHOTS
     new JoystickButton(buttonBoard, 2)
-    .whileHeld(new RunShooter(shooter, loader, revolver));
+    .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+                                PowerConstants.RevolverShotsButton.val));
 
+    // 3: 5419 SHOTS
     new JoystickButton(buttonBoard, 3)
-    .whenPressed(new RevolverToTape(colorSensor, revolver));
+    .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.Shooter5419Shots.val, 
+                                PowerConstants.Revolver5419Shots.val));
 
+    // 4: henry's off the wall thing at 9 inches
+    new JoystickButton(buttonBoard, 4)
+    .whenPressed(new GetToColorDistFromWall(driveBase, colorSensor)); 
+    
+    // 5: cp down & no spin
     new JoystickButton(buttonBoard, 5)
-    .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperatorSlow.val, false));
+    .whileHeld(new RaiseCpMech(cpMech, .25, true));
 
+    // 6: cp up, spin after a delay
     new JoystickButton(buttonBoard, 6)
-    .whileHeld(new RunClimber(climber, PowerConstants.ClimberOperatorSlow.val, true));
+    .whileHeld(new UpThenSpin(cpMech, .25, false, 2, .25));
 
-    new JoystickButton(buttonBoard, 8)
-    .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperatorFast.val, false));
-
+    // 7: hood up at 0.25
     new JoystickButton(buttonBoard, 7)
-    .whileHeld(new RunClimber(climber, PowerConstants.ClimberOperatorFast.val, true));
+    .whileHeld(new RunHood(hood, .25, false));
 
+    // 8: hood down at 0.25
+    new JoystickButton(buttonBoard, 7)
+    .whileHeld(new RunHood(hood, .25, true));
+
+    // 9: climb down at .9
+    new JoystickButton(buttonBoard, 6)
+    .whileHeld(new RunClimber(climber, PowerConstants.ClimberOperator.val, true));
+
+    // 12: climb up at .9
+    new JoystickButton(buttonBoard, 5)
+    .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperator.val, false));
+
+    // run revolver on external joystick x axis
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, PowerConstants.RevolverButtonBoard.val, true));
     externalLeftJoystick.whileActiveOnce(new RunRevolver(revolver, PowerConstants.RevolverButtonBoard.val, false));
+
+    // run intake on external joystick y axis
     externalDownJoystick.whileActiveOnce(new RunIntake(intake, joystick, PowerConstants.IntakeJohannGround.val));
     externalUpJoystick.whileActiveOnce(new RunIntake(intake, joystick, PowerConstants.IntakeJohannPlayerStation.val));
   }

@@ -6,6 +6,7 @@ import frc.robot.subsystems.drive.DriveBaseSub;
 import frc.robot.subsystems.drive.StraightPercentOut;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.shooter.ShooterSub;
+import frc.robot.PowerConstants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.buttons.*;
 import frc.robot.subsystems.drive.*;
@@ -31,6 +32,7 @@ public class FaceplantThenShoot extends SequentialCommandGroup {
     addCommands(new StraightWithMotionMagic(driveBase, -9));
     addCommands(new ReadyToShoot(robot));
     addCommands(new Sleep(2));
-    addCommands(new RunShooter(shooter, loader, revolver));
+    addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+                                PowerConstants.RevolverShotsButton.val));
   }
 }
