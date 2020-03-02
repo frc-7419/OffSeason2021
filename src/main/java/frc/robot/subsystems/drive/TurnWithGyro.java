@@ -22,17 +22,15 @@ public class TurnWithGyro extends CommandBase {
   private double initAngle;
 
   /**
-   * 
+   * LEFT IS POSITIVE
    * @param driveBase
    * @param gyro
    * @param angle
-   * @param direction TurnDirection.LEFT or TurnDirection.RIGHT
    */
-  public TurnWithGyro(DriveBaseSub driveBase, GyroSub ahrs, double target, TurnDirection direction) {
+  public TurnWithGyro(DriveBaseSub driveBase, GyroSub ahrs, double target) {
     this.driveBase = driveBase;
     this.ahrs = ahrs;
     this.target = target;
-    this.direction = direction;
   }
 
   @Override

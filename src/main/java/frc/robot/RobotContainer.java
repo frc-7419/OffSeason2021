@@ -6,6 +6,7 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -46,6 +47,7 @@ public class RobotContainer {
   // private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
+  private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -74,7 +76,7 @@ public class RobotContainer {
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     // .whenPressed(new TurnWithGyro(driveBase, gyro, 90, TurnDirection.LEFT));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whenPressed(new TurnWithGyro(driveBase, gyro, limelight.getTx(), TurnDirection.LEFT));
+    .whenPressed(new TurnWithGyro(driveBase, gyro, limelight.getTx()));
   }
 
   private void manualButtonBindings(){ // for johann
@@ -84,10 +86,10 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whileHeld(new RunClimber(climber, .5, true));
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new PercentOutput(shooter, PowerConstants.ShooterReverse.val, true));
   
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
@@ -112,7 +114,7 @@ public class RobotContainer {
 
     // 1: pregame button
     new JoystickButton(buttonBoard, 1)
-    .whenPressed(new RevolverToTape(colorSensor, revolver));
+    .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
     new JoystickButton(buttonBoard, 1)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
 
@@ -140,18 +142,18 @@ public class RobotContainer {
 
     // 7: hood up at 0.25
     new JoystickButton(buttonBoard, 7)
-    .whileHeld(new RunHood(hood, .25, false));
+    .whileHeld(new RunHood(hood, .5, false));
 
     // 8: hood down at 0.25
-    new JoystickButton(buttonBoard, 7)
-    .whileHeld(new RunHood(hood, .25, true));
+    new JoystickButton(buttonBoard, 8)
+    .whileHeld(new RunHood(hood, .5, true));
 
     // 9: climb down at .9
-    new JoystickButton(buttonBoard, 6)
+    new JoystickButton(buttonBoard, 9)
     .whileHeld(new RunClimber(climber, PowerConstants.ClimberOperator.val, true));
 
     // 12: climb up at .9
-    new JoystickButton(buttonBoard, 5)
+    new JoystickButton(buttonBoard, 12)
     .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperator.val, false));
 
     // run revolver on external joystick x axis
@@ -180,5 +182,9 @@ public class RobotContainer {
     public ClimberSub getClimber(){return climber;}
     public RevColorDistanceSub getColorSensor(){return colorSensor;}
     public LimelightSub getLimelight(){return limelight;}
+
+    public Command getAutoCommand(){
+      return faceplantThenShoot;
+    }
   
 }

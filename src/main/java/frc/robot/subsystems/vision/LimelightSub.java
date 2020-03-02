@@ -20,8 +20,8 @@ public class LimelightSub extends SubsystemBase{
     public void periodic(){
         double x = tx.getDouble(0);
         double y = ty.getDouble(0);
-        SmartDashboard.putNumber("tx", x);
-        SmartDashboard.putNumber("ty", y);
+        // SmartDashboard.putNumber("tx", x);
+        // SmartDashboard.putNumber("ty", y);
     }
 
     public double getTx(){return tx.getDouble(0);}

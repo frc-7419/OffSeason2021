@@ -17,12 +17,17 @@ public class ReadyToShoot extends ParallelCommandGroup {
   private RevolverSub revolver;
   private RevColorDistanceSub colorSensor;
 
-  public ReadyToShoot(RobotContainer robot) {
-    shooter = robot.getShooter();
-    revolver = robot.getRevolver();
-    colorSensor = robot.getColorSensor();
+  /**
+   * 
+   * @param robot pass instance of robot thru
+   * @param time in seconds, how long to ramp shooter
+   */
+  public ReadyToShoot(ShooterSub shooter, RevolverSub revolver, RevColorDistanceSub colorSensor, double time) {
+    // shooter = robot.getShooter();
+    // revolver = robot.getRevolver();
+    // colorSensor = robot.getColorSensor();
 
     addCommands(new RevolverToTape(colorSensor, revolver));
-    addCommands(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
+    addCommands(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val).withTimeout(time));
   }
 }

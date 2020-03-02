@@ -2,6 +2,7 @@ package frc.robot.subsystems.autos;
 
 import com.team7419.Sleep;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.drive.DriveBaseSub;
 import frc.robot.subsystems.drive.StraightPercentOut;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
@@ -12,27 +13,28 @@ import frc.robot.subsystems.buttons.*;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.LoaderSub;
 import frc.robot.subsystems.intake.RevolverSub;
+import frc.robot.subsystems.sensors.RevColorDistanceSub;
 import frc.robot.subsystems.shooter.*;
 
 public class FaceplantThenShoot extends SequentialCommandGroup {
   
-  private DriveBaseSub driveBase;
-  private ShooterSub shooter;
-  private RevolverSub revolver;
-  private LoaderSub loader;
+  // private DriveBaseSub driveBase;
+  // private ShooterSub shooter;
+  // private RevolverSub revolver;
+  // private LoaderSub loader;
 
-  public FaceplantThenShoot(RobotContainer robot) {
+  public FaceplantThenShoot(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, RevColorDistanceSub colorSensor) {
     
-    driveBase = robot.getDriveBase();
-    shooter = robot.getShooter();
-    revolver = robot.getRevolver();
-    loader = robot.getLoader();
+    
 
-    addCommands(new StraightWithMotionMagic(driveBase, 24));
-    addCommands(new StraightWithMotionMagic(driveBase, -9));
-    addCommands(new ReadyToShoot(robot));
-    addCommands(new Sleep(2));
-    addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
-                                PowerConstants.RevolverShotsButton.val));
+    // addCommands(new WaitCommand(2));
+    addCommands(new StraightWithMotionMagic(driveBase, 120));
+    // addCommands(new WaitCommand(1));
+    // addCommands(new StraightWithMotionMagic(driveBase, -12));
+    // addCommands(new ReadyToShoot(shooter, revolver, colorSensor, 3));
+    // // addCommands(new WaitCommand(1));
+    // addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+    //                             PowerConstants.RevolverShotsButton.val).withTimeout(5));
+    // addCommands(new WaitCommand(1));
   }
 }

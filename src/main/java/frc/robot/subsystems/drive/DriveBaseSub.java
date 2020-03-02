@@ -18,6 +18,11 @@ public class DriveBaseSub extends SubsystemBase {
 		right1 = new TalonFX(CanIds.rightFalcon1.id);
 		left2 = new TalonFX(CanIds.leftFalcon2.id);
     right2 = new TalonFX(CanIds.rightFalcon2.id);
+
+    // left1.configFactoryDefault();
+    // right1.configFactoryDefault();
+    // left2.configFactoryDefault();
+    // right2.configFactoryDefault();
     
     right1.setInverted(true);
     right1.setSensorPhase(false);

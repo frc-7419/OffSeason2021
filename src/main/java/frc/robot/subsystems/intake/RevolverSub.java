@@ -17,6 +17,7 @@ public class RevolverSub extends SubsystemBase{
 
     public RevolverSub(){
         victor = new VictorSPX(CanIds.revolverVictor.id);
+        // victor.configFactoryDefault();
         Initers.initVictors(victor);
     }
 

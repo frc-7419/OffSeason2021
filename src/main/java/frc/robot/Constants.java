@@ -20,9 +20,9 @@ public final class Constants {
         revolverVictor(12),
         climberFalcon(13),
         shooterFalcon(14), 
-        hoodVictor(15), 
-        cpLifterVictor(16),
-        cpSpinnerVictor(17),
+        hoodVictor(40), 
+        cpLifterVictor(43), // maybe? 
+        cpSpinnerVictor(25), // not getting power rn
         ;
 
         public final int id; 

@@ -8,7 +8,7 @@ public class RunHood extends CommandBase{
   private HoodSub hood;
   private double power;
   private boolean reversed;
-  double coeff;
+  double coeff = 1;
 
   public RunHood(HoodSub hood, double power, boolean reversed) {
     this.hood = hood;
@@ -24,8 +24,9 @@ public class RunHood extends CommandBase{
 
   @Override
   public void execute() {
-    SmartDashboard.putString("revolver", "running");
-    hood.setPower(power * coeff);
+    SmartDashboard.putString("hood", "running");
+    hood.setPower(Math.abs(power) * coeff);
+    SmartDashboard.putNumber("hood coeff", coeff);
   }
 
   @Override

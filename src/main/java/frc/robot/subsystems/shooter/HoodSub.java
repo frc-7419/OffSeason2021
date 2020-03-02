@@ -19,6 +19,7 @@ public class HoodSub extends SubsystemBase{
 
     public HoodSub(){
         victor = new VictorSPX(CanIds.hoodVictor.id);
+        // victor.configFactoryDefault();
         Initers.initVictors(victor);
         victor.setNeutralMode(NeutralMode.Brake);
     }

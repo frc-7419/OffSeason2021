@@ -14,6 +14,7 @@ public class LoaderSub extends SubsystemBase{
 
     public LoaderSub(){
         falcon = new TalonFX(CanIds.loaderFalcon.id);
+        // falcon.configFactoryDefault();
     }
 
     @Override

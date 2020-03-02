@@ -19,6 +19,6 @@ public class Rev2mDistanceSub extends SubsystemBase{
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("2m distance", this.getDistance());
+        // SmartDashboard.putNumber("2m distance", this.getDistance());
     }
 }

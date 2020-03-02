@@ -14,17 +14,17 @@ public enum PowerConstants{
     DriveBaseLeftTurn(.2),
     DriveBaseRightStraight(.4),
     DriveBaseLoadingStation(.2),
-    DriveBaseMotionMagickP(.01),
+    DriveBaseMotionMagickP(.1),
     DriveBaseMotionMagickD(0),
     DriveBaseSetpoint(5),
 
     // revolver
-    RevolverShotsButton(.8),
+    RevolverShotsButton(1),
     RevolverJohann(.5),
     RevolverToTape(-.35),
     RevolverWithIntake(.4),
-    RevolverButtonBoard(.5),
-    Revolver5419Shots(.5),
+    RevolverButtonBoard(1),
+    Revolver5419Shots(1),
 
     // intake
     IntakeJohannGround(-1),

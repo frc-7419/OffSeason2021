@@ -87,7 +87,7 @@ public class StraightWithMotionMagic extends CommandBase {
         SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
         SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
         SmartDashboard.putNumber("error", driveBase.getLeftMast().getClosedLoopError());
-        if(System.currentTimeMillis() - startTime > 500){
+        if(System.currentTimeMillis() - startTime > 1000){
             started = true;
         }
 

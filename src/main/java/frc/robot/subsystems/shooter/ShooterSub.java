@@ -29,6 +29,7 @@ public class ShooterSub extends SubsystemBase{
     public ShooterSub(){
 
         talon = new TalonFX(CanIds.shooterFalcon.id);
+        // talon.configFactoryDefault();
         talon.setInverted(true);
         talon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     }
@@ -41,7 +42,7 @@ public class ShooterSub extends SubsystemBase{
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
+        // SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
     }
 
     public void run(){
