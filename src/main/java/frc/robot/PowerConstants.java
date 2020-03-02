@@ -20,8 +20,8 @@ public enum PowerConstants{
 
     // revolver
     RevolverShotsButton(1),
-    RevolverJohann(.5),
-    RevolverToTape(-.35),
+    RevolverJohann(.6),
+    RevolverToTape(-.45),
     RevolverWithIntake(.4),
     RevolverButtonBoard(1),
     Revolver5419Shots(1),

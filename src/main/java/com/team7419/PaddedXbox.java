@@ -42,28 +42,28 @@ public class PaddedXbox extends XboxController{
 
     public double getRightX() {
 		double out = getRawAxis(F310Map.kGamepadAxisRightStickX.value);
-		if(Math.abs(out)<.05) {
+		if(Math.abs(out)<.02) {
 			out = 0;
 		}
 		return out;
 	}
 	public double getLeftX() {
 		double out = getRawAxis(F310Map.kGamepadAxisLeftStickX.value);
-		if(Math.abs(out)<.05) {
+		if(Math.abs(out)<.02) {
 			out = 0;
 		}
 		return out;
 	}
 	public double getLeftY() {
 		double out = -getRawAxis(F310Map.kGamepadAxisLeftStickY.value);
-		if(Math.abs(out)<.05) {
+		if(Math.abs(out)<.02) {
 			out = 0;
 		}
 		return -out;
 	}
 	public double getRightY() {
 		double out = -getRawAxis(F310Map.kGamepadAxisRightStickY.value);
-		if(Math.abs(out)<.05) {
+		if(Math.abs(out)<.02) {
 			out = 0;
 		}
 		return out;

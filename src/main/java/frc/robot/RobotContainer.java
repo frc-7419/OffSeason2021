@@ -86,10 +86,10 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whileHeld(new RunClimber(climber, .5, true));
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, PowerConstants.ShooterReverse.val, true));
   
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
@@ -169,9 +169,9 @@ public class RobotContainer {
   // public Command getLimelightTest(){return turnToTx;}
   
   public void setDefaultCommands(){
-    revolver.setDefaultCommand(revolverDefault);
+    // revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
-    intake.setDefaultCommand(intakeDefault);
+    // intake.setDefaultCommand(intakeDefault);
   }
 
     public DriveBaseSub getDriveBase(){return driveBase;}
