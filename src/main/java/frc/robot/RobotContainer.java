@@ -50,9 +50,9 @@ public class RobotContainer {
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
 
   public RobotContainer() {
-    manualButtonBindings();
-    // codeTestButtonBindings();
-    buttonBoardBindings();
+    // manualButtonBindings();
+    codeTestButtonBindings();
+    // buttonBoardBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
@@ -76,7 +76,7 @@ public class RobotContainer {
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     // .whenPressed(new TurnWithGyro(driveBase, gyro, 90, TurnDirection.LEFT));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whenPressed(new TurnWithGyro(driveBase, gyro, limelight.getTx()));
+    .whenPressed(new StraightPowerTime(driveBase, -.2, 1000));
   }
 
   private void manualButtonBindings(){ // for johann
@@ -169,9 +169,9 @@ public class RobotContainer {
   // public Command getLimelightTest(){return turnToTx;}
   
   public void setDefaultCommands(){
-    // revolver.setDefaultCommand(revolverDefault);
+    revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
-    // intake.setDefaultCommand(intakeDefault);
+    intake.setDefaultCommand(intakeDefault);
   }
 
     public DriveBaseSub getDriveBase(){return driveBase;}
