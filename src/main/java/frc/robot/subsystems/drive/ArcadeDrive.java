@@ -48,15 +48,15 @@ public class ArcadeDrive extends CommandBase {
     double leftPower = kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
     double rightPower = -kTurn * joystick.getRightX() - kStraight * joystick.getLeftY() + kSlowStraight * joystick.getRightY();
 
-    double leftX = joystick.getLeftX();
+    // double leftX = joystick.getLeftX();
 
-    if(leftX > 0){
-      rightPower -= kSlowTurn * leftX;
-    }
-    else if(leftX < 0){
-      leftPower += kSlowTurn * leftX;
-    }
-    else{}
+    // if(leftX > 0){
+    //   rightPower -= kSlowTurn * leftX;
+    // }
+    // else if(leftX < 0){
+    //   leftPower += kSlowTurn * leftX;
+    // }
+    // else{}
 
     driveBase.setLeftPower(leftPower);
     driveBase.setRightPower(rightPower);
