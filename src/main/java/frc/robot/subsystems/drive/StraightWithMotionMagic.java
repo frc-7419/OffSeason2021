@@ -20,6 +20,8 @@ public class StraightWithMotionMagic extends CommandBase {
   
     private DriveBaseSub driveBase;
     private double setpoint;
+    private double leftSet;
+    private double rightSet;
     private double leftMastOutput;
     private double rightMastOutput;
     private boolean started;
@@ -47,6 +49,8 @@ public class StraightWithMotionMagic extends CommandBase {
     //   driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
     //   driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
 
+        driveBase.coast();    
+
         driveBase.getLeftMast().setSelectedSensorPosition(0);
         driveBase.getRightMast().setSelectedSensorPosition(0);
 
@@ -59,18 +63,14 @@ public class StraightWithMotionMagic extends CommandBase {
 
         TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
         TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
-        // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
-        double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
-        double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
+
+        leftSet = DriveBaseConversions.inchesToTicks(setpoint);
+        rightSet = DriveBaseConversions.inchesToTicks(setpoint);
 
         SmartDashboard.putNumber("leftSet", leftSet);
         SmartDashboard.putNumber("rightSet", rightSet);
 
         started = false;
-
-        driveBase.getLeftMast().set(ControlMode.MotionMagic, leftSet);
-        driveBase.getRightMast().set(ControlMode.MotionMagic, rightSet);
-
         startTime = System.currentTimeMillis();
     }
 
@@ -79,17 +79,19 @@ public class StraightWithMotionMagic extends CommandBase {
 
         SmartDashboard.putString("command status", "executing motion magic");
 
-        SmartDashboard.putNumber("leftMast", driveBase.getLeftMast().getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("rightMast", driveBase.getRightMast().getSelectedSensorPosition(0));
+        driveBase.getLeftMast().set(ControlMode.MotionMagic, leftSet);
+        driveBase.getRightMast().set(ControlMode.MotionMagic, rightSet);
     
         double leftMastOutput = driveBase.getLeftMast().getMotorOutputPercent();
         double rightMastOutput = driveBase.getRightMast().getMotorOutputPercent();
-        SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
-        SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
+
+        SmartDashboard.putNumber("left output", leftMastOutput);
+        SmartDashboard.putNumber("right output", rightMastOutput);
         SmartDashboard.putNumber("error", driveBase.getLeftMast().getClosedLoopError());
         if(System.currentTimeMillis() - startTime > 1000){
             started = true;
         }
+
 
         SmartDashboard.putBoolean("started", started);
         
@@ -97,15 +99,16 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public boolean isFinished(){
-        if(started && Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
+        if(started && Math.abs(leftMastOutput) < 0.001 && Math.abs(rightMastOutput) < 0.001){
             SmartDashboard.putString("command status", "moving");
             Timer.delay(1);
             return true;
-        } else{return false;}
+        }else{return false;}    
     }
 
     @Override
     public void end(boolean interrupted){
-
+        driveBase.stop();
+        driveBase.brake();
     }
 }

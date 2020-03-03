@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -20,6 +21,8 @@ import frc.robot.subsystems.intake.RevolverSub;
 import frc.robot.subsystems.sensors.RevColorDistanceSub;
 import frc.robot.subsystems.shooter.ShooterSub;
 import frc.robot.subsystems.vision.LimelightSub;
+=======
+>>>>>>> origin/no-shuffleboard
 
 public class Robot extends TimedRobot {
 

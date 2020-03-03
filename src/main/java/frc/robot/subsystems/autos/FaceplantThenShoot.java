@@ -4,17 +4,18 @@ import com.team7419.Sleep;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.drive.DriveBaseSub;
-import frc.robot.subsystems.drive.StraightPercentOut;
 import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.shooter.ShooterSub;
 import frc.robot.PowerConstants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.buttons.*;
-import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.intake.LoaderSub;
 import frc.robot.subsystems.intake.RevolverSub;
+<<<<<<< HEAD
 import frc.robot.subsystems.sensors.RevColorDistanceSub;
 import frc.robot.subsystems.shooter.*;
+=======
+>>>>>>> origin/no-shuffleboard
 
 public class FaceplantThenShoot extends SequentialCommandGroup {
   
