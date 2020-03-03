@@ -11,6 +11,12 @@ public class StraightPowerTime extends CommandBase {
   private boolean done;
   private double timestamp;
 
+  /**
+   * runs the drive base straight at a power for a time
+   * @param driveBase
+   * @param power positive / negative to indicate direction
+   * @param time in milliseconds
+   */
   public StraightPowerTime(DriveBaseSub driveBase, double power, double time) {
     this.driveBase = driveBase;
     this.power = power;
