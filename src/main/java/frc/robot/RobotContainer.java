@@ -12,6 +12,7 @@ import java.util.function.BooleanSupplier;
 import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.buttons.ButtonBoard;
@@ -40,6 +41,7 @@ public class RobotContainer {
   private final ButtonBoard buttonBoard = new ButtonBoard();
   // private final Dashboard dashboard = new Dashboard();
   private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
+  private final Rev2mAnalogDistanceSub analogDistance = new Rev2mAnalogDistanceSub();
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 
   PowerConstants.DriveBaseStraight.val, PowerConstants.DriveBaseTurn.val, 

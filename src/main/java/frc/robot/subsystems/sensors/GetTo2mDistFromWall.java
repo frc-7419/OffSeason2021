@@ -8,7 +8,7 @@
 package frc.robot.subsystems.sensors;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.revrobotics.Rev2mDistanceSensor;
+
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -43,7 +43,7 @@ public class GetTo2mDistFromWall extends CommandBase {
     SmartDashboard.putString("command status", "2m distance");
     error = desiredDistance - distance.getDistance();
     if (error > 0){
-      driveBase.setAll(kP);
+      driveBase.setAll(-kP);
     }
     // driveBase.setAll(kP /* * error */);
     if (/* Math.abs(error) > 75 && */ error < 0){
