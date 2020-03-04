@@ -130,7 +130,9 @@ public class RobotContainer {
 
     // 4: henry's off the wall thing at 9 inches
     new JoystickButton(buttonBoard, 4)
-    .whenPressed(new GetToColorDistFromWall(driveBase, colorSensor)); 
+    .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
+    new JoystickButton(buttonBoard, 4)
+    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.Shooter5419Shots.val));
     
     // 5: cp down & no spin
     new JoystickButton(buttonBoard, 5)
@@ -169,9 +171,9 @@ public class RobotContainer {
   // public Command getLimelightTest(){return turnToTx;}
   
   public void setDefaultCommands(){
-    // revolver.setDefaultCommand(revolverDefault);
+    revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
-    // intake.setDefaultCommand(intakeDefault);
+    intake.setDefaultCommand(intakeDefault);
   }
 
     public DriveBaseSub getDriveBase(){return driveBase;}
