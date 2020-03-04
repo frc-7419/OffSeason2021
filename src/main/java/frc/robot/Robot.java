@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // faceplantThenShoot.schedule();
-    robotContainer.getAutoCommand().schedule();
+    // robotContainer.getAutoCommand().schedule();
   }
 
   @Override
@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    robotContainer.getAutoCommand().cancel();
+    // robotContainer.getAutoCommand().cancel();
     robotContainer.setDefaultCommands();
   }
 

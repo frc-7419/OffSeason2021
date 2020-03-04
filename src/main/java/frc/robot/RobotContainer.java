@@ -6,7 +6,7 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.autos.FaceplantThenShoot;
+// import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -35,7 +35,6 @@ public class RobotContainer {
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final ButtonBoard buttonBoard = new ButtonBoard();
-  private final GyroSub gyro = new GyroSub();
   private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
   private final HoodSub hood = new HoodSub();
   private final ControlPanelSub cpMech = new ControlPanelSub();
@@ -47,7 +46,6 @@ public class RobotContainer {
   // private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
-  private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
 
   public RobotContainer() {
     codeTestButtonBindings();
@@ -71,12 +69,6 @@ public class RobotContainer {
   private Trigger externalDownJoystick = new Trigger(bsExternalDownJoystick);
 
   private void codeTestButtonBindings(){ // for programmer
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whenPressed(new StraightWithMotionMagic(driveBase, PowerConstants.DriveBaseSetpoint.val));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whenPressed(new TurnWithGyro(driveBase, gyro, 90, TurnDirection.LEFT));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    // .whenPressed(new TurnWithGyro(driveBase, gyro, limelight.getTx()));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whenPressed(new StraightWithMotionMagic(driveBase, PowerConstants.DriveBaseSetpoint.val));
   }
@@ -185,8 +177,8 @@ public class RobotContainer {
     public RevColorDistanceSub getColorSensor(){return colorSensor;}
     public LimelightSub getLimelight(){return limelight;}
 
-    public Command getAutoCommand(){
-      return faceplantThenShoot;
-    }
+    // public Command getAutoCommand(){
+    //   return faceplantThenShoot;
+    // }
   
 }
