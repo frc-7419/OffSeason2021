@@ -8,17 +8,27 @@
 package frc.robot.subsystems.autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.PowerConstants;
+import frc.robot.subsystems.intake.RevolverSub;
+import frc.robot.subsystems.sensors.RevColorDistanceSub;
+import frc.robot.subsystems.shooter.GetToTargetVelocity;
+import frc.robot.subsystems.shooter.ShooterSub;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class StraightShotsForward extends SequentialCommandGroup {
-  /**
-   * Creates a new StraightShotsForward.
-   */
-  public StraightShotsForward() {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
-    super();
+
+  public StraightShotsForward(final ShooterSub shooter, final RevolverSub revolver, final RevColorDistanceSub colorSensor, final LoaderSub loader) {
+    super(
+      new WaitCommand(1),
+      new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val),
+      new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+      PowerConstants.RevolverShotsButton.val).withTimeout(5),
+
+
+
+    );
   }
 }

@@ -20,7 +20,7 @@ public class InitiationLineStraightShot extends SequentialCommandGroup {
 
   public InitiationLineStraightShot(ShooterSub shooter, RevolverSub revolver, RevColorDistanceSub colorSensor, LoaderSub loader) {
 
-    addCommands(new ReadyToShoot(shooter, revolver, colorSensor, 3));
+    addCommands(new ReadyToShoot(shooter, revolver, colorSensor, 3, PowerConstants.ShooterShotsButton.val));
     addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
                                 PowerConstants.RevolverShotsButton.val).withTimeout(5));
     addCommands(new WaitCommand(1));

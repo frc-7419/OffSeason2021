@@ -1,8 +1,9 @@
 package frc.robot.subsystems.drive;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PowerTime extends CommandBase {
+public class StraightPowerTime extends CommandBase {
 
   private DriveBaseSub driveBase;
   private double power;
@@ -11,12 +12,12 @@ public class PowerTime extends CommandBase {
   private double timestamp;
 
   /**
-   * 
-   * @param power powe of which the robot will wun. max of 1.
-   * @param time in seconds 
+   * runs the drive base straight at a power for a time
+   * @param driveBase
+   * @param power positive / negative to indicate direction
+   * @param time in milliseconds
    */
-
-  public PowerTime(DriveBaseSub driveBase, double power, double time) {
+  public StraightPowerTime(DriveBaseSub driveBase, double power, double time) {
     this.driveBase = driveBase;
     this.power = power;
     this.time = time * 1000;
@@ -30,6 +31,7 @@ public class PowerTime extends CommandBase {
 
   @Override
   public void execute() {
+    SmartDashboard.putString("command status", "power time");
     driveBase.setAll(power);
     
     if(System.currentTimeMillis() - timestamp > time)
@@ -41,6 +43,7 @@ public class PowerTime extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveBase.stop();
+    driveBase.brake();
   }
 
   @Override

@@ -42,7 +42,7 @@ public class ShooterSub extends SubsystemBase{
 
     @Override
     public void periodic() {
-        // SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("periodic speed", talon.getSelectedSensorVelocity());
     }
 
     public void run(){
