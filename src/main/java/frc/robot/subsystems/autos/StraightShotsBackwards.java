@@ -23,7 +23,6 @@ import frc.robot.subsystems.shooter.ShooterSub;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class StraightShotsBackwards extends SequentialCommandGroup {
 
-
     public StraightShotsBackwards(final ShooterSub shooter, final RevolverSub revolver, 
         final RevColorDistanceSub colorSensor, final LoaderSub loader, DriveBaseSub driveBase) {
     
