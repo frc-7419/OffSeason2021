@@ -53,8 +53,8 @@ public class RobotContainer {
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
 
   public RobotContainer() {
-    // manualButtonBindings();
-    codeTestButtonBindings();
+    manualButtonBindings();
+    // codeTestButtonBindings();
     buttonBoardBindings();
   }
 
