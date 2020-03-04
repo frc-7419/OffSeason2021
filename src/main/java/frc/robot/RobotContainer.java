@@ -6,6 +6,7 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.autos.JustMoveForward;
 // import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
@@ -51,6 +52,7 @@ public class RobotContainer {
     codeTestButtonBindings();
     // manualButtonBindings();
     buttonBoardBindings();
+    
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
@@ -70,7 +72,7 @@ public class RobotContainer {
 
   private void codeTestButtonBindings(){ // for programmer
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whenPressed(new StraightWithMotionMagic(driveBase, PowerConstants.DriveBaseSetpoint.val));
+    .whenPressed(new JustMoveForward(driveBase, 0.5, 2));
   }
 
   private void manualButtonBindings(){ // for johann

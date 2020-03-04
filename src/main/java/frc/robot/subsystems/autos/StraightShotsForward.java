@@ -7,22 +7,18 @@
 
 package frc.robot.subsystems.autos;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.drive.DriveBaseSub;
 
-public class JustMoveForward extends SequentialCommandGroup {
-
-  public JustMoveForward(DriveBaseSub driveBase, double power, int time) {
-
-    super(
-      new WaitCommand(2),
-      new JustMoveForward(driveBase, power, time),
-      new WaitCommand(15 - time)
-    );
-
-    SmartDashboard.putString("command status", "Just Move Forward");
-
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+public class StraightShotsForward extends SequentialCommandGroup {
+  /**
+   * Creates a new StraightShotsForward.
+   */
+  public StraightShotsForward() {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());
+    super();
   }
 }

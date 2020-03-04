@@ -26,12 +26,16 @@ public class PercentOutput extends CommandBase {
 
   @Override
   public void initialize() {
-    if(reversed){negative = -1;}
-    else{negative = 1;}
+    if(reversed){
+      negative = -1;
+    }
+    else{
+      negative = 1;
+    }
 
-      SmartDashboard.putString("shooter", "percent power");
-      shooter.setOutputPower(negative * power);
-      shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
+    SmartDashboard.putString("shooter", "percent power");
+    shooter.setOutputPower(negative * power);
+    shooter.setControlMethod(ControlMethod.PERCENT_OUTPUT);
   }
 
   @Override
