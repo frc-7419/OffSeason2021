@@ -5,22 +5,17 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class StopAll extends InstantCommand {
 
-  public StopAll() {
-  }
+  public StopAll() {}
 
   @Override
-  public void initialize() {
-  }
-
+  public void initialize() {}
 
   @Override
   public void execute() {
     CommandScheduler.getInstance().cancelAll();
   }
 
-
   @Override
-  public void end(boolean interrupted) {
-  }
-
+  public void end(boolean interrupted) {}
+  
 }
