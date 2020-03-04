@@ -10,19 +10,6 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.autos.FaceplantThenShoot;
-import frc.robot.subsystems.climber.ClimberSub;
-import frc.robot.subsystems.drive.DriveBaseSub;
-import frc.robot.subsystems.intake.IntakeSub;
-import frc.robot.subsystems.intake.LoaderSub;
-import frc.robot.subsystems.intake.RevolverSub;
-import frc.robot.subsystems.sensors.RevColorDistanceSub;
-import frc.robot.subsystems.shooter.ShooterSub;
-import frc.robot.subsystems.vision.LimelightSub;
-=======
->>>>>>> origin/no-shuffleboard
 
 public class Robot extends TimedRobot {
 
@@ -54,7 +41,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // faceplantThenShoot.schedule();
-    robotContainer.getAutoCommand().schedule();
+    // robotContainer.getAutoCommand().schedule();
   }
 
   @Override
@@ -63,7 +50,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    robotContainer.getAutoCommand().cancel();
+    // robotContainer.getAutoCommand().cancel();
     robotContainer.setDefaultCommands();
   }
 
