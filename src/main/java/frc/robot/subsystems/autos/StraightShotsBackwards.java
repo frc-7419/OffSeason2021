@@ -25,7 +25,7 @@ public class StraightShotsBackwards extends SequentialCommandGroup {
 
     public StraightShotsBackwards(final ShooterSub shooter, final RevolverSub revolver, 
         final RevColorDistanceSub colorSensor, final LoaderSub loader, DriveBaseSub driveBase) {
-    
+
         // This part here is confusing me. Think about it 
         super(
         new WaitCommand(1),

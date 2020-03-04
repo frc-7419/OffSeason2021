@@ -7,20 +7,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.shooter.ShooterSub;
 
-public class GetToTargetVelocity extends CommandBase {
+public class TimeTargetVelocity extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-
+  
+  private Timer time;
   private ShooterSub shooter;
-  private double kF;
-
+  private int timestamp;
   private double target;
   private boolean done;
-  private double steadyLoops = 0;
-  private boolean stable = true;
-  private Timer time;
-  private int timestamp;
 
-  public GetToTargetVelocity(ShooterSub shooter, double target, int timestamp) {
+  public TimeTargetVelocity(ShooterSub shooter, double target, int timestamp) {
     this.shooter = shooter;
     this.target = target;
     this.timestamp = timestamp;
@@ -40,22 +36,20 @@ public class GetToTargetVelocity extends CommandBase {
     shooter.setPIDF(0, 0, 0, shooter.getkF());
     shooter.setTargetRawSpeed(target);
     // shooter.setControlMethod(ControlMethod.SPIN_UP);
-    
-    
 
   }
 
   @Override
   public void execute() {
     shooter.talon.set(ControlMode.Velocity, target);
-    double currentTime = time.get();
-    if(currentTime > timestamp){
+    final double currentTime = time.get();
+    if (currentTime > timestamp) {
       done = !done;
     }
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
     shooter.off();
   }
 
