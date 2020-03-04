@@ -39,6 +39,7 @@ public class RobotContainer {
   private final GyroSub gyro = new GyroSub();
   private final HoodSub hood = new HoodSub();
   private final ControlPanelSub cpMech = new ControlPanelSub();
+  private final ColorSensor colorSensorSub = new ColorSensor(cpMech);
 
   private final ArcadeDrive arcade = new ArcadeDrive(joystick, driveBase, 
   PowerConstants.DriveBaseLeftStraight.val, PowerConstants.DriveBaseRightTurn.val, 
@@ -50,9 +51,9 @@ public class RobotContainer {
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
 
   public RobotContainer() {
-    manualButtonBindings();
-    // codeTestButtonBindings();
-    buttonBoardBindings();
+    // manualButtonBindings();
+    codeTestButtonBindings();
+    // buttonBoardBindings();
   }
 
   private BooleanSupplier bsLeftTrig = () -> Math.abs(joystick.getLeftTrig()) > .05;
@@ -77,6 +78,12 @@ public class RobotContainer {
     // .whenPressed(new TurnWithGyro(driveBase, gyro, 90, TurnDirection.LEFT));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whenPressed(new TurnWithGyro(driveBase, gyro, limelight.getTx()));
+
+    new JoystickButton(buttonBoard, 5)
+    .whenHeld(new RotationControlCommand(colorSensorSub));
+
+    new JoystickButton(buttonBoard, 6)
+    .whenHeld(new PositionControlCommand(colorSensorSub));
   }
 
   private void manualButtonBindings(){ // for johann
