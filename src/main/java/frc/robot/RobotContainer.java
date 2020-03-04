@@ -6,8 +6,11 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.snippits.ShotsButton;
+import frc.robot.snippits.StopAll;
 import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.buttons.ButtonBoard;
+import frc.robot.subsystems.buttons.ReadyToShoot;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
@@ -71,12 +74,12 @@ public class RobotContainer {
   private Trigger externalDownJoystick = new Trigger(bsExternalDownJoystick);
 
   private void codeTestButtonBindings(){ // for programmer
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whenPressed(new StraightWithMotionMagic(driveBase, PowerConstants.DriveBaseSetpoint.val));
-    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    // .whenPressed(new TurnWithGyro(driveBase, gyro, 90, TurnDirection.LEFT));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    .whenPressed(new RunShooter(shooter, loader, revolver, 5000, .4));
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    .whenPressed(new StopAll());
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whenPressed(new TurnWithGyro(driveBase, gyro, limelight.getTx()));
+    .whenPressed(new ReadyToShoot(shooter, revolver, colorSensor, 4, 5000));
   }
 
   private void manualButtonBindings(){ // for johann
@@ -120,7 +123,7 @@ public class RobotContainer {
 
     // 2: SHOTS
     new JoystickButton(buttonBoard, 2)
-    .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+    .whileHeld(new RunShooter(  shooter, loader, revolver, 1000, 
                                 PowerConstants.RevolverShotsButton.val));
 
     // 3: 5419 SHOTS
@@ -169,9 +172,9 @@ public class RobotContainer {
   // public Command getLimelightTest(){return turnToTx;}
   
   public void setDefaultCommands(){
-    // revolver.setDefaultCommand(revolverDefault);
+    revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
-    // intake.setDefaultCommand(intakeDefault);
+    intake.setDefaultCommand(intakeDefault);
   }
 
     public DriveBaseSub getDriveBase(){return driveBase;}
