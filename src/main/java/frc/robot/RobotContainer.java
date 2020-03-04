@@ -6,6 +6,7 @@ import com.team7419.HappyPrintCommand;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+// import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -35,7 +36,6 @@ public class RobotContainer {
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final ButtonBoard buttonBoard = new ButtonBoard();
   private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
-  private final GyroSub gyro = new GyroSub();
   private final HoodSub hood = new HoodSub();
   private final ControlPanelSub cpMech = new ControlPanelSub();
 
