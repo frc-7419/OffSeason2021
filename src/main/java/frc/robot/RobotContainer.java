@@ -43,7 +43,7 @@ public class RobotContainer {
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
 
   public RobotContainer() {
-    // manualButtonBindings();
+    manualButtonBindings();
     codeTestButtonBindings();
     buttonBoardBindings();
   }
@@ -76,13 +76,13 @@ public class RobotContainer {
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new RunClimber(climber, .5, false));
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whileHeld(new RunClimber(climber, .5, true));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new RunClimber(climber, .5, true));
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new PercentOutput(shooter, PowerConstants.ShooterReverse.val, true));
   
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
 
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)

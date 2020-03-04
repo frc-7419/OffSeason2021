@@ -37,8 +37,8 @@ public class TurnWithGyro extends CommandBase {
 
   @Override
   public void initialize() {
-    if(target > 0){negative = 1;}
-    else{negative = -1;}
+    if(target > 0){negative = -1;} //negative tx means the robot needs to turn to the right
+    else{negative = 1;}
     initAngle = ahrs.getGyroAngle();
     kP = PowerConstants.GyrokP.val; 
     kI = PowerConstants.GyrokI.val;
