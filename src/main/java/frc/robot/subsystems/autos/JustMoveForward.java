@@ -14,11 +14,11 @@ import frc.robot.subsystems.drive.DriveBaseSub;
 
 public class JustMoveForward extends SequentialCommandGroup {
 
-  public JustMoveForward(DriveBaseSub driveBase, double power, int time) {
+  public JustMoveForward(final DriveBaseSub driveBase, final double power, final int time) {
 
     super(
       new WaitCommand(2),
-      new JustMoveForward(driveBase, power, time),
+      new PowerTime(driveBase, power, time),
       new WaitCommand(15 - time)
     );
 

@@ -5,41 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems.autos;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.PowerConstants;
+import frc.robot.snippits.StopAll;
+import frc.robot.subsystems.autos.PowerTime;
+import frc.robot.subsystems.autos.TimeTargetVelocity;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.drive.DriveBaseSub;
 import frc.robot.subsystems.intake.LoaderSub;
 import frc.robot.subsystems.intake.RevolverSub;
 import frc.robot.subsystems.sensors.RevColorDistanceSub;
-import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.ShooterSub;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class StraightShotsForward extends SequentialCommandGroup {
-
-
-    public StraightShotsForward(final ShooterSub shooter, final RevolverSub revolver,
-            final RevColorDistanceSub colorSensor, final LoaderSub loader, DriveBaseSub driveBase) {
+public class FaceplantShots extends SequentialCommandGroup {
+  /**
+   * Creates a new FaceplantShots.
+   */
+  public FaceplantShots(final ShooterSub shooter, final RevolverSub revolver, 
+  final RevColorDistanceSub colorSensor, final LoaderSub loader, final DriveBaseSub driveBase) {
     super(
-      new WaitCommand(1),
-
-      // This part here is confusing me. Think about it 
+      new WaitCommand(0.5),
+      new PowerTime(driveBase, 0.3, 5),
+      new WaitCommand(0.5),
+      new PowerTime(driveBase, -0.6, 0.5),
       new TimeTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val, 5),
       new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
-        PowerConstants.RevolverShotsButton.val).withTimeout(5),
-      new WaitCommand(1),
-      new PowerTime(driveBase, 0.5, 2)
-
-    
-
-
-
+          PowerConstants.RevolverShotsButton.val).withTimeout(5),
+      new StopAll()
     );
   }
 }
