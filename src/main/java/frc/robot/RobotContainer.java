@@ -177,17 +177,17 @@ public class RobotContainer {
     intake.setDefaultCommand(intakeDefault);
   }
 
-    public DriveBaseSub getDriveBase(){return driveBase;}
-    public IntakeSub getIntake(){return intake;}
-    public RevolverSub getRevolver(){return revolver;}
-    public LoaderSub getLoader(){return loader;}
-    public ShooterSub getShooter(){return shooter;}
-    public ClimberSub getClimber(){return climber;}
-    public RevColorDistanceSub getColorSensor(){return colorSensor;}
-    public LimelightSub getLimelight(){return limelight;}
+  public DriveBaseSub getDriveBase(){return driveBase;}
+  public IntakeSub getIntake(){return intake;}
+  public RevolverSub getRevolver(){return revolver;}
+  public LoaderSub getLoader(){return loader;}
+  public ShooterSub getShooter(){return shooter;}
+  public ClimberSub getClimber(){return climber;}
+  public RevColorDistanceSub getColorSensor(){return colorSensor;}
+  public LimelightSub getLimelight(){return limelight;}
 
-    public Command getAutoCommand(){
-      return faceplantThenShoot;
-    }
+  public Command getAutoCommand(){
+    return faceplantThenShoot;
+  }
   
 }
