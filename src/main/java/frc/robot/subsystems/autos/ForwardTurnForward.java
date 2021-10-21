@@ -6,9 +6,9 @@ import frc.robot.subsystems.drive.StraightPowerTime;
 import frc.robot.subsystems.drive.TurnPowerTime;
 import frc.robot.subsystems.drive.DriveBaseSub.TurnDirection;
 
-public class MoveForward extends SequentialCommandGroup {
+public class ForwardTurnForward extends SequentialCommandGroup {
 
-    public MoveForward(DriveBaseSub driveBase) {
+    public ForwardTurnForward(DriveBaseSub driveBase) {
         addCommands(new StraightPowerTime(driveBase, .5, 1000));
         addCommands(new TurnPowerTime(driveBase, .5, TurnDirection.LEFT, 500));
         addCommands(new StraightPowerTime(driveBase, .5, 1000));
