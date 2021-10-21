@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.snippits.ShotsButton;
 import frc.robot.snippits.StopAll;
 import frc.robot.subsystems.autos.FaceplantThenShoot;
+import frc.robot.subsystems.autos.ForwardTurnForward;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.ReadyToShoot;
 import frc.robot.subsystems.buttons.RunShooter;
@@ -51,6 +52,8 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
+
+  private final ForwardTurnForward forwardTurnForward = new ForwardTurnForward(driveBase);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -187,7 +190,8 @@ public class RobotContainer {
   public LimelightSub getLimelight(){return limelight;}
 
   public Command getAutoCommand(){
-    return faceplantThenShoot;
+    // return faceplantThenShoot;
+    return forwardTurnForward;
   }
   
 }
