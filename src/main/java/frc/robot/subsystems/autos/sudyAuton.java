@@ -20,5 +20,6 @@ public class sudyAuton extends SequentialCommandGroup {
     public sudyAuton(DriveBaseSub driveBaseSub, ShooterSub shooterSub, RevolverSub revolver, RevColorDistanceSub colorSensor, LoaderSub loader) {
         addCommands(new StraightPowerTime(driveBaseSub, 0.5, 1000));
         addCommands(new StraightPowerTime(driveBaseSub, -0.5, 1000));
+        //Testing this
     }
 }
