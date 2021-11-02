@@ -6,7 +6,7 @@ import frc.robot.subsystems.drive.GyroSub;
 import frc.robot.subsystems.drive.StraightPowerTime;
 import frc.robot.subsystems.drive.TurnWithGyro;
 
-public class StephenAutonTest extends SequentialCommandGroup {
+public class DriveTriangle extends SequentialCommandGroup {
 
   public DriveTriangle(DriveBaseSub driveBase) {
     addCommands(new StraightPowerTime(driveBase, 0.5, 1000));
