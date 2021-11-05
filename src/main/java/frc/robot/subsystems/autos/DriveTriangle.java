@@ -8,7 +8,7 @@ import frc.robot.subsystems.drive.TurnWithGyro;
 
 public class DriveTriangle extends SequentialCommandGroup {
 
-  public DriveTriangle(DriveBaseSub driveBase) {
+  public DriveTriangle(DriveBaseSub driveBase, GyroSub ahrs) {
     addCommands(new StraightPowerTime(driveBase, 0.5, 1000));
     addCommands(new TurnWithGyro(driveBase, ahrs, 120));
     addCommands(new StraightPowerTime(driveBase, 0.5, 1000));
