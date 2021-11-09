@@ -4,6 +4,7 @@ import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.PowerConstants;
 
 public class IntakeDefault extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
@@ -26,8 +27,8 @@ public class IntakeDefault extends CommandBase{
     double power = joystick.getLeftTrig() + joystick.getRightTrig();
     // SmartDashboard.putNumber("intake pow", power);
     // assumption being that left trigger vals are negative
-    if(Math.abs(joystick.getLeftTrig()) > 0){intake.setPower(-.6*joystick.getLeftTrig());}
-    else if(Math.abs(joystick.getRightTrig()) > 0){intake.setPower(-.6*joystick.getRightTrig());}
+    if(Math.abs(joystick.getLeftTrig()) > 0){intake.setPower(PowerConstants.IntakeJohannGround.val*joystick.getLeftTrig());}
+    else if(Math.abs(joystick.getRightTrig()) > 0){intake.setPower(PowerConstants.IntakeJohannGround.val*joystick.getRightTrig());}
     else{intake.setPower(0);}
     // intake.setPower(-.5);
 

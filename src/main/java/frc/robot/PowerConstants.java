@@ -3,7 +3,7 @@ package frc.robot;
 public enum PowerConstants{
     
     // shooter
-    ShooterShotsButton(13000),
+    ShooterShotsButton(17000),
     ShooterReverse(5000), // 100% power
     ShooterJohann(13000),
     Shooter5419Shots(17000),
@@ -23,7 +23,7 @@ public enum PowerConstants{
     RevolverJohann(.6),
     RevolverToTape(-.45),
     RevolverWithIntake(.4),
-    RevolverButtonBoard(1),
+    RevolverButtonBoard(.8),
     Revolver5419Shots(1),
 
     // intake

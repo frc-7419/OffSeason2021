@@ -7,10 +7,12 @@ import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.autos.FaceplantThenShoot;
+import frc.robot.subsystems.autos.InitiationLineStraightShot;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
+import frc.robot.subsystems.intake.RunLoader;
 import frc.robot.subsystems.controlpanel.ControlPanelSub;
 import frc.robot.subsystems.controlpanel.RaiseCpMech;
 import frc.robot.subsystems.controlpanel.UpThenSpin;
@@ -48,6 +50,7 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
+  private final InitiationLineStraightShot initiationLineStraightShot = new InitiationLineStraightShot(shooter, revolver, colorSensor, loader);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -112,21 +115,29 @@ public class RobotContainer {
 
   public void buttonBoardBindings(){
 
-    // 1: pregame button
+    // 1: revolver to tape
     new JoystickButton(buttonBoard, 1)
     .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
-    new JoystickButton(buttonBoard, 1)
-    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
+    
 
-    // 2: SHOTS
+    // 2: Revolver to Speed
     new JoystickButton(buttonBoard, 2)
-    .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
-                                PowerConstants.RevolverShotsButton.val));
+    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
+    
+    // new JoystickButton(buttonBoard, 2)
+    // .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+    //                             PowerConstants.RevolverShotsButton.val));
 
     // 3: 5419 SHOTS
+    
     new JoystickButton(buttonBoard, 3)
-    .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.Shooter5419Shots.val, 
-                                PowerConstants.Revolver5419Shots.val));
+    .whileHeld(new RunLoader(loader, PowerConstants.LoaderShotsButton.val, true));
+
+    // new JoystickButton(buttonBoard, 3)
+    // .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.Shooter5419Shots.val, 
+    //                             PowerConstants.Revolver5419Shots.val));
+
+    
 
     // 4: henry's off the wall thing at 9 inches
     new JoystickButton(buttonBoard, 4)
@@ -186,7 +197,7 @@ public class RobotContainer {
     public LimelightSub getLimelight(){return limelight;}
 
     public Command getAutoCommand(){
-      return faceplantThenShoot;
+      return initiationLineStraightShot;
     }
   
 }
