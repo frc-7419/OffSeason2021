@@ -31,6 +31,7 @@ public class RunRevolver extends CommandBase{
   @Override
   public void end(boolean interrupted) {
       revolver.setPower(0);
+      revolver.brakeMode();
   }
 
   @Override

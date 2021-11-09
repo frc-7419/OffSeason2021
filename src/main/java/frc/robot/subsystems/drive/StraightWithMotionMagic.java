@@ -39,7 +39,7 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void initialize(){
 
-        SmartDashboard.putString("command status", "motion magic test");
+        // SmartDashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */
         // driveBase.getRightMast().configFactoryDefault();
     //   driveBase.getLeftMast().configFactoryDefault();
@@ -77,28 +77,28 @@ public class StraightWithMotionMagic extends CommandBase {
     @Override
     public void execute(){
 
-        SmartDashboard.putString("command status", "executing motion magic");
+        // SmartDashboard.putString("command status", "executing motion magic");
 
-        SmartDashboard.putNumber("leftMast", driveBase.getLeftMast().getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("rightMast", driveBase.getRightMast().getSelectedSensorPosition(0));
+        // SmartDashboard.putNumber("leftMast", driveBase.getLeftMast().getSelectedSensorPosition(0));
+        // SmartDashboard.putNumber("rightMast", driveBase.getRightMast().getSelectedSensorPosition(0));
     
         double leftMastOutput = driveBase.getLeftMast().getMotorOutputPercent();
         double rightMastOutput = driveBase.getRightMast().getMotorOutputPercent();
-        SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
-        SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
-        SmartDashboard.putNumber("error", driveBase.getLeftMast().getClosedLoopError());
+        // SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
+        // SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
+        // SmartDashboard.putNumber("error", driveBase.getLeftMast().getClosedLoopError());
         if(System.currentTimeMillis() - startTime > 1000){
             started = true;
         }
 
-        SmartDashboard.putBoolean("started", started);
+        // SmartDashboard.putBoolean("started", started);
         
     }
 
     @Override
     public boolean isFinished(){
         if(started && Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
-            SmartDashboard.putString("command status", "moving");
+            // SmartDashboard.putString("command status", "moving");
             Timer.delay(1);
             return true;
         } else{return false;}

@@ -1,24 +1,24 @@
-package frc.robot.subsystems.sensors;
+// package frc.robot.subsystems.sensors;
 
-import com.revrobotics.Rev2mDistanceSensor;
-import com.revrobotics.Rev2mDistanceSensor.Port;
+// import com.revrobotics.Rev2mDistanceSensor;
+// import com.revrobotics.Rev2mDistanceSensor.Port;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Rev2mDistanceSub extends SubsystemBase{
+// public class Rev2mDistanceSub extends SubsystemBase{
 
-    private Rev2mDistanceSensor distanceSensor;
+//     private Rev2mDistanceSensor distanceSensor;
 
-    public Rev2mDistanceSub(){
-        distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
-        distanceSensor.setAutomaticMode(true);
-    }
+//     public Rev2mDistanceSub(){
+//         distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
+//         distanceSensor.setAutomaticMode(true);
+//     }
 
-    public double getDistance(){return distanceSensor.getRange();}
+//     public double getDistance(){return distanceSensor.getRange();}
 
-    @Override
-    public void periodic(){
-        // SmartDashboard.putNumber("2m distance", this.getDistance());
-    }
-}
+//     @Override
+//     public void periodic(){
+//         // SmartDashboard.putNumber("2m distance", this.getDistance());
+//     }
+// }

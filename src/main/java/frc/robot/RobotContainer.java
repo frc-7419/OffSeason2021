@@ -7,13 +7,16 @@ import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.autos.FaceplantThenShoot;
+import frc.robot.subsystems.autos.InitiationLineStraightShot;
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
 import frc.robot.subsystems.climber.RunClimber;
+import frc.robot.subsystems.intake.RunLoader;
 import frc.robot.subsystems.controlpanel.ControlPanelSub;
 import frc.robot.subsystems.controlpanel.RaiseCpMech;
 import frc.robot.subsystems.controlpanel.UpThenSpin;
+import frc.robot.subsystems.shooter.HoodDefault;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.drive.DriveBaseSub.TurnDirection;
 import frc.robot.subsystems.intake.*;
@@ -35,7 +38,7 @@ public class RobotContainer {
   private final RevColorDistanceSub colorSensor = new RevColorDistanceSub();
   private final MaxBotixUltrasonicSub ultrasonic = new MaxBotixUltrasonicSub();
   private final ButtonBoard buttonBoard = new ButtonBoard();
-  private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
+  // private final Rev2mDistanceSub distanceSensor = new Rev2mDistanceSub();
   private final GyroSub gyro = new GyroSub();
   private final HoodSub hood = new HoodSub();
   private final ControlPanelSub cpMech = new ControlPanelSub();
@@ -47,7 +50,9 @@ public class RobotContainer {
   // private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
+  private final HoodDefault hoodDefault = new HoodDefault(hood, joystick);
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
+  private final InitiationLineStraightShot initiationLineStraightShot = new InitiationLineStraightShot(shooter, revolver, colorSensor, loader);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -80,22 +85,34 @@ public class RobotContainer {
   }
 
   private void manualButtonBindings(){ // for johann
+    // A button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new RunClimber(climber, .5, false));
 
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
-    .whileHeld(new RunClimber(climber, .5, true));
+    // B button
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
+    // .whileHeld(new RunClimber(climber, .5, true));
 
+    // Y button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whileHeld(new PercentOutput(shooter, PowerConstants.ShooterReverse.val, true));
-  
+    .whenPressed(new StraightWithMotionMagic(driveBase, -12));
+
+    // X button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
 
+
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    // .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
+
+    // L Shoulder
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     .whileHeld(new RunRevolver(revolver, PowerConstants.RevolverJohann.val, false)); 
+    
+    // R Shoulder
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
     .whileHeld(new RunRevolver(revolver, PowerConstants.RevolverJohann.val, true)); 
+
 
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, PowerConstants.LoaderJohann.val, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, PowerConstants.LoaderJohann.val, false));
@@ -112,35 +129,48 @@ public class RobotContainer {
 
   public void buttonBoardBindings(){
 
-    // 1: pregame button
+    // 1: revolver to tape
     new JoystickButton(buttonBoard, 1)
     .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
-    new JoystickButton(buttonBoard, 1)
-    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
+    
 
-    // 2: SHOTS
+    // 2: Revolver to Speed
     new JoystickButton(buttonBoard, 2)
-    .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
-                                PowerConstants.RevolverShotsButton.val));
+    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
+    
+    // new JoystickButton(buttonBoard, 2)
+    // .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+    //                             PowerConstants.RevolverShotsButton.val));
 
     // 3: 5419 SHOTS
+    
     new JoystickButton(buttonBoard, 3)
-    .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.Shooter5419Shots.val, 
-                                PowerConstants.Revolver5419Shots.val));
+    .whileHeld(new RunLoader(loader, PowerConstants.LoaderShotsButton.val, true));
 
-    // 4: henry's off the wall thing at 9 inches
+    // new JoystickButton(buttonBoard, 3)
+    // .whileHeld(new RunShooter(  shooter, loader, revolver, PowerConstants.Shooter5419Shots.val, 
+    //                             PowerConstants.Revolver5419Shots.val));
+
+    
+
+    // 4: henry's off the wall thing at 9 inches <--- wrong 
+    // 4: rotate revolver and gets to target velocity
     new JoystickButton(buttonBoard, 4)
     .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
     new JoystickButton(buttonBoard, 4)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.Shooter5419Shots.val));
     
     // 5: cp down & no spin
-    new JoystickButton(buttonBoard, 5)
-    .whileHeld(new RaiseCpMech(cpMech, .25, true));
+    // new JoystickButton(buttonBoard, 5)
+    // .whileHeld(new RaiseCpMech(cpMech, .25, true));
 
     // 6: cp up, spin after a delay
-    new JoystickButton(buttonBoard, 6)
-    .whileHeld(new UpThenSpin(cpMech, .25, false, 2, .25));
+    // new JoystickButton(buttonBoard, 6)
+    // .whileHeld(new UpThenSpin(cpMech, .25, false, 2, .25));
+
+    // // 5: go back x inches 
+    // new JoystickButton(buttonBoard, 5)
+    // .whenPressed(new StraightWithMotionMagic(driveBase, 12));
 
     // 7: hood up at 0.25
     new JoystickButton(buttonBoard, 7)
@@ -174,6 +204,7 @@ public class RobotContainer {
     revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
     intake.setDefaultCommand(intakeDefault);
+    hood.setDefaultCommand(hoodDefault);
   }
 
     public DriveBaseSub getDriveBase(){return driveBase;}
@@ -186,7 +217,7 @@ public class RobotContainer {
     public LimelightSub getLimelight(){return limelight;}
 
     public Command getAutoCommand(){
-      return faceplantThenShoot;
+      return initiationLineStraightShot;
     }
   
 }
