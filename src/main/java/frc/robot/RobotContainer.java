@@ -14,6 +14,7 @@ import frc.robot.subsystems.climber.RunClimber;
 import frc.robot.subsystems.controlpanel.ControlPanelSub;
 import frc.robot.subsystems.controlpanel.RaiseCpMech;
 import frc.robot.subsystems.controlpanel.UpThenSpin;
+import frc.robot.subsystems.shooter.HoodDefault;
 import frc.robot.subsystems.drive.*;
 import frc.robot.subsystems.drive.DriveBaseSub.TurnDirection;
 import frc.robot.subsystems.intake.*;
@@ -47,6 +48,7 @@ public class RobotContainer {
   // private final TurnToTx turnToTx = new TurnToTx(driveBase, limelight);
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
+  private final HoodDefault hoodDefault = new HoodDefault(hood, joystick);
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
 
   public RobotContainer() {
@@ -174,6 +176,7 @@ public class RobotContainer {
     revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
     intake.setDefaultCommand(intakeDefault);
+    hood.setDefaultCommand(hoodDefault);
   }
 
     public DriveBaseSub getDriveBase(){return driveBase;}
