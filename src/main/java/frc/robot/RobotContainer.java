@@ -95,11 +95,12 @@ public class RobotContainer {
 
     // Y button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whileHeld(new PercentOutput(shooter, PowerConstants.ShooterReverse.val, true));
-  
+    .whileHeld(new StraightWithMotionMagic(driveBase, -12));
+
     // X button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-    .whileHeld(new StraightWithMotionMagic(driveBase, -12));
+    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
+
 
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
     // .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
