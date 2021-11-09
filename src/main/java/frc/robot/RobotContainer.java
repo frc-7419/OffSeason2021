@@ -82,22 +82,33 @@ public class RobotContainer {
   }
 
   private void manualButtonBindings(){ // for johann
+    // A button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
     .whileHeld(new RunClimber(climber, .5, false));
 
+    // B button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
     .whileHeld(new RunClimber(climber, .5, true));
 
+    // Y button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     .whileHeld(new PercentOutput(shooter, PowerConstants.ShooterReverse.val, true));
   
+    // X button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
-    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
+    .whileHeld(new StraightWithMotionMagic(driveBase, -12));
 
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
+    // .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterJohann.val));
+
+    // L Shoulder
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderL.value)
     .whileHeld(new RunRevolver(revolver, PowerConstants.RevolverJohann.val, false)); 
+    
+    // R Shoulder
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonShoulderR.value)
     .whileHeld(new RunRevolver(revolver, PowerConstants.RevolverJohann.val, true)); 
+
 
     new POVButton(joystick, 0).whileHeld(new RunLoader(loader, PowerConstants.LoaderJohann.val, true)); 
     new POVButton(joystick, 180).whileHeld(new RunLoader(loader, PowerConstants.LoaderJohann.val, false));
@@ -137,12 +148,12 @@ public class RobotContainer {
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.Shooter5419Shots.val));
     
     // 5: cp down & no spin
-    new JoystickButton(buttonBoard, 5)
-    .whileHeld(new RaiseCpMech(cpMech, .25, true));
+    // new JoystickButton(buttonBoard, 5)
+    // .whileHeld(new RaiseCpMech(cpMech, .25, true));
 
     // 6: cp up, spin after a delay
-    new JoystickButton(buttonBoard, 6)
-    .whileHeld(new UpThenSpin(cpMech, .25, false, 2, .25));
+    // new JoystickButton(buttonBoard, 6)
+    // .whileHeld(new UpThenSpin(cpMech, .25, false, 2, .25));
 
     // 7: hood up at 0.25
     new JoystickButton(buttonBoard, 7)
