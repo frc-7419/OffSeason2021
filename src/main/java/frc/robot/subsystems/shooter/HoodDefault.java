@@ -1,17 +1,17 @@
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunRevolver extends CommandBase{
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private RevolverSub revolver;
+public class HoodDefault extends CommandBase{
+  private HoodSub hood;
+  
   private double power;
   private boolean reversed;
-  double coeff;
+  double coeff = 1;
 
-  public RunRevolver(RevolverSub revolver, double power, boolean reversed) {
-    this.revolver = revolver;
+  public HoodDefault(HoodSub hood, double power, boolean reversed) {
+    this.hood = hood;
     this.power = power;
     this.reversed = reversed;
   }
@@ -24,14 +24,14 @@ public class RunRevolver extends CommandBase{
 
   @Override
   public void execute() {
-    SmartDashboard.putString("revolver", "running");
-    revolver.setPower(power * coeff);
+    SmartDashboard.putString("hood", "running");
+    hood.setPower(Math.abs(power) * coeff);
+    SmartDashboard.putNumber("hood coeff", coeff);
   }
 
   @Override
   public void end(boolean interrupted) {
-      revolver.setPower(0);
-      revolver.brakeMode();
+      hood.setPower(0);
   }
 
   @Override

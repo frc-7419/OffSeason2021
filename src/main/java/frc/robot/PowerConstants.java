@@ -23,12 +23,12 @@ public enum PowerConstants{
     RevolverJohann(.6),
     RevolverToTape(-.45),
     RevolverWithIntake(.4),
-    RevolverButtonBoard(.8),
+    RevolverButtonBoard(.6),
     Revolver5419Shots(1),
 
     // intake
-    IntakeJohannGround(-1),
-    IntakeJohannPlayerStation(-1),
+    IntakeJohannGround(-.7),
+    IntakeJohannPlayerStation(.7),
 
     // climber
     ClimberJohann(.5),

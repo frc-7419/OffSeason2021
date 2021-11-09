@@ -36,6 +36,7 @@ public class RunLoader extends CommandBase{
   @Override
   public void end(boolean interrupted) {
       loader.setPower(0);
+      loader.brake();
   }
 
   @Override

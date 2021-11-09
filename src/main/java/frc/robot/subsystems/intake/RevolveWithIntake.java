@@ -45,8 +45,10 @@ private double timestamp;
     }
     else{
         revolver.setPower(0);
+        revolver.brakeMode();
     }
   }
+
 
   @Override
   public void end(boolean interrupted) {

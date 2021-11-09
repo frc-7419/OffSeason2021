@@ -1,6 +1,7 @@
 package frc.robot.subsystems.intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
@@ -21,4 +22,8 @@ public class LoaderSub extends SubsystemBase{
     public void periodic(){}
 
     public void setPower(double power){falcon.set(ControlMode.PercentOutput, power);}
+
+    public void brake() {
+        falcon.setNeutralMode(NeutralMode.Brake);
+    }
 }
