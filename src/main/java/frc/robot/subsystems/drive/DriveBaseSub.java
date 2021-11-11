@@ -43,8 +43,11 @@ public class DriveBaseSub extends SubsystemBase {
     RIGHT,
   }
 
+  // accessors
   public TalonFX getLeftMast(){return left1;}
   public TalonFX getRightMast(){return right1;}
+  public TalonFX getLeftFollow(){return left2;}
+  public TalonFX getRightFollow(){return right2;}
 
   public void setLeftPower(double power){
     left1.set(ControlMode.PercentOutput, power);

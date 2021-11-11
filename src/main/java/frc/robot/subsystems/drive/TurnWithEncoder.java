@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.PowerConstants;
+import frc.robot.subsystems.drive.DriveBaseSub.TurnDirection;
 
 public class TurnWithEncoder extends CommandBase {
   
@@ -76,8 +77,8 @@ public class TurnWithEncoder extends CommandBase {
         driveBase.getRightMast().configMotionCruiseVelocity(15000, 0);
         driveBase.getRightMast().configMotionAcceleration(6000, 0);  
 
-        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
-        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PowerConstants.TurnWithEncoderkP.val, PowerConstants.TurnWithEncoderkI.val, PowerConstants.TurnWithEncoderkD.val, 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PowerConstants.TurnWithEncoderkP.val, PowerConstants.TurnWithEncoderkI.val, PowerConstants.TurnWithEncoderkD.val, 0);
         // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
         double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
         double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
@@ -116,7 +117,7 @@ public class TurnWithEncoder extends CommandBase {
 
     @Override
     public boolean isFinished(){
-        if(started && Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
+        if(started && Math.abs(leftMastOutput) < PowerConstants.TurnWithEncoderTolerance.val && Math.abs(rightMastOutput) < PowerConstants.TurnWithEncoderTolerance.val){
             SmartDashboard.putString("command status", "moving");
             Timer.delay(1);
             return true;
@@ -126,10 +127,10 @@ public class TurnWithEncoder extends CommandBase {
     @Override
     public void end(boolean interrupted){
         // reset inversions to default
-        driveBase.getRightMast().setInverted(true);
-        driveBase.getRightFollow().setInverted(true);
+        // driveBase.getRightMast().setInverted(true);
+        // driveBase.getRightFollow().setInverted(true);
 
-        driveBase.getLeftMast().setInverted(false);
-        driveBase.getLeftFollow().setInverted(false);
+        // driveBase.getLeftMast().setInverted(false);
+        // driveBase.getLeftFollow().setInverted(false);
     }
 }

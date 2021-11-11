@@ -3,9 +3,9 @@ package frc.robot;
 public enum PowerConstants{
     
     // shooter
-    ShooterShotsButton(17000),
+    ShooterShotsButton(14500),
     // ShooterShotsButtonLong(18500),
-    ShooterShotsButtonLong(24000),
+    ShooterShotsButtonLong(25000),
     ShooterReverse(5000), // 100% power
     ShooterJohann(13000),
     Shooter5419Shots(17000),
@@ -19,6 +19,13 @@ public enum PowerConstants{
     DriveBaseMotionMagickP(.1),
     DriveBaseMotionMagickD(0),
     DriveBaseSetpoint(5),
+    //TurnWithEncoderSetPoint90(18.8),
+    TurnWithEncoderSetPoint(38.4),
+    // TurnWithEncoderSetPoint(57.72),
+    TurnWithEncoderkP(.0215),
+    TurnWithEncoderkI(0.000002),
+    TurnWithEncoderkD(.065),
+    TurnWithEncoderTolerance(0.01),
 
     // revolver
     RevolverShotsButton(1),

@@ -54,6 +54,7 @@ public class RobotContainer {
   private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor, hood);
   private final InitiationLineStraightShot initiationLineStraightShot = new InitiationLineStraightShot(shooter, revolver, colorSensor, loader);
   private final TurnWithGyro turnWithGyro = new TurnWithGyro(driveBase, gyro, PowerConstants.GyroRotation.val);
+  private final TurnWithEncoder turnWithEncoder = new TurnWithEncoder(driveBase, PowerConstants.TurnWithEncoderSetPoint.val, TurnDirection.LEFT);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -224,7 +225,7 @@ public class RobotContainer {
     public Command getAutoCommand(){
       // return initiationLineStraightShot;
       // return faceplantThenShoot;
-      return turnWithGyro;
+      return turnWithEncoder;
     }
   
 }
