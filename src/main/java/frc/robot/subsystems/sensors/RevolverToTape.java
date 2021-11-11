@@ -20,7 +20,7 @@ public class RevolverToTape extends CommandBase {
 
   @Override
   public void execute() {
-    revolver.setPower(-.35);
+    revolver.setPower(-.7);
     red = colorSensor.getRgb()[0];
   }
 

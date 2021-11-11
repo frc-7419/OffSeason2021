@@ -2,6 +2,7 @@
 
 // import edu.wpi.first.networktables.*;
 // import edu.wpi.first.wpilibj.shuffleboard.*;
+// import frc.robot.*;
 // import frc.robot.PowerConstants;
 
 // public class Dashboard{
@@ -19,20 +20,20 @@
 
 //     public static ShuffleboardTab driveBase = Shuffleboard.getTab("drive base");
 
-//     public static NetworkTableEntry kDriveBaseStraight 
-//     = driveBase.add("straight", PowerConstants.DriveBaseStraight.val).getEntry();
-//     public static NetworkTableEntry kDriveBaseTurn 
-//     = driveBase.add("turn", PowerConstants.DriveBaseTurn.val).getEntry();
-//     public static NetworkTableEntry kDriveBaseRight 
-//     = driveBase.add("right stick", PowerConstants.DriveBaseRight.val).getEntry();
-//     public static NetworkTableEntry kDriveBaseLoadingStation 
-//     = driveBase.add("loader station", PowerConstants.DriveBaseLoadingStation.val).getEntry();
-//     public static NetworkTableEntry kDriveBaseMotionMagickP 
-//     = driveBase.add("motion magic kP", PowerConstants.DriveBaseMotionMagickP.val).getEntry();
-//     public static NetworkTableEntry kDriveBaseMotionMagickD
-//     = driveBase.add("motion magic kD", PowerConstants.DriveBaseMotionMagickD.val).getEntry();
-//     public static NetworkTableEntry kDriveBaseSetpoint
-//     = driveBase.add("setpoint inches", PowerConstants.DriveBaseSetpoint.val).getEntry();
+//     // public static NetworkTableEntry kDriveBaseStraight 
+//     // = driveBase.add("straight", PowerConstants.DriveBaseStraight.val).getEntry();
+//     // public static NetworkTableEntry kDriveBaseTurn 
+//     // = driveBase.add("turn", PowerConstants.DriveBaseTurn.val).getEntry();
+//     // public static NetworkTableEntry kDriveBaseRight 
+//     // = driveBase.add("right stick", PowerConstants.DriveBaseRight.val).getEntry();
+//     // public static NetworkTableEntry kDriveBaseLoadingStation 
+//     // = driveBase.add("loader station", PowerConstants.DriveBaseLoadingStation.val).getEntry();
+//     // public static NetworkTableEntry kDriveBaseMotionMagickP 
+//     // = driveBase.add("motion magic kP", PowerConstants.DriveBaseMotionMagickP.val).getEntry();
+//     // public static NetworkTableEntry kDriveBaseMotionMagickD
+//     // = driveBase.add("motion magic kD", PowerConstants.DriveBaseMotionMagickD.val).getEntry();
+//     // public static NetworkTableEntry kDriveBaseSetpoint
+//     // = driveBase.add("setpoint inches", PowerConstants.DriveBaseSetpoint.val).getEntry();
 
 
 //     public static ShuffleboardTab revolver = Shuffleboard.getTab("revolver");

@@ -4,6 +4,8 @@ public enum PowerConstants{
     
     // shooter
     ShooterShotsButton(17000),
+    // ShooterShotsButtonLong(18500),
+    ShooterShotsButtonLong(24000),
     ShooterReverse(5000), // 100% power
     ShooterJohann(13000),
     Shooter5419Shots(17000),
@@ -27,8 +29,8 @@ public enum PowerConstants{
     Revolver5419Shots(1),
 
     // intake
-    IntakeJohannGround(-.7),
-    IntakeJohannPlayerStation(.7),
+    IntakeJohannGround(-.9),
+    IntakeJohannPlayerStation(.9),
 
     // climber
     ClimberJohann(.5),
@@ -45,9 +47,10 @@ public enum PowerConstants{
     HoodTime(1000),
 
     // gyro
-    GyrokP(.1),
+    GyrokP(0.085),
     GyrokI(0),
     GyrokD(0),
+    GyroRotation(1),
 
     ;
 

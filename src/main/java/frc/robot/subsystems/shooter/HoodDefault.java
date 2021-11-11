@@ -28,7 +28,6 @@ public class HoodDefault extends CommandBase {
 
     @Override
     public void execute(){
-        
 
         if((joystick.getRightX() > 0) && (hood.getCurrentPosition() == HoodPosition.LONG_SHOT)){
             hood.runForTime(-power, time);

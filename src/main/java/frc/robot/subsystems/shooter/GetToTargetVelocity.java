@@ -26,8 +26,11 @@ public class GetToTargetVelocity extends CommandBase {
       SmartDashboard.putString("shooter", "ramping up");
       shooter.setkF(shooter.lookUpkF(target));
       
+      double kP = 0;
+      double kI = 0;
+      double kD = 0;
       // double[] gains = dashboard.getRampingGains();
-      shooter.setPIDF(0, 0, 0, shooter.getkF());
+      shooter.setPIDF(kP, kI, kD, shooter.getkF());
       shooter.setTargetRawSpeed(target);
       // shooter.setControlMethod(ControlMethod.SPIN_UP);
   }

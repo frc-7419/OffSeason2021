@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.PowerConstants;
 
-public class StraightWithMotionMagic extends CommandBase {
+public class TurnWithEncoder extends CommandBase {
   
     private DriveBaseSub driveBase;
     private double setpoint;
@@ -24,25 +24,35 @@ public class StraightWithMotionMagic extends CommandBase {
     private double rightMastOutput;
     private boolean started;
     private long startTime;
+    private boolean setRightInverted;
 
     /**
      * 
      * @param driveBase
      * @param setpoint in inches
      */
-    public StraightWithMotionMagic(DriveBaseSub driveBase, double setpoint) {
+    public TurnWithEncoder(DriveBaseSub driveBase, double setpoint, boolean setRightInverted) { 
+        // if setRightInverted, then the right motors are inverted, else the left motors are inverted
+
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
         this.setpoint = setpoint;
+        this.setRightInverted = setRightInverted;
     }
 
     @Override
     public void initialize(){
+        if (setRightInverted) {
+            driveBase.getRightMast().setInverted(false);
+        }
+        else {
+            driveBase.getRightMast().setInverted(true);
+        }
 
         SmartDashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */
-        driveBase.getRightMast().configFactoryDefault();
-        driveBase.getLeftMast().configFactoryDefault();
+        // driveBase.getRightMast().configFactoryDefault();
+    //   driveBase.getLeftMast().configFactoryDefault();
 
     //   driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
     //   driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
@@ -106,6 +116,11 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
-
+        if (setRightInverted) {
+            driveBase.getRightMast().setInverted(true);
+        }
+        else {
+            driveBase.getRightMast().setInverted(false);
+        }
     }
 }

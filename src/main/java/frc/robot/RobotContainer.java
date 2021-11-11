@@ -51,8 +51,9 @@ public class RobotContainer {
   private final IntakeDefault intakeDefault = new IntakeDefault(intake, joystick);
   private final RevolveWithIntake revolverDefault = new RevolveWithIntake(revolver, joystick);
   private final HoodDefault hoodDefault = new HoodDefault(hood, joystick);
-  private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor);
+  private final FaceplantThenShoot faceplantThenShoot = new FaceplantThenShoot(driveBase, shooter, revolver, loader, colorSensor, hood);
   private final InitiationLineStraightShot initiationLineStraightShot = new InitiationLineStraightShot(shooter, revolver, colorSensor, loader);
+  private final TurnWithGyro turnWithGyro = new TurnWithGyro(driveBase, gyro, PowerConstants.GyroRotation.val);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -86,8 +87,8 @@ public class RobotContainer {
 
   private void manualButtonBindings(){ // for johann
     // A button
-    new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
-    .whileHeld(new RunClimber(climber, .5, false));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonA.value)
+    // .whileHeld(new RunClimber(climber, .5, false));
 
     // B button
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonB.value)
@@ -155,10 +156,14 @@ public class RobotContainer {
 
     // 4: henry's off the wall thing at 9 inches <--- wrong 
     // 4: rotate revolver and gets to target velocity
+
     new JoystickButton(buttonBoard, 4)
-    .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
-    new JoystickButton(buttonBoard, 4)
-    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.Shooter5419Shots.val));
+    .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButtonLong.val));
+
+    // new JoystickButton(buttonBoard, 4)
+    // .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
+    // new JoystickButton(buttonBoard, 4)
+    // .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.Shooter5419Shots.val));
     
     // 5: cp down & no spin
     // new JoystickButton(buttonBoard, 5)
@@ -185,8 +190,8 @@ public class RobotContainer {
     .whileHeld(new RunClimber(climber, PowerConstants.ClimberOperator.val, true));
 
     // 12: climb up at .9
-    new JoystickButton(buttonBoard, 12)
-    .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperator.val, false));
+    // new JoystickButton(buttonBoard, 12)
+    // .whileHeld(new RunClimber(climber, -PowerConstants.ClimberOperator.val, false));
 
     // run revolver on external joystick x axis
     externalRightJoystick.whileActiveOnce(new RunRevolver(revolver, PowerConstants.RevolverButtonBoard.val, true));
@@ -201,7 +206,7 @@ public class RobotContainer {
   // public Command getLimelightTest(){return turnToTx;}
   
   public void setDefaultCommands(){
-    revolver.setDefaultCommand(revolverDefault);
+    // revolver.setDefaultCommand(revolverDefault);
     driveBase.setDefaultCommand(arcade);
     intake.setDefaultCommand(intakeDefault);
     hood.setDefaultCommand(hoodDefault);
@@ -217,7 +222,9 @@ public class RobotContainer {
     public LimelightSub getLimelight(){return limelight;}
 
     public Command getAutoCommand(){
-      return initiationLineStraightShot;
+      // return initiationLineStraightShot;
+      // return faceplantThenShoot;
+      return turnWithGyro;
     }
   
 }

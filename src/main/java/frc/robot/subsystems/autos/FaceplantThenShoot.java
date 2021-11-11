@@ -23,18 +23,16 @@ public class FaceplantThenShoot extends SequentialCommandGroup {
   // private RevolverSub revolver;
   // private LoaderSub loader;
 
-  public FaceplantThenShoot(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, RevColorDistanceSub colorSensor) {
-    
-    
+  public FaceplantThenShoot(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, RevColorDistanceSub colorSensor, HoodSub hood) {
 
-    // addCommands(new WaitCommand(2));
+    addCommands(new WaitCommand(1));
     addCommands(new StraightWithMotionMagic(driveBase, 120));
-    // addCommands(new WaitCommand(1));
-    // addCommands(new StraightWithMotionMagic(driveBase, -12));
-    // addCommands(new ReadyToShoot(shooter, revolver, colorSensor, 3));
-    // // addCommands(new WaitCommand(1));
-    // addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
-    //                             PowerConstants.RevolverShotsButton.val).withTimeout(5));
-    // addCommands(new WaitCommand(1));
+    addCommands(new WaitCommand(1));
+    addCommands(new StraightWithMotionMagic(driveBase, -12));
+    addCommands(new ReadyToShoot(shooter, revolver, colorSensor, 3));
+    addCommands(new WaitCommand(1));
+    addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+                                PowerConstants.RevolverShotsButton.val).withTimeout(5));
+    addCommands(new WaitCommand(1));
   }
 }
