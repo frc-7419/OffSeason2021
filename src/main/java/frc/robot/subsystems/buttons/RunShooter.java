@@ -1,6 +1,7 @@
 package frc.robot.subsystems.buttons;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.PowerConstants;
 import frc.robot.subsystems.intake.LoaderSub;
 import frc.robot.subsystems.intake.RevolverSub;
@@ -8,6 +9,7 @@ import frc.robot.subsystems.intake.RunLoader;
 import frc.robot.subsystems.intake.RunRevolver;
 import frc.robot.subsystems.shooter.GetToTargetVelocity;
 import frc.robot.subsystems.shooter.ShooterSub;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class RunShooter extends ParallelCommandGroup {
   
@@ -28,7 +30,7 @@ public class RunShooter extends ParallelCommandGroup {
 
     addCommands(new GetToTargetVelocity(shooter, shooterSpeed));
     addCommands(new RunLoader(loader, PowerConstants.LoaderShotsButton.val, true));
-    addCommands(new RunRevolver(revolver, revolverSpeed, true));
+    addCommands(new SequentialCommandGroup(new WaitCommand(2), new RunRevolver(revolver, PowerConstants.ShooterShotsButton.val, true).withTimeout(10)));
   }
 
 }

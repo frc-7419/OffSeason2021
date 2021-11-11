@@ -15,36 +15,45 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.PowerConstants;
+import frc.robot.subsystems.drive.DriveBaseSub.TurnDirection;
 
-public class StraightWithMotionMagic extends CommandBase {
+public class RightSwerveTurnWithEncoder extends CommandBase {
   
     private DriveBaseSub driveBase;
     private double setpoint;
-    private double leftMastOutput;
     private double rightMastOutput;
     private boolean started;
     private long startTime;
+    private boolean setRightInverted;
+    private TurnDirection turnDirection;
 
     /**
      * 
      * @param driveBase
      * @param setpoint in inches
      */
-    public StraightWithMotionMagic(DriveBaseSub driveBase, double setpoint) {
+    public RightSwerveTurnWithEncoder(DriveBaseSub driveBase, double setpoint, TurnDirection turnDirection) { 
+        // if setRightInverted, then the right motors are inverted, else the left motors are inverted
+
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
         this.setpoint = setpoint;
+        this.turnDirection = turnDirection;
+        // this.setRightInverted = setRightInverted;
     }
 
     @Override
     public void initialize(){
+        if (turnDirection == TurnDirection.RIGHT) {
+            // for right turn set only one as inverted
+            driveBase.getRightMast().setInverted(true);
+            driveBase.getRightFollow().setInverted(true);
+        }
 
         SmartDashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */
-        driveBase.getLeftMast().configFactoryDefault();
-        driveBase.getRightMast().configFactoryDefault();
-        driveBase.getLeftFollow().configFactoryDefault();
-        driveBase.getRightFollow().configFactoryDefault();
+        // driveBase.getRightMast().configFactoryDefault();
+    //   driveBase.getLeftMast().configFactoryDefault();
 
     //   driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
     //   driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
@@ -53,24 +62,18 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBase.getRightMast().setSelectedSensorPosition(0);
 
         // because sample code 
-        driveBase.getLeftMast().configMotionCruiseVelocity(15000, 0);
-        driveBase.getLeftMast().configMotionAcceleration(6000, 0);
 
         driveBase.getRightMast().configMotionCruiseVelocity(15000, 0);
         driveBase.getRightMast().configMotionAcceleration(6000, 0);  
 
-        TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
-        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
+        TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PowerConstants.TurnWithEncoderkP.val, PowerConstants.TurnWithEncoderkI.val, PowerConstants.TurnWithEncoderkD.val, 0);
         // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
-        double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
         double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
 
-        SmartDashboard.putNumber("leftSet", leftSet);
         SmartDashboard.putNumber("rightSet", rightSet);
 
         started = false;
 
-        driveBase.getLeftMast().set(ControlMode.MotionMagic, leftSet);
         driveBase.getRightMast().set(ControlMode.MotionMagic, rightSet);
 
         startTime = System.currentTimeMillis();
@@ -81,14 +84,10 @@ public class StraightWithMotionMagic extends CommandBase {
 
         SmartDashboard.putString("command status", "executing motion magic");
 
-        SmartDashboard.putNumber("leftMast", driveBase.getLeftMast().getSelectedSensorPosition(0));
         SmartDashboard.putNumber("rightMast", driveBase.getRightMast().getSelectedSensorPosition(0));
     
-        double leftMastOutput = driveBase.getLeftMast().getMotorOutputPercent();
         double rightMastOutput = driveBase.getRightMast().getMotorOutputPercent();
-        SmartDashboard.putNumber("leftMastOutput", leftMastOutput);
         SmartDashboard.putNumber("rightMastOutput", rightMastOutput);
-        SmartDashboard.putNumber("error", driveBase.getLeftMast().getClosedLoopError());
         if(System.currentTimeMillis() - startTime > 1000){
             started = true;
         }
@@ -99,7 +98,7 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public boolean isFinished(){
-        if(started && Math.abs(leftMastOutput) < 0.01 && Math.abs(rightMastOutput) < 0.01){
+        if(started && Math.abs(rightMastOutput) < PowerConstants.TurnWithEncoderTolerance.val){
             SmartDashboard.putString("command status", "moving");
             Timer.delay(1);
             return true;
@@ -108,6 +107,11 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
+        // reset inversions to default
+        // driveBase.getRightMast().setInverted(true);
+        // driveBase.getRightFollow().setInverted(true);
 
+        // driveBase.getLeftMast().setInverted(false);
+        // driveBase.getLeftFollow().setInverted(false);
     }
 }

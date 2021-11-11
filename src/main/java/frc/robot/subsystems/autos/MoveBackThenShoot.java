@@ -16,21 +16,41 @@ import frc.robot.subsystems.shooter.HoodSub;
 import frc.robot.subsystems.shooter.RunHood;
 import frc.robot.subsystems.shooter.ShooterSub;
 import frc.robot.subsystems.shooter.HoodSub.HoodPosition;
+import frc.robot.subsystems.buttons.ReadyToShoot;
+import frc.robot.subsystems.buttons.RunShooter;
+import frc.robot.subsystems.sensors.RevColorDistanceSub;
+import frc.robot.PowerConstants;
+import com.team7419.Sleep;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.subsystems.drive.DriveBaseSub;
+import frc.robot.subsystems.drive.StraightPercentOut;
+import frc.robot.subsystems.drive.StraightWithMotionMagic;
+import frc.robot.subsystems.shooter.ShooterSub;
+import frc.robot.PowerConstants;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.buttons.*;
+import frc.robot.subsystems.drive.*;
+import frc.robot.subsystems.intake.LoaderSub;
+import frc.robot.subsystems.intake.RevolverSub;
+import frc.robot.subsystems.sensors.RevColorDistanceSub;
+import frc.robot.subsystems.shooter.*;
+import frc.robot.subsystems.intake.RunRevolver;
 
 
 public class MoveBackThenShoot extends SequentialCommandGroup {
-    public MoveBackThenShoot(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, HoodSub hood) {
+    public MoveBackThenShoot(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, HoodSub hood, RevColorDistanceSub colorSensor) {
         // Add your commands in the super() call, e.g.
         // super(new FooCommand(), new BarCommand());
         //
         super(
           new WaitCommand(0.5),
-          new StraightWithMotionMagic(driveBase, -48),
+          new StraightWithMotionMagic(driveBase, -12).withTimeout(1),
           new WaitCommand(0.5),
-          new GetToHoodPosition(hood, HoodPosition.LONG_SHOT),
           new WaitCommand(0.5),
-          new AutoReadyToShoot(shooter, loader, 5, 0.65, 0.65).withTimeout(3),
-          new AutoShots(revolver, shooter, loader, 0.35, 0.65, 0.65).withTimeout(4),
+          new ReadyToShoot(shooter, revolver, colorSensor, 3),
+          new WaitCommand(1),
+          new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, PowerConstants.RevolverShotsButton.val).withTimeout(5),
           new WaitCommand(0.5),
           new StopAll()
         );
