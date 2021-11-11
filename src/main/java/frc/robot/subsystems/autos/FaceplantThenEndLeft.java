@@ -14,14 +14,14 @@ import frc.robot.subsystems.intake.RevolverSub;
 import frc.robot.subsystems.sensors.RevColorDistanceSub;
 import frc.robot.subsystems.shooter.*;
 
-public class FaceplantThenShootThenTurn extends SequentialCommandGroup {
+public class FaceplantThenEndLeft extends SequentialCommandGroup {
   
   // private DriveBaseSub driveBase;
   // private ShooterSub shooter;
   // private RevolverSub revolver;
   // private LoaderSub loader;
 
-  public FaceplantThenShootThenTurn(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, RevColorDistanceSub colorSensor, HoodSub hood) {
+  public FaceplantThenEndLeft(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, RevColorDistanceSub colorSensor, HoodSub hood) {
 
     addCommands(new WaitCommand(1));
     addCommands(new StraightWithMotionMagic(driveBase, 120));
@@ -32,8 +32,8 @@ public class FaceplantThenShootThenTurn extends SequentialCommandGroup {
     addCommands(new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
                               PowerConstants.RevolverShotsButton.val).withTimeout(5));
     addCommands(new WaitCommand(1));
-    addCommands(new LeftSwerveTurnWithEncoder(driveBase, -35).withTimeout(3.5)); 
-    addCommands(new StraightWithMotionMagic(driveBase, -60));
+    addCommands(new RightSwerveTurnWithEncoder(driveBase, 45).withTimeout(5)); 
+    addCommands(new StraightWithMotionMagic(driveBase, -55));
     
   }
 }

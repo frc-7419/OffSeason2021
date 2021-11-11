@@ -42,6 +42,10 @@ public class RightSwerveTurnWithEncoder extends CommandBase {
 
     @Override
     public void initialize(){
+
+        driveBase.getRightMast().configFactoryDefault();
+        driveBase.getLeftMast().configFactoryDefault();
+        
         driveBase.getRightMast().setInverted(true);
         driveBase.getRightFollow().setInverted(true);
 

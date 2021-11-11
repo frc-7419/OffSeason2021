@@ -42,14 +42,17 @@ public class LeftSwerveTurnWithEncoder extends CommandBase {
     @Override
     public void initialize(){
             // for left turn set both as inverted
+
+        driveBase.getRightMast().configFactoryDefault();
+        driveBase.getLeftMast().configFactoryDefault();
+        
         driveBase.getLeftMast().setInverted(false);
         driveBase.getLeftFollow().setInverted(false);
         
 
         SmartDashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */
-        // driveBase.getRightMast().configFactoryDefault();
-    //   driveBase.getLeftMast().configFactoryDefault();
+        
 
     //   driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
     //   driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
