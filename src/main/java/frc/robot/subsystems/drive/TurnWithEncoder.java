@@ -25,28 +25,37 @@ public class TurnWithEncoder extends CommandBase {
     private boolean started;
     private long startTime;
     private boolean setRightInverted;
+    private TurnDirection turnDirection;
 
     /**
      * 
      * @param driveBase
      * @param setpoint in inches
      */
-    public TurnWithEncoder(DriveBaseSub driveBase, double setpoint, boolean setRightInverted) { 
+    public TurnWithEncoder(DriveBaseSub driveBase, double setpoint, TurnDirection turnDirection) { 
         // if setRightInverted, then the right motors are inverted, else the left motors are inverted
 
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
         this.setpoint = setpoint;
-        this.setRightInverted = setRightInverted;
+        this.turnDirection = turnDirection;
+        // this.setRightInverted = setRightInverted;
     }
 
     @Override
     public void initialize(){
-        if (setRightInverted) {
+        if (turnDirection == TurnDirection.RIGHT) {
+            // for right turn set only one as inverted
             driveBase.getRightMast().setInverted(false);
+            driveBase.getRightFollow().setInverted(false);
         }
         else {
+            // for left turn set both as inverted
             driveBase.getRightMast().setInverted(true);
+            driveBase.getRightFollow().setInverted(true);
+
+            driveBase.getLeftMast().setInverted(true);
+            driveBase.getLeftFollow().setInverted(true);
         }
 
         SmartDashboard.putString("command status", "motion magic test");
@@ -116,11 +125,11 @@ public class TurnWithEncoder extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
-        if (setRightInverted) {
-            driveBase.getRightMast().setInverted(true);
-        }
-        else {
-            driveBase.getRightMast().setInverted(false);
-        }
+        // reset inversions to default
+        driveBase.getRightMast().setInverted(true);
+        driveBase.getRightFollow().setInverted(true);
+
+        driveBase.getLeftMast().setInverted(false);
+        driveBase.getLeftFollow().setInverted(false);
     }
 }
