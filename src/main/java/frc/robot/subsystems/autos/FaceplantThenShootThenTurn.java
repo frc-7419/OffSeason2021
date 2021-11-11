@@ -33,6 +33,7 @@ public class FaceplantThenShootThenTurn extends SequentialCommandGroup {
                                 PowerConstants.RevolverShotsButton.val).withTimeout(5));
     addCommands(new WaitCommand(1));
     addCommands(new TurnWithEncoder(driveBase, -48, TurnDirection.RIGHT));
-    //addCommands(new LeftSwerveTurnWithEncoder());
+    addCommands(new LeftSwerveTurnWithEncoder(driveBase, m_currentCommandIndex, null)); //-35
+    
   }
 }
