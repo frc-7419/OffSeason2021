@@ -24,20 +24,18 @@ public class LeftSwerveTurnWithEncoder extends CommandBase {
     private double leftMastOutput;
     private boolean started;
     private long startTime;
-    private TurnDirection turnDirection;
 
     /**
      * 
      * @param driveBase
      * @param setpoint in inches
      */
-    public LeftSwerveTurnWithEncoder(DriveBaseSub driveBase, double setpoint, TurnDirection turnDirection) { 
+    public LeftSwerveTurnWithEncoder(DriveBaseSub driveBase, double setpoint) { 
         // if setRightInverted, then the right motors are inverted, else the left motors are inverted
 
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
         this.setpoint = setpoint;
-        this.turnDirection = turnDirection;
         // this.setRightInverted = setRightInverted;
     }
 

@@ -29,11 +29,11 @@ public class FaceplantThenShootThenTurn extends SequentialCommandGroup {
     addCommands(new StraightWithMotionMagic(driveBase, -12));
     addCommands(new ReadyToShoot(shooter, revolver, colorSensor, 3));
     addCommands(new WaitCommand(1));
-    addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
-                                PowerConstants.RevolverShotsButton.val).withTimeout(5));
+    addCommands(new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+                              PowerConstants.RevolverShotsButton.val).withTimeout(5));
     addCommands(new WaitCommand(1));
-    addCommands(new TurnWithEncoder(driveBase, -48, TurnDirection.RIGHT));
-    addCommands(new LeftSwerveTurnWithEncoder(driveBase, m_currentCommandIndex, null)); //-35
+    addCommands(new LeftSwerveTurnWithEncoder(driveBase, -35).withTimeout(3.5)); 
+    addCommands(new StraightWithMotionMagic(driveBase, -60));
     
   }
 }

@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.autos.InitiationLineStraightShot;
 import frc.robot.subsystems.autos.MoveBackThenShoot;
+import frc.robot.subsystems.autos.FaceplantThenShootThenTurn;
+import frc.robot.subsystems.autos.*;
+
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
 import frc.robot.subsystems.climber.ClimberSub;
@@ -57,6 +60,7 @@ public class RobotContainer {
   private final MoveBackThenShoot moveBackThenShoot = new MoveBackThenShoot(driveBase, shooter, revolver, loader, hood, colorSensor);
   private final TurnWithGyro turnWithGyro = new TurnWithGyro(driveBase, gyro, PowerConstants.GyroRotation.val);
   private final TurnWithEncoder turnWithEncoder = new TurnWithEncoder(driveBase, PowerConstants.TurnWithEncoderSetPoint.val, TurnDirection.LEFT);
+  private final FaceplantThenShootThenTurn faceplantThenShootThenTurn = new FaceplantThenShootThenTurn(driveBase, shooter, revolver, loader, colorSensor, hood);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -226,9 +230,10 @@ public class RobotContainer {
 
     public Command getAutoCommand(){
       // return initiationLineStraightShot;
-      return faceplantThenShoot;
+      // return faceplantThenShoot;
       // return turnWithEncoder;
       // return moveBackThenShoot;
+      return faceplantThenShootThenTurn;
     }
   
 }

@@ -25,30 +25,25 @@ public class RightSwerveTurnWithEncoder extends CommandBase {
     private boolean started;
     private long startTime;
     private boolean setRightInverted;
-    private TurnDirection turnDirection;
 
     /**
      * 
      * @param driveBase
      * @param setpoint in inches
      */
-    public RightSwerveTurnWithEncoder(DriveBaseSub driveBase, double setpoint, TurnDirection turnDirection) { 
+    public RightSwerveTurnWithEncoder(DriveBaseSub driveBase, double setpoint) { 
         // if setRightInverted, then the right motors are inverted, else the left motors are inverted
 
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
         this.setpoint = setpoint;
-        this.turnDirection = turnDirection;
         // this.setRightInverted = setRightInverted;
     }
 
     @Override
     public void initialize(){
-        if (turnDirection == TurnDirection.RIGHT) {
-            // for right turn set only one as inverted
-            driveBase.getRightMast().setInverted(true);
-            driveBase.getRightFollow().setInverted(true);
-        }
+        driveBase.getRightMast().setInverted(true);
+        driveBase.getRightFollow().setInverted(true);
 
         SmartDashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */
