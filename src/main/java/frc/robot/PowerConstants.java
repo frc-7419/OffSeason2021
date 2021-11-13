@@ -4,8 +4,8 @@ public enum PowerConstants{
     
     // shooter
     ShooterShotsAuton(17000),
-    ShooterShotsButton(16500),
-    ShooterShotsMoveBackThenShoot(14500)
+    ShooterShotsButton(16000),
+    ShooterShotsMoveBackThenShoot(13000),
     // ShooterShotsButtonLong(18500),
     ShooterShotsButtonLong(17750),
     ShooterReverse(5000), // 100% power

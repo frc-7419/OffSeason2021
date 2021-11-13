@@ -47,7 +47,7 @@ public class MoveBackThenShoot extends SequentialCommandGroup {
           new WaitCommand(0.115),
           new ReadyToShoot(shooter, revolver, colorSensor, 3),
           new WaitCommand(1),
-          new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsMoveBackThenShootButton.val, 
+          new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsMoveBackThenShoot.val, 
                                                     PowerConstants.RevolverShotsButton.val).withTimeout(5),
           new WaitCommand(0.125),
           new StraightWithMotionMagic(driveBase, -24),
