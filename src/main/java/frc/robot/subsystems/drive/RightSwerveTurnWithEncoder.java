@@ -45,9 +45,11 @@ public class RightSwerveTurnWithEncoder extends CommandBase {
 
         driveBase.getRightMast().configFactoryDefault();
         driveBase.getLeftMast().configFactoryDefault();
+
         
         driveBase.getRightMast().setInverted(true);
         driveBase.getRightFollow().setInverted(true);
+
 
         SmartDashboard.putString("command status", "motion magic test");
         /* factory default just so nothing acts up */

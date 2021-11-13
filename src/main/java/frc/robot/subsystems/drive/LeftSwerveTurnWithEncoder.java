@@ -45,7 +45,7 @@ public class LeftSwerveTurnWithEncoder extends CommandBase {
 
         driveBase.getRightMast().configFactoryDefault();
         driveBase.getLeftMast().configFactoryDefault();
-        
+
         driveBase.getLeftMast().setInverted(false);
         driveBase.getLeftFollow().setInverted(false);
         
