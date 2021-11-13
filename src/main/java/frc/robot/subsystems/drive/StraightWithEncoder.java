@@ -31,7 +31,7 @@ public class StraightWithEncoder extends CommandBase {
      * @param driveBase
      * @param setpoint in inches
      */
-    public StraightWithEncoder(DriveBaseSub driveBase, double setpoint) {
+    public StraightWithEncoder(DriveBaseSub driveBase, double setpoint, double power) {
         // this.setpoint = setpoint;
         this.driveBase = driveBase;
         this.setpoint = setpoint;
@@ -66,13 +66,12 @@ public class StraightWithEncoder extends CommandBase {
         // TalonFuncs.setPIDFConstants(0, driveBase.getLeftMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
         // TalonFuncs.setPIDFConstants(0, driveBase.getRightMast(), PowerConstants.DriveBaseMotionMagickP.val, 0, PowerConstants.DriveBaseMotionMagickD.val, 0);
         // setpoint = Dashboard.get(DashboardValue.driveBaseSetpoint);
-        double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
-        double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
+        
 
-        SmartDashboard.putNumber("leftSet", leftSet);
-        SmartDashboard.putNumber("rightSet", rightSet);
+        // SmartDashboard.putNumber("leftSet", leftSet);
+        // SmartDashboard.putNumber("rightSet", rightSet);
 
-        started = false;
+        // started = false;
 
         // driveBase.getLeftMast().set(ControlMode.MotionMagic, leftSet);
         // driveBase.getRightMast().set(ControlMode.MotionMagic, rightSet);
@@ -84,7 +83,9 @@ public class StraightWithEncoder extends CommandBase {
     public void execute(){
 
         driveBase.setAll(power);
-
+        
+        double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
+        double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
 
         SmartDashboard.putNumber("leftMast", driveBase.getLeftMast().getSelectedSensorPosition(0));
         SmartDashboard.putNumber("rightMast", driveBase.getRightMast().getSelectedSensorPosition(0));
@@ -103,8 +104,11 @@ public class StraightWithEncoder extends CommandBase {
 
     @Override
     public boolean isFinished(){
-        if((Math.abs(driveBase.getLeftMast().getSelectedSensorPosition())) >= Math.abs(leftSetpoint)
-            && (Math.abs(driveBase.getRightMast().getSelectedSensorPosition()) >= Math.abs(rightSetpoint))){
+        double leftSet = DriveBaseConversions.inchesToTicks(setpoint);
+        double rightSet = DriveBaseConversions.inchesToTicks(setpoint);
+        
+        if((Math.abs(driveBase.getLeftMast().getSelectedSensorPosition())) >= Math.abs(leftSet)
+            && (Math.abs(driveBase.getRightMast().getSelectedSensorPosition()) >= Math.abs(rightSet))){
             return true;
         } else{return false;}
     }
