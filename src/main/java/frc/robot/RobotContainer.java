@@ -108,7 +108,7 @@ public class RobotContainer {
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     //   .whenPressed(new StraightPercentOut(driveBase, .4, 500));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whenPressed(new StraightWithEncoder(driveBase, -12, -.5));
+      .whenPressed(new StraightWithEncoder(driveBase, -7.5, -.5));
 
     // X button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
@@ -147,7 +147,7 @@ public class RobotContainer {
     .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
     
 
-    // 2: Revolver to Speed
+    // 2: Shooter to Speed
     new JoystickButton(buttonBoard, 2)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
     
@@ -178,8 +178,8 @@ public class RobotContainer {
     // .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.Shooter5419Shots.val));
 
     // 5: ball stuck, shooter back, feeder back
-    new JoystickButton(buttonBoard, 5)
-    .whenPressed(new BallStuck(shooter, loader, -200, 0.2));
+    // new JoystickButton(buttonBoard, 5)
+    // .whileHeld(new BallStuck(shooter, loader, -200, 0.2));
 
     // 7: hood up at 0.25
     new JoystickButton(buttonBoard, 7)
@@ -228,10 +228,10 @@ public class RobotContainer {
       // return initiationLineStraightShot;
       // return faceplantThenShoot;
       // return turnWithEncoder;
-      // return moveBackThenShoot;
+      return moveBackThenShoot;
       // return faceplantThenEndRight;
       // return faceplantThenEndLeft;
-      return faceplantThenMoveBack;
+      // return faceplantThenMoveBack;
       // return leftSideStartEndRight;
     }
   

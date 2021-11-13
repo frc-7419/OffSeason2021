@@ -15,6 +15,7 @@ import frc.robot.subsystems.intake.LoaderSub;
 import frc.robot.subsystems.intake.RevolverSub;
 import frc.robot.subsystems.sensors.RevColorDistanceSub;
 import frc.robot.subsystems.shooter.*;
+import frc.robot.subsystems.sensors.RevolverToTape;
 
 public class FaceplantThenMoveBack extends SequentialCommandGroup {
   
@@ -29,10 +30,10 @@ public class FaceplantThenMoveBack extends SequentialCommandGroup {
     addCommands(new WaitCommand(0.25));
     addCommands(new StraightWithMotionMagic(driveBase, -12));
     addCommands(new RevolverToTape(colorSensor, revolver));
-    addCommands(new WaitCommand(.25));
+    addCommands(new WaitCommand(0.125));
     addCommands(new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
                               PowerConstants.RevolverShotsButton.val).withTimeout(5));
-    addCommands(new WaitCommand(0.25));
+    addCommands(new WaitCommand(0.125));
     addCommands(new StraightWithMotionMagic(driveBase, -144));
   }
 }

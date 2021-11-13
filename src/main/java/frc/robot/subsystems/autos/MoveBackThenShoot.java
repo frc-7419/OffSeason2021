@@ -43,14 +43,14 @@ public class MoveBackThenShoot extends SequentialCommandGroup {
         // super(new FooCommand(), new BarCommand());
         //
         super(
-          new WaitCommand(0.5),
-          new StraightWithMotionMagic(driveBase, -12).withTimeout(1),
-          new WaitCommand(0.5),
-          new WaitCommand(0.5),
+          new StraightWithMotionMagic(driveBase, -12),
+          new WaitCommand(0.115),
           new ReadyToShoot(shooter, revolver, colorSensor, 3),
           new WaitCommand(1),
-          new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, PowerConstants.RevolverShotsButton.val).withTimeout(5),
-          new WaitCommand(0.5),
+          new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsMoveBackThenShootButton.val, 
+                                                    PowerConstants.RevolverShotsButton.val).withTimeout(5),
+          new WaitCommand(0.125),
+          new StraightWithMotionMagic(driveBase, -24),
           new StopAll()
         );
       }

@@ -4,7 +4,8 @@ public enum PowerConstants{
     
     // shooter
     ShooterShotsAuton(17000),
-    ShooterShotsButton(18000),
+    ShooterShotsButton(16500),
+    ShooterShotsMoveBackThenShoot(14500)
     // ShooterShotsButtonLong(18500),
     ShooterShotsButtonLong(17750),
     ShooterReverse(5000), // 100% power
@@ -12,10 +13,10 @@ public enum PowerConstants{
     Shooter5419Shots(17000),
 
     // drive base
-    DriveBaseLeftStraight(.95),
-    DriveBaseRightTurn(.7),
-    DriveBaseLeftTurn(.7),
-    DriveBaseRightStraight(.95),
+    DriveBaseLeftStraight(.85),
+    DriveBaseRightTurn(.6),
+    DriveBaseLeftTurn(.6),
+    DriveBaseRightStraight(.85),
 
     DriveBaseLoadingStation(.2),
     DriveBaseMotionMagickP(.1),
@@ -33,7 +34,7 @@ public enum PowerConstants{
     RevolverJohann(.6),
     RevolverToTape(-.45),
     RevolverWithIntake(.4),
-    RevolverButtonBoard(.6),
+    RevolverButtonBoard(.45),
     Revolver5419Shots(1),
 
     // intake
