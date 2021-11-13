@@ -103,8 +103,10 @@ public class RobotContainer {
     // Y button
     // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
     // .whileHeld(new StraightWithMotionMagic(driveBase, -12));
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    //   .whenPressed(new StraightPercentOut(driveBase, .4, 500));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-      .whenPressed(new StraightPercentOut(driveBase, .4, 500));
+      .whenPressed(new StraightWithEncoder(driveBase, -12, -.5));
 
     // X button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
