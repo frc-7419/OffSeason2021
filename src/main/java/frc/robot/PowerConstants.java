@@ -6,7 +6,7 @@ public enum PowerConstants{
     ShooterShotsAuton(17000),
     ShooterShotsButton(18000),
     // ShooterShotsButtonLong(18500),
-    ShooterShotsButtonLong(19000),
+    ShooterShotsButtonLong(17750),
     ShooterReverse(5000), // 100% power
     ShooterJohann(13000),
     Shooter5419Shots(17000),

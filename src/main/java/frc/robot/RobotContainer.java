@@ -10,6 +10,7 @@ import frc.robot.subsystems.autos.FaceplantThenShoot;
 import frc.robot.subsystems.autos.InitiationLineStraightShot;
 import frc.robot.subsystems.autos.MoveBackThenShoot;
 import frc.robot.subsystems.autos.*;
+import frc.robot.snippits.*;
 
 import frc.robot.subsystems.buttons.ButtonBoard;
 import frc.robot.subsystems.buttons.RunShooter;
@@ -60,6 +61,7 @@ public class RobotContainer {
   private final FaceplantThenEndRight faceplantThenEndRight = new FaceplantThenEndRight(driveBase, shooter, revolver, loader, colorSensor, hood);
   private final FaceplantThenEndLeft faceplantThenEndLeft = new FaceplantThenEndLeft(driveBase, shooter, revolver, loader, colorSensor, hood);
   private final LeftSideStartEndRight leftSideStartEndRight = new LeftSideStartEndRight(driveBase, shooter, revolver, loader, colorSensor, hood);
+  private final FaceplantThenMoveBack faceplantThenMoveBack = new FaceplantThenMoveBack(driveBase, shooter, revolver, loader, colorSensor, hood);
 
   public RobotContainer() {
     manualButtonBindings();
@@ -174,18 +176,10 @@ public class RobotContainer {
     // .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
     // new JoystickButton(buttonBoard, 4)
     // .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.Shooter5419Shots.val));
-    
-    // 5: cp down & no spin
-    // new JoystickButton(buttonBoard, 5)
-    // .whileHeld(new RaiseCpMech(cpMech, .25, true));
 
-    // 6: cp up, spin after a delay
-    // new JoystickButton(buttonBoard, 6)
-    // .whileHeld(new UpThenSpin(cpMech, .25, false, 2, .25));
-
-    // // 5: go back x inches 
-    // new JoystickButton(buttonBoard, 5)
-    // .whenPressed(new StraightWithMotionMagic(driveBase, 12));
+    // 5: ball stuck, shooter back, feeder back
+    new JoystickButton(buttonBoard, 5)
+    .whenPressed(new BallStuck(shooter, loader, -200, 0.2));
 
     // 7: hood up at 0.25
     new JoystickButton(buttonBoard, 7)
@@ -232,11 +226,12 @@ public class RobotContainer {
 
     public Command getAutoCommand(){
       // return initiationLineStraightShot;
-      return faceplantThenShoot;
+      // return faceplantThenShoot;
       // return turnWithEncoder;
       // return moveBackThenShoot;
       // return faceplantThenEndRight;
       // return faceplantThenEndLeft;
+      return faceplantThenMoveBack;
       // return leftSideStartEndRight;
     }
   
