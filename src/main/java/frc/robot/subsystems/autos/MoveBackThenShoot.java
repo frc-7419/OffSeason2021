@@ -11,7 +11,6 @@ import frc.robot.subsystems.drive.StraightWithMotionMagic;
 import frc.robot.subsystems.intake.LoaderSub;
 import frc.robot.subsystems.intake.RevolverSub;
 import frc.robot.subsystems.shooter.GetToHoodPosition;
-import frc.robot.subsystems.shooter.HoodDefault;
 import frc.robot.subsystems.shooter.HoodSub;
 import frc.robot.subsystems.shooter.RunHood;
 import frc.robot.subsystems.shooter.ShooterSub;

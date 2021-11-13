@@ -35,7 +35,8 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void initialize() {
-    driveBase.factoryResetAll();    
+    driveBase.factoryResetAll();   
+    driveBase.setAllDefaultInversions(); 
     driveBase.coast(); 
     SmartDashboard.putString("command status", "init arcade");
   }

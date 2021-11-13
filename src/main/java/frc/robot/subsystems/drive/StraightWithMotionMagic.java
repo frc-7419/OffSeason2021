@@ -46,12 +46,8 @@ public class StraightWithMotionMagic extends CommandBase {
         driveBase.getLeftFollow().configFactoryDefault();
         driveBase.getRightFollow().configFactoryDefault();
 
-        driveBase.getRightMast().setInverted(true);
-        driveBase.getRightFollow().setInverted(true);
+        driveBase.setAllDefaultInversions();
 
-        driveBase.getLeftMast().setInverted(false);
-        driveBase.getLeftFollow().setInverted(false);
-        
     //   driveBase.getLeftMast().getSensorCollection().setIntegratedSensorPosition(0, 10);
     //   driveBase.getRightMast().getSensorCollection().setIntegratedSensorPosition(0, 10); 
 

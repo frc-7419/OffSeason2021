@@ -86,4 +86,12 @@ public class DriveBaseSub extends SubsystemBase {
     left1.configFactoryDefault();
     left2.configFactoryDefault();
   }
+
+  
+  public void setAllDefaultInversions() {
+    left1.setInverted(false);
+    left2.setInverted(false);
+    right1.setInverted(true);
+    right2.setInverted(true);
+  }
 }
