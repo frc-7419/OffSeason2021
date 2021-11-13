@@ -12,10 +12,10 @@ public enum PowerConstants{
     Shooter5419Shots(17000),
 
     // drive base
-    DriveBaseLeftStraight(.9),
-    DriveBaseRightTurn(.6),
-    DriveBaseLeftTurn(.6),
-    DriveBaseRightStraight(.9),
+    DriveBaseLeftStraight(.95),
+    DriveBaseRightTurn(.7),
+    DriveBaseLeftTurn(.7),
+    DriveBaseRightStraight(.95),
 
     DriveBaseLoadingStation(.2),
     DriveBaseMotionMagickP(.1),

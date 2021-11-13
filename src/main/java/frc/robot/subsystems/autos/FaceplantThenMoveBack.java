@@ -26,13 +26,13 @@ public class FaceplantThenMoveBack extends SequentialCommandGroup {
   public FaceplantThenMoveBack(DriveBaseSub driveBase, ShooterSub shooter, RevolverSub revolver, LoaderSub loader, RevColorDistanceSub colorSensor, HoodSub hood) {
     // addCommands(new WaitCommand(0.5));
     addCommands(new StraightWithMotionMagic(driveBase, 120));
-    addCommands(new WaitCommand(0.75));
+    addCommands(new WaitCommand(0.25));
     addCommands(new StraightWithMotionMagic(driveBase, -12));
-    addCommands(new ReadyToShoot(shooter, revolver, colorSensor, 3));
-    addCommands(new WaitCommand(1));
-    addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
-                                PowerConstants.RevolverShotsButton.val).withTimeout(5));
-    addCommands(new WaitCommand(0.5));
+    addCommands(new RevolverToTape(colorSensor, revolver));
+    addCommands(new WaitCommand(.25));
+    addCommands(new RunShooter(shooter, loader, revolver, PowerConstants.ShooterShotsButton.val, 
+                              PowerConstants.RevolverShotsButton.val).withTimeout(5));
+    addCommands(new WaitCommand(0.25));
     addCommands(new StraightWithMotionMagic(driveBase, -144));
   }
 }

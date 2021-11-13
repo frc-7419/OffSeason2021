@@ -30,7 +30,7 @@ public class RunShooter extends ParallelCommandGroup {
 
     addCommands(new GetToTargetVelocity(shooter, shooterSpeed));
     addCommands(new RunLoader(loader, PowerConstants.LoaderShotsButton.val, true));
-    addCommands(new SequentialCommandGroup(new WaitCommand(2), new RunRevolver(revolver, PowerConstants.ShooterShotsButton.val, true).withTimeout(10)));
+    addCommands(new SequentialCommandGroup(new WaitCommand(2), new RunRevolver(revolver, PowerConstants.ShooterShotsButton.val, true).withTimeout(4)));
   }
 
 }
