@@ -101,8 +101,10 @@ public class RobotContainer {
     // .whileHeld(new RunClimber(climber, .5, true));
 
     // Y button
+    // new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
+    // .whileHeld(new StraightWithMotionMagic(driveBase, -12));
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonY.value)
-    .whenPressed(new StraightWithMotionMagic(driveBase, -12));
+      .whenPressed(new StraightPercentOut(driveBase, .4, 500));
 
     // X button
     new JoystickButton(joystick, PaddedXbox.F310Map.kGamepadButtonX.value)
@@ -228,12 +230,12 @@ public class RobotContainer {
 
     public Command getAutoCommand(){
       // return initiationLineStraightShot;
-      // return faceplantThenShoot;
+      return faceplantThenShoot;
       // return turnWithEncoder;
       // return moveBackThenShoot;
       // return faceplantThenEndRight;
       // return faceplantThenEndLeft;
-      return leftSideStartEndRight;
+      // return leftSideStartEndRight;
     }
   
 }

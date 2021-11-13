@@ -36,8 +36,8 @@ public enum PowerConstants{
     Revolver5419Shots(1),
 
     // intake
-    IntakeJohannGround(-.9),
-    IntakeJohannPlayerStation(.9),
+    IntakeJohannGround(-.85),
+    IntakeJohannPlayerStation(.85),
 
     // climber
     ClimberJohann(.5),

@@ -36,6 +36,7 @@ public class StraightPercentOut extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveBase.setAll(0);
+    driveBase.brake();
   }
 
   // Returns true when the command should end.
