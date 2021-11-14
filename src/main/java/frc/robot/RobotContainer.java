@@ -147,7 +147,7 @@ public class RobotContainer {
     .whenPressed(new RevolverToTape(colorSensor, revolver).withTimeout(3));
     
 
-    // 2: Shooter to Speed
+    // 2: Revolver to Speed
     new JoystickButton(buttonBoard, 2)
     .whileHeld(new GetToTargetVelocity(shooter, PowerConstants.ShooterShotsButton.val));
     
@@ -179,7 +179,7 @@ public class RobotContainer {
 
     // 5: ball stuck, shooter back, feeder back
     // new JoystickButton(buttonBoard, 5)
-    // .whileHeld(new BallStuck(shooter, loader, -200, 0.2));
+    // .whenPressed(new BallStuck(shooter, loader, -200, 0.2));
 
     // 7: hood up at 0.25
     new JoystickButton(buttonBoard, 7)
