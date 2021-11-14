@@ -226,9 +226,9 @@ public class RobotContainer {
 
     public Command getAutoCommand(){
       // return initiationLineStraightShot;
-      return faceplantThenShoot;
+      // return faceplantThenShoot;
       // return turnWithEncoder;
-      // return moveBackThenShoot;
+      return moveBackThenShoot;
       // return faceplantThenEndRight;
       // return faceplantThenEndLeft;
       // return faceplantThenMoveBack;

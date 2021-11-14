@@ -110,6 +110,6 @@ public class StraightWithMotionMagic extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
-
+        driveBase.brake();
     }
 }

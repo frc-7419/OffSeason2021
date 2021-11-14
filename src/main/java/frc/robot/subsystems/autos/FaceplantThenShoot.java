@@ -29,7 +29,7 @@ public class FaceplantThenShoot extends SequentialCommandGroup {
     // addCommands(new WaitCommand(1));
     addCommands(new StraightWithMotionMagic(driveBase, 120));
     addCommands(new WaitCommand(.25));
-    addCommands(new StraightWithMotionMagic(driveBase, -5.75));
+    addCommands(new StraightWithMotionMagic(driveBase, -0.5));
     addCommands(new RevolverToTape(colorSensor, revolver));
     addCommands(new WaitCommand(.25));
     addCommands(new RunShooter( shooter, loader, revolver, PowerConstants.ShooterShotsFaceplantAuton.val, 
