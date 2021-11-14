@@ -3,8 +3,8 @@ package frc.robot;
 public enum PowerConstants{
     
     // shooter
-    ShooterShotsAuton(17000),
-    ShooterShotsButton(12000),
+    ShooterShotsFaceplantAuton(13500),
+    ShooterShotsButton(15000),
     ShooterShotsMoveBackThenShoot(11500),
     ShooterShotsButtonLong(15000),
     ShooterReverse(5000), // 100% power
